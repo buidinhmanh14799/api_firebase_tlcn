@@ -16,9 +16,10 @@ exports.createUser = (req, res) => {
             console.log("password:",user.email);
             admindb.doc(user.uid)
             .set(req.body)
+            .then(()=>{
+                res.send(user);
+            })
             .catch(err=>res.status(500).send(err))
-
-            res.send(user);
         }).catch(err => {
             res.status(500).send(err);
         })
@@ -34,7 +35,12 @@ exports.updateUser = (req, res) => {
         photoURL: req.body.photoURL,
         disabled: false
     }).then(user => {
-        res.send(user);
+        admindb.doc(user.uid)
+        .set(req.body)
+        .then(()=>{
+            res.send(user);
+        })
+        .catch(err=>res.status(500).send(err))
     }).catch(err => {
         res.status(500).send(err);
     })
@@ -97,4 +103,5 @@ exports.GetUserbyPhone = (req, res)=>{
         res.status(500).send(err)
     })
 }
+
 

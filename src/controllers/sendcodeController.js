@@ -29,7 +29,7 @@ exports.sendmail = function (req, res) {
         from: 'Toeic Seb',
         to: req.body.email,
         subject: 'TOEIC-SEB: Code confix your accont',
-        text: 'Nam cho điên',//Thường thi mình không dùng cái này thay vào đó mình sử dụng html để dễ edit hơn
+        text: 'Mã xác nhận tài khoản',//Thường thi mình không dùng cái này thay vào đó mình sử dụng html để dễ edit hơn
         html: content //Nội dung html mình đã tạo trên kia :))
     }
     transporter.sendMail(mainOptions, function (err, info) {

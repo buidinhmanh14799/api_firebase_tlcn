@@ -12,6 +12,7 @@ router.get('/email/:id', userController.GetUserbyEmail);
 router.get('/phone/:id', userController.GetUserbyPhone);
 router.get('/uid/:id', userController.GetUserbyUid);
 
-// router.post('/add', userController.adduser);
+router.get('/login', userController.LoginEmail);
+
 
 module.exports = router;
