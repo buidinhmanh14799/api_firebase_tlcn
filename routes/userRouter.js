@@ -12,7 +12,10 @@ router.get('/email/:id', userController.GetUserbyEmail);
 router.get('/phone/:id', userController.GetUserbyPhone);
 router.get('/uid/:id', userController.GetUserbyUid);
 
+router.get('/firestore/:uid', userController.GetUserFireStore);
+router.get('/expirationDate/:uid', userController.GetDateExpiration);
 // router.get('/login', userController.LoginEmail);
+
 
 
 module.exports = router;

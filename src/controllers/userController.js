@@ -13,13 +13,13 @@ exports.createUser = (req, res) => {
         disabled: false
     })
         .then((user) => {
-            console.log("password:",user.email);
+            console.log("password:", user.email);
             admindb.doc(user.uid)
-            .set(req.body)
-            .then(()=>{
-                res.send(user);
-            })
-            .catch(err=>res.status(500).send(err))
+                .set(req.body)
+                .then(() => {
+                    res.send(user);
+                })
+                .catch(err => res.status(500).send(err))
         }).catch(err => {
             res.status(500).send(err);
         })
@@ -36,11 +36,11 @@ exports.updateUser = (req, res) => {
         disabled: false
     }).then(user => {
         admindb.doc(user.uid)
-        .set(req.body)
-        .then(()=>{
-            res.send(user);
-        })
-        .catch(err=>res.status(500).send(err))
+            .set(req.body)
+            .then(() => {
+                res.send(user);
+            })
+            .catch(err => res.status(500).send(err))
     }).catch(err => {
         res.status(500).send(err);
     })
@@ -82,25 +82,47 @@ exports.listAllUserAuthen = (req, res) => {
         })
 }
 
-exports.GetUserbyEmail = (req, res)=>{
-    admin.auth().getUserByEmail(req.params.id).then(user=>{
+exports.GetUserbyEmail = (req, res) => {
+    admin.auth().getUserByEmail(req.params.id).then(user => {
         res.send(user)
-    }).catch(err=>{
+    }).catch(err => {
         res.status(500).send(err)
     })
 }
-exports.GetUserbyUid = (req, res)=>{
-    admin.auth().getUser(req.params.id).then(user=>{
+exports.GetUserbyUid = (req, res) => {
+    admin.auth().getUser(req.params.id).then(user => {
         res.send(user)
-    }).catch(err=>{
+    }).catch(err => {
         res.status(500).send(err)
     })
 }
-exports.GetUserbyPhone = (req, res)=>{
-    admin.auth().getUserByPhoneNumber(req.params.id).then(user=>{
+exports.GetUserbyPhone = (req, res) => {
+    admin.auth().getUserByPhoneNumber(req.params.id).then(user => {
         res.send(user)
-    }).catch(err=>{
+    }).catch(err => {
         res.status(500).send(err)
+    })
+}
+exports.GetUserFireStore = (req, res) => {
+    admindb.doc(req.params.uid).get().then(user => {
+        res.send(user._fieldsProto)
+    }).catch(err => {
+        res.status(500).send(err);
+    })
+}
+exports.GetDateExpiration = (req, res) => {
+    admindb.doc(req.params.uid).get().then(user => {
+        var date = user._fieldsProto.expirationDate.timestampValue.seconds;
+        console.log(date);
+        var datecurrent = new Date();
+        var dateTam = new Date(date*1000-datecurrent.getTime())
+        var result = dateTam.getDate();
+        console.log("ngay con lai",result)
+
+        res.json({'Expiration': result});
+
+    }).catch(err => {
+        res.status(500).send(err);
     })
 }
 
