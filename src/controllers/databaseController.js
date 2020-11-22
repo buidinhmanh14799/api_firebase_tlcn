@@ -4,7 +4,11 @@ const { admindbPart1,
     admindbPart4,
     admindbPart5,
     admindbPart6,
-    admindbPart7 } = require('../firebase/firebase-confix');
+    admindbPart7,
+    admindbPart3Detail,
+    admindbPart4Detail,
+    admindbPart6Detail,
+    admindbPart7Detail } = require('../firebase/firebase-confix');
 
 exports.AddPart1 = (req, res) => {
     var object = req.body;
@@ -83,6 +87,55 @@ exports.AddPart7 = (req, res) => {
         res.status(500).send(error);
     }
 }
+
+
+
+exports.AddPart3Detail = (req, res) => {
+    var object = req.body;
+    try {
+        object.forEach(element => {
+            admindbPart3Detail.collection('data').add(element);
+        });
+        res.send("Add Compelete!");
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.AddPart4Detail = (req, res) => {
+    var object = req.body;
+    try {
+        object.forEach(element => {
+            admindbPart4Detail.collection('data').add(element);
+        });
+        res.send("Add Compelete!");
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.AddPart6Detail = (req, res) => {
+    var object = req.body;
+    try {
+        object.forEach(element => {
+            admindbPart6Detail.collection('data').add(element);
+        });
+        res.send("Add Compelete!");
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.AddPart7Detail = (req, res) => {
+    var object = req.body;
+    try {
+        object.forEach(element => {
+            admindbPart7Detail.collection('data').add(element);
+        });
+        res.send("Add Compelete!");
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+
+
 
 exports.GetDataPart1 = (req, res) => {
     try {
@@ -173,6 +226,63 @@ exports.GetDataPart7 = (req, res) => {
     try {
         var arr = [];
         admindbPart7.collection('data').get().then(data => {
+            data.forEach(element => {
+                arr.push(element.data());
+            });
+            res.send(arr);
+        });
+
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+
+exports.GetDataPart3Detail = (req, res) => {
+    try {
+        var arr = [];
+        admindbPart3Detail.collection('data').get().then(data => {
+            data.forEach(element => {
+                arr.push(element.data());
+            });
+            res.send(arr);
+        });
+
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.GetDataPart4Detail = (req, res) => {
+    try {
+        var arr = [];
+        admindbPart4Detail.collection('data').get().then(data => {
+            data.forEach(element => {
+                arr.push(element.data());
+            });
+            res.send(arr);
+        });
+
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.GetDataPart6Detail = (req, res) => {
+    try {
+        var arr = [];
+        admindbPart6Detail.collection('data').get().then(data => {
+            data.forEach(element => {
+                arr.push(element.data());
+            });
+            res.send(arr);
+        });
+
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.GetDataPart7Detail = (req, res) => {
+    try {
+        var arr = [];
+        admindbPart7Detail.collection('data').get().then(data => {
             data.forEach(element => {
                 arr.push(element.data());
             });
