@@ -143,6 +143,19 @@ exports.DisabledUser = (req, res) => {
             res.status(500).send(error);
         });
 }
+exports.EnableUser = (req, res) => {
+    admin
+        .auth()
+        .updateUser(req.uid, {
+            disabled: false,
+        })
+        .then((userRecord) => {
+            res.send(userRecord);
+        })
+        .catch((error) => {
+            res.status(500).send(error);
+        });
+}
 
 
 

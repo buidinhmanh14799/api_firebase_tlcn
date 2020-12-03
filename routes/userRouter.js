@@ -15,6 +15,7 @@ router.get('/uid/:id', userController.GetUserbyUid);
 router.get('/firestore/:uid', userController.GetUserFireStore);
 router.get('/expirationDate/:uid', userController.GetDateExpiration);
 router.post('/disable/:uid', userController.DisabledUser);
+router.post('/enable/:uid', userController.EnableUser);
 // router.get('/login', userController.LoginEmail);
 
 
