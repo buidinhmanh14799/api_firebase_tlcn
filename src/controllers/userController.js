@@ -133,7 +133,7 @@ exports.GetDateExpiration = (req, res) => {
 exports.DisabledUser = (req, res) => {
     admin
         .auth()
-        .updateUser(req.uid, {
+        .updateUser(req.params.uid, {
             disabled: true,
         })
         .then((userRecord) => {
@@ -146,7 +146,7 @@ exports.DisabledUser = (req, res) => {
 exports.EnableUser = (req, res) => {
     admin
         .auth()
-        .updateUser('"'+req.uid+'"', {
+        .updateUser(req.params.uid, {
             disabled: false,
         })
         .then((userRecord) => {
