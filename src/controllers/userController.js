@@ -130,5 +130,19 @@ exports.GetDateExpiration = (req, res) => {
         res.status(500).send(err);
     })
 }
+exports.DisabledUser = (req, res) => {
+    admin
+        .auth()
+        .updateUser(req.uid, {
+            disabled: true,
+        })
+        .then((userRecord) => {
+            res.send(userRecord);
+        })
+        .catch((error) => {
+            res.status(500).send(error);
+        });
+}
+
 
 
