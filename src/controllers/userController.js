@@ -146,7 +146,7 @@ exports.DisabledUser = (req, res) => {
 exports.EnableUser = (req, res) => {
     admin
         .auth()
-        .updateUser('QHo51AF6AUSZTMKlvXjRzG5idQk1', {
+        .updateUser('"'+req.uid+'"', {
             disabled: false,
         })
         .then((userRecord) => {
