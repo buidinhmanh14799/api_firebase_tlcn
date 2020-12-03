@@ -147,6 +147,7 @@ exports.EnableUser = (req, res) => {
     admin
         .auth()
         .updateUser(req.uid, {
+            uid: req.uid,
             disabled: false,
         })
         .then((userRecord) => {
