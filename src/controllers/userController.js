@@ -130,6 +130,17 @@ exports.GetDateExpiration = (req, res) => {
         res.status(500).send(err);
     })
 }
+exports.CheckNewData = (req, res) => {
+    admindb.doc(req.params.uid).get().then(user => {
+        var isNew = user._fieldsProto.isNewData.stringValue;
+        res.json({
+            'isNewData': isNew
+        });
+
+    }).catch(err => {
+        res.status(500).send(err);
+    })
+}
 exports.DisabledUser = (req, res) => {
     admin
         .auth()
