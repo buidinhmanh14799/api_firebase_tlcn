@@ -1,6 +1,6 @@
 const {
-    adminYear,
-    adminTest,
+    admindbYear,
+    admindbTest,
     admindbPart1,
     admindbPart2,
     admindbPart3,
@@ -17,7 +17,7 @@ exports.AddYear = (req,res) =>{
     var object = req.body;
     try{
         object.forEach(element=>{
-            adminYear.collection('data').add(element);
+            admindbYear.collection('data').add(element);
         })
         res.send("Add Compelete!");
     }catch(error){
@@ -29,7 +29,7 @@ exports.AddTest = (req,res) =>{
     var object = req.body;
     try{
         object.forEach(element=>{
-            adminTest.collection('data').add(element);
+            admindbTest.collection('data').add(element);
         })
         res.send("Add Compelete!");
     }catch(error){
