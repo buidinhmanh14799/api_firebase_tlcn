@@ -8,7 +8,10 @@ admin.initializeApp({
 });
 
 exports.admin = admin;
+
 exports.admindb = admin.firestore().collection('users');
+exports.admindbPart1 = admin.firestore().collection('DataBase').doc('Year');
+exports.admindbPart1 = admin.firestore().collection('DataBase').doc('Test');
 exports.admindbPart1 = admin.firestore().collection('DataBase').doc('Part1');
 exports.admindbPart2 = admin.firestore().collection('DataBase').doc('Part2');
 exports.admindbPart3 = admin.firestore().collection('DataBase').doc('Part3');

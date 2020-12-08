@@ -1,4 +1,7 @@
-const { admindbPart1,
+const {
+    adminYear,
+    adminTest,
+    admindbPart1,
     admindbPart2,
     admindbPart3,
     admindbPart4,
@@ -10,6 +13,29 @@ const { admindbPart1,
     admindbPart6Detail,
     admindbPart7Detail } = require('../firebase/firebase-confix');
 
+exports.AddYear = (req,res) =>{
+    var object = req.body;
+    try{
+        object.forEach(element=>{
+            adminYear.collection('data').add(element);
+        })
+        res.send("Add Compelete!");
+    }catch(error){
+        res.status(500).send(error);
+    }
+}
+
+exports.AddTest = (req,res) =>{
+    var object = req.body;
+    try{
+        object.forEach(element=>{
+            adminTest.collection('data').add(element);
+        })
+        res.send("Add Compelete!");
+    }catch(error){
+        res.status(500).send(error);
+    }
+}
 exports.AddPart1 = (req, res) => {
     var object = req.body;
     try {
@@ -146,7 +172,6 @@ exports.GetDataPart1 = (req, res) => {
             });
             res.send(arr);
         });
-
     } catch (error) {
         res.status(500).send(error);
     }

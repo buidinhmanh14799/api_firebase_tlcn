@@ -5,6 +5,8 @@ const controller = require('../src/controllers/databaseController');
 
 //database
 
+router.post('/year/add', controller.AddYear);
+router.post('/Test/add', controller.AddTest);
 router.post('/part1/add', controller.AddPart1);
 router.post('/part2/add', controller.AddPart2);
 router.post('/part3/add', controller.AddPart3);
