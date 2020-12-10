@@ -1,6 +1,4 @@
 const {
-    admindbYear,
-    admindbTest,
     admindbPart1,
     admindbPart2,
     admindbPart3,
@@ -11,38 +9,10 @@ const {
     admindbPart3Detail,
     admindbPart4Detail,
     admindbPart6Detail,
-<<<<<<< HEAD
     admindbPart7Detail,
     admindbTest,
     admindbYear } = require('../firebase/firebase-confix');
-=======
-    admindbPart7Detail, 
-    admindb} = require('../firebase/firebase-confix');
->>>>>>> 76ca1e67a276e5ff9f7a5c35c0589c06943930e3
 
-exports.AddYear = (req,res) =>{
-    var object = req.body;
-    try{
-        object.forEach(element=>{
-            admindbYear.collection('data').add(element);
-        })
-        res.send("Add Compelete!");
-    }catch(error){
-        res.status(500).send(error);
-    }
-}
-
-exports.AddTest = (req,res) =>{
-    var object = req.body;
-    try{
-        object.forEach(element=>{
-            admindbTest.collection('data').add(element);
-        })
-        res.send("Add Compelete!");
-    }catch(error){
-        res.status(500).send(error);
-    }
-}
 exports.AddPart1 = (req, res) => {
     var object = req.body;
     try {
@@ -185,35 +155,6 @@ exports.AddYear = (req, res) => {
             admindbYear.collection('data').add(element);
         });
         res.send("Add Compelete!");
-    } catch (error) {
-        res.status(500).send(error);
-    }
-}
-
-
-
-exports.GetDataYear = (req, res) => {
-    try {
-        var arr = [];
-        admindbYear.collection('data').get().then(data => {
-            data.forEach(element => {
-                arr.push(element.data());
-            });
-            res.send(arr);
-        });
-    } catch (error) {
-        res.status(500).send(error);
-    }
-}
-exports.GetDataTest = (req, res) => {
-    try {
-        var arr = [];
-        admindbTest.collection('data').get().then(data => {
-            data.forEach(element => {
-                arr.push(element.data());
-            });
-            res.send(arr);
-        });
     } catch (error) {
         res.status(500).send(error);
     }
