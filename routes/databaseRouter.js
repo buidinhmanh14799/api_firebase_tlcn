@@ -5,6 +5,8 @@ const controller = require('../src/controllers/databaseController');
 
 //database
 
+router.post('/year/add', controller.AddYear);
+router.post('/test/add', controller.AddTest);
 router.post('/part1/add', controller.AddPart1);
 router.post('/part2/add', controller.AddPart2);
 router.post('/part3/add', controller.AddPart3);
@@ -20,6 +22,8 @@ router.post('/year/add', controller.AddYear);
 router.post('/test/add', controller.AddTest);
 
 
+router.get('/year', controller.GetDataYear);
+router.get('/test', controller.GetDataTest);
 router.get('/part1', controller.GetDataPart1);
 router.get('/part2', controller.GetDataPart2);
 router.get('/part3', controller.GetDataPart3);
