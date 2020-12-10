@@ -16,6 +16,8 @@ router.post('/part3detail/add', controller.AddPart3Detail);
 router.post('/part4detail/add', controller.AddPart4Detail);
 router.post('/part6detail/add', controller.AddPart6Detail);
 router.post('/part7detail/add', controller.AddPart7Detail);
+router.post('/year/add', controller.AddYear);
+router.post('/test/add', controller.AddTest);
 
 
 router.get('/part1', controller.GetDataPart1);
@@ -29,6 +31,8 @@ router.get('/part3detail', controller.GetDataPart3Detail);
 router.get('/part4detail', controller.GetDataPart4Detail);
 router.get('/part6detail', controller.GetDataPart6Detail);
 router.get('/part7detail', controller.GetDataPart7Detail);
+router.get('/year', controller.GetDataYear);
+router.get('/test', controller.GetDataTest);
 
 
 module.exports = router;

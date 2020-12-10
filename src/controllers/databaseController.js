@@ -8,7 +8,9 @@ const { admindbPart1,
     admindbPart3Detail,
     admindbPart4Detail,
     admindbPart6Detail,
-    admindbPart7Detail } = require('../firebase/firebase-confix');
+    admindbPart7Detail,
+    admindbTest,
+    admindbYear } = require('../firebase/firebase-confix');
 
 exports.AddPart1 = (req, res) => {
     var object = req.body;
@@ -128,6 +130,28 @@ exports.AddPart7Detail = (req, res) => {
     try {
         object.forEach(element => {
             admindbPart7Detail.collection('data').add(element);
+        });
+        res.send("Add Compelete!");
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.AddTest = (req, res) => {
+    var object = req.body;
+    try {
+        object.forEach(element => {
+            admindbTest.collection('data').add(element);
+        });
+        res.send("Add Compelete!");
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.AddYear = (req, res) => {
+    var object = req.body;
+    try {
+        object.forEach(element => {
+            admindbYear.collection('data').add(element);
         });
         res.send("Add Compelete!");
     } catch (error) {
@@ -283,6 +307,34 @@ exports.GetDataPart7Detail = (req, res) => {
     try {
         var arr = [];
         admindbPart7Detail.collection('data').get().then(data => {
+            data.forEach(element => {
+                arr.push(element.data());
+            });
+            res.send(arr);
+        });
+
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.GetDataYear = (req, res) => {
+    try {
+        var arr = [];
+        admindbYear.collection('data').get().then(data => {
+            data.forEach(element => {
+                arr.push(element.data());
+            });
+            res.send(arr);
+        });
+
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.GetDataTest = (req, res) => {
+    try {
+        var arr = [];
+        admindbTest.collection('data').get().then(data => {
             data.forEach(element => {
                 arr.push(element.data());
             });

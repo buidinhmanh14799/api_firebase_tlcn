@@ -16,6 +16,8 @@ exports.admindbPart4 = admin.firestore().collection('DataBase').doc('Part4');
 exports.admindbPart5 = admin.firestore().collection('DataBase').doc('Part5');
 exports.admindbPart6 = admin.firestore().collection('DataBase').doc('Part6');
 exports.admindbPart7 = admin.firestore().collection('DataBase').doc('Part7');
+exports.admindbYear = admin.firestore().collection('DataBase').doc('Year');
+exports.admindbTest = admin.firestore().collection('DataBase').doc('Test');
 
 exports.admindbPart3Detail = admin.firestore().collection('DataBase').doc('Part3Detail');
 exports.admindbPart4Detail = admin.firestore().collection('DataBase').doc('Part4Detail');
