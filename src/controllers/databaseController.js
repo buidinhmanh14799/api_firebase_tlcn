@@ -161,13 +161,16 @@ exports.AddYear = (req, res) => {
 }
 exports.GetDataPart1 = (req, res) => {
     try {
-        var arr = [];
-        admindbPart1.collection('data').get().then(data => {
-            data.forEach(element => {
-                arr.push(element.data());
+        var array = req.body.array;
+        var arrReult = [];
+        array.map(element=>{
+            admindbPart1.collection('data').where('IDTest', '==', element.IDTest, 'AND', 'IDYear', '==', element.IDYear).get().then(data => {
+                data.forEach(element => {
+                    arrReult.push(element.data());
+                }); 
             });
-            res.send(arr);
-        });
+        })
+        res.send(arrReult);
     } catch (error) {
         res.status(500).send(error);
     }
