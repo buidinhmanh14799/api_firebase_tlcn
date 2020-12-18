@@ -3,6 +3,7 @@ const { admin, admindb } = require('../firebase/firebase-confix');
 
 
 exports.createUser = (req, res) => {
+    console.log(req.body.email)
     admin.auth().createUser({
         email: req.body.email,
         emailVerified: false,
