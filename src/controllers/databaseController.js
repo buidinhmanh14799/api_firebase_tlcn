@@ -161,6 +161,7 @@ exports.AddYear = (req, res) => {
 }
 exports.GetDataPart1 = (req, res) => {
     try {
+        console.log(req.body);
         var array = req.body.array;
         var arrReult = [];
         array.map(element=>{
@@ -180,7 +181,6 @@ exports.GetDataPart2 = (req, res) => {
         var arr = [];
         admindbPart2.collection('data').get().then(data => {
             data.forEach(element => {
-
                 arr.push(element.data());
             });
             res.send(arr);
