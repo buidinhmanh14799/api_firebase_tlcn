@@ -11,7 +11,8 @@ const {
     admindbPart6Detail,
     admindbPart7Detail,
     admindbTest,
-    admindbYear } = require('../firebase/firebase-confix');
+    admindbYear,
+    admindb } = require('../firebase/firebase-confix');
 
 exports.AddPart1 = (req, res) => {
     var object = req.body;
@@ -161,21 +162,42 @@ exports.AddYear = (req, res) => {
 }
 exports.GetDataPart1 = (req, res) => {
     try {
-        console.log(req.body);
-        var array = req.body.array;
-        var arrReult = [];
-        array.map(element=>{
-            admindbPart1.collection('data').where('IDTest', '==', element.IDTest, 'AND', 'IDYear', '==', element.IDYear).get().then(data => {
-                data.forEach(element => {
-                    arrReult.push(element.data());
-                }); 
+        var arr = [];
+        admindbPart1.collection('data').get().then(data => {
+            data.forEach(element => {
+
+                arr.push(element.data());
             });
-        })
-        res.send(arrReult);
+            res.send(arr);
+        });
     } catch (error) {
         res.status(500).send(error);
     }
 }
+exports.GetDataPart1ByUid = async (req, res) => {
+    try {
+        const arrListGet = []
+        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+        arrListGettam.forEach(element => {
+            arrListGet.push(element.data());
+        });
+        var arrResult = [];
+        await Promise.all(arrListGet.map(async (element) => {
+            const data = await admindbPart1.collection('data')
+            .where('IDTest', '==', element.IDTest)
+            .where('IDYear', '==', element.IDYear)
+            .get();
+            data.forEach(element2 => {
+                arrResult.push(element2.data());
+            });
+        }))
+        res.send(arrResult);
+    } catch (error) {
+        console.log(error + '')
+        res.status(500).send(error);
+    }
+}
+
 exports.GetDataPart2 = (req, res) => {
     try {
         var arr = [];
@@ -187,6 +209,29 @@ exports.GetDataPart2 = (req, res) => {
         });
 
     } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.GetDataPart2ByUid = async (req, res) => {
+    try {
+        const arrListGet = []
+        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+        arrListGettam.forEach(element => {
+            arrListGet.push(element.data());
+        });
+        var arrResult = [];
+        await Promise.all(arrListGet.map(async (element) => {
+            const data = await admindbPart2.collection('data')
+            .where('IDTest', '==', element.IDTest)
+            .where('IDYear', '==', element.IDYear)
+            .get();
+            data.forEach(element2 => {
+                arrResult.push(element2.data());
+            });
+        }))
+        res.send(arrResult);
+    } catch (error) {
+        console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -204,6 +249,29 @@ exports.GetDataPart3 = (req, res) => {
         res.status(500).send(error);
     }
 }
+exports.GetDataPart3ByUid = async (req, res) => {
+    try {
+        const arrListGet = []
+        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+        arrListGettam.forEach(element => {
+            arrListGet.push(element.data());
+        });
+        var arrResult = [];
+        await Promise.all(arrListGet.map(async (element) => {
+            const data = await admindbPart3.collection('data')
+            .where('IDTest', '==', element.IDTest)
+            .where('IDYear', '==', element.IDYear)
+            .get();
+            data.forEach(element2 => {
+                arrResult.push(element2.data());
+            });
+        }))
+        res.send(arrResult);
+    } catch (error) {
+        console.log(error + '')
+        res.status(500).send(error);
+    }
+}
 exports.GetDataPart4 = (req, res) => {
     try {
         var arr = [];
@@ -215,6 +283,29 @@ exports.GetDataPart4 = (req, res) => {
         });
 
     } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.GetDataPart4ByUid = async (req, res) => {
+    try {
+        const arrListGet = []
+        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+        arrListGettam.forEach(element => {
+            arrListGet.push(element.data());
+        });
+        var arrResult = [];
+        await Promise.all(arrListGet.map(async (element) => {
+            const data = await admindbPart4.collection('data')
+            .where('IDTest', '==', element.IDTest)
+            .where('IDYear', '==', element.IDYear)
+            .get();
+            data.forEach(element2 => {
+                arrResult.push(element2.data());
+            });
+        }))
+        res.send(arrResult);
+    } catch (error) {
+        console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -232,6 +323,29 @@ exports.GetDataPart5 = (req, res) => {
         res.status(500).send(error);
     }
 }
+exports.GetDataPart5ByUid = async (req, res) => {
+    try {
+        const arrListGet = []
+        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+        arrListGettam.forEach(element => {
+            arrListGet.push(element.data());
+        });
+        var arrResult = [];
+        await Promise.all(arrListGet.map(async (element) => {
+            const data = await admindbPart5.collection('data')
+            .where('IDTest', '==', element.IDTest)
+            .where('IDYear', '==', element.IDYear)
+            .get();
+            data.forEach(element2 => {
+                arrResult.push(element2.data());
+            });
+        }))
+        res.send(arrResult);
+    } catch (error) {
+        console.log(error + '')
+        res.status(500).send(error);
+    }
+}
 exports.GetDataPart6 = (req, res) => {
     try {
         var arr = [];
@@ -246,6 +360,29 @@ exports.GetDataPart6 = (req, res) => {
         res.status(500).send(error);
     }
 }
+exports.GetDataPart6ByUid = async (req, res) => {
+    try {
+        const arrListGet = []
+        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+        arrListGettam.forEach(element => {
+            arrListGet.push(element.data());
+        });
+        var arrResult = [];
+        await Promise.all(arrListGet.map(async (element) => {
+            const data = await admindbPart6.collection('data')
+            .where('IDTest', '==', element.IDTest)
+            .where('IDYear', '==', element.IDYear)
+            .get();
+            data.forEach(element2 => {
+                arrResult.push(element2.data());
+            });
+        }))
+        res.send(arrResult);
+    } catch (error) {
+        console.log(error + '')
+        res.status(500).send(error);
+    }
+}
 exports.GetDataPart7 = (req, res) => {
     try {
         var arr = [];
@@ -257,6 +394,29 @@ exports.GetDataPart7 = (req, res) => {
         });
 
     } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.GetDataPart7ByUid = async (req, res) => {
+    try {
+        const arrListGet = []
+        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+        arrListGettam.forEach(element => {
+            arrListGet.push(element.data());
+        });
+        var arrResult = [];
+        await Promise.all(arrListGet.map(async (element) => {
+            const data = await admindbPart7.collection('data')
+            .where('IDTest', '==', element.IDTest)
+            .where('IDYear', '==', element.IDYear)
+            .get();
+            data.forEach(element2 => {
+                arrResult.push(element2.data());
+            });
+        }))
+        res.send(arrResult);
+    } catch (error) {
+        console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -275,6 +435,29 @@ exports.GetDataPart3Detail = (req, res) => {
         res.status(500).send(error);
     }
 }
+exports.GetDataPart3DetailByUid = async (req, res) => {
+    try {
+        const arrListGet = []
+        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+        arrListGettam.forEach(element => {
+            arrListGet.push(element.data());
+        });
+        var arrResult = [];
+        await Promise.all(arrListGet.map(async (element) => {
+            const data = await admindbPart3Detail.collection('data')
+            .where('IDTest', '==', element.IDTest)
+            .where('IDYear', '==', element.IDYear)
+            .get();
+            data.forEach(element2 => {
+                arrResult.push(element2.data());
+            });
+        }))
+        res.send(arrResult);
+    } catch (error) {
+        console.log(error + '')
+        res.status(500).send(error);
+    }
+}
 exports.GetDataPart4Detail = (req, res) => {
     try {
         var arr = [];
@@ -286,6 +469,29 @@ exports.GetDataPart4Detail = (req, res) => {
         });
 
     } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.GetDataPart4DetailByUid = async (req, res) => {
+    try {
+        const arrListGet = []
+        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+        arrListGettam.forEach(element => {
+            arrListGet.push(element.data());
+        });
+        var arrResult = [];
+        await Promise.all(arrListGet.map(async (element) => {
+            const data = await admindbPart4Detail.collection('data')
+            .where('IDTest', '==', element.IDTest)
+            .where('IDYear', '==', element.IDYear)
+            .get();
+            data.forEach(element2 => {
+                arrResult.push(element2.data());
+            });
+        }))
+        res.send(arrResult);
+    } catch (error) {
+        console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -303,6 +509,29 @@ exports.GetDataPart6Detail = (req, res) => {
         res.status(500).send(error);
     }
 }
+exports.GetDataPart6DetailByUid = async (req, res) => {
+    try {
+        const arrListGet = []
+        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+        arrListGettam.forEach(element => {
+            arrListGet.push(element.data());
+        });
+        var arrResult = [];
+        await Promise.all(arrListGet.map(async (element) => {
+            const data = await admindbPart6Detail.collection('data')
+            .where('IDTest', '==', element.IDTest)
+            .where('IDYear', '==', element.IDYear)
+            .get();
+            data.forEach(element2 => {
+                arrResult.push(element2.data());
+            });
+        }))
+        res.send(arrResult);
+    } catch (error) {
+        console.log(error + '')
+        res.status(500).send(error);
+    }
+}
 exports.GetDataPart7Detail = (req, res) => {
     try {
         var arr = [];
@@ -314,6 +543,29 @@ exports.GetDataPart7Detail = (req, res) => {
         });
 
     } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.GetDataPart7DetailByUid = async (req, res) => {
+    try {
+        const arrListGet = []
+        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+        arrListGettam.forEach(element => {
+            arrListGet.push(element.data());
+        });
+        var arrResult = [];
+        await Promise.all(arrListGet.map(async (element) => {
+            const data = await admindbPart7Detail.collection('data')
+            .where('IDTest', '==', element.IDTest)
+            .where('IDYear', '==', element.IDYear)
+            .get();
+            data.forEach(element2 => {
+                arrResult.push(element2.data());
+            });
+        }))
+        res.send(arrResult);
+    } catch (error) {
+        console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -342,6 +594,29 @@ exports.GetDataTest = (req, res) => {
         });
 
     } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.GetDataTestByUid = async (req, res) => {
+    try {
+        const arrListGet = []
+        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+        arrListGettam.forEach(element => {
+            arrListGet.push(element.data());
+        });
+        var arrResult = [];
+        await Promise.all(arrListGet.map(async (element) => {
+            const data = await admindbTest.collection('data')
+            .where('IDTest', '==', element.IDTest)
+            .where('IDYear', '==', element.IDYear)
+            .get();
+            data.forEach(element2 => {
+                arrResult.push(element2.data());
+            });
+        }))
+        res.send(arrResult);
+    } catch (error) {
+        console.log(error + '')
         res.status(500).send(error);
     }
 }
