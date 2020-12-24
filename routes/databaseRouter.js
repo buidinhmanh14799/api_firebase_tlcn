@@ -18,7 +18,7 @@ router.post('/part6detail/add', controller.AddPart6Detail);
 router.post('/part7detail/add', controller.AddPart7Detail);
 router.post('/year/add', controller.AddYear);
 router.post('/test/add', controller.AddTest);
-
+router.post('/vocabulary/add', controller.AddVocabulary);
 
 router.get('/part1', controller.GetDataPart1);
 router.get('/part1/:uid', controller.GetDataPart1ByUid);
@@ -58,5 +58,6 @@ router.get('/year', controller.GetDataYear);
 router.get('/test', controller.GetDataTest);
 router.get('/test/:uid', controller.GetDataTestByUid);
 
+router.get('/vocabulary', controller.GetDataVocabulary);
 
 module.exports = router;

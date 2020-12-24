@@ -23,3 +23,5 @@ exports.admindbPart3Detail = admin.firestore().collection('DataBase').doc('Part3
 exports.admindbPart4Detail = admin.firestore().collection('DataBase').doc('Part4Detail');
 exports.admindbPart6Detail = admin.firestore().collection('DataBase').doc('Part6Detail');
 exports.admindbPart7Detail = admin.firestore().collection('DataBase').doc('Part7Detail');
+
+exports.admindbVocabulary = admin.firestore().collection('DataBase').doc('Vocabulary');

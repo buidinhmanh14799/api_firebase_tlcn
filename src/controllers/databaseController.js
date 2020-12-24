@@ -12,7 +12,8 @@ const {
     admindbPart7Detail,
     admindbTest,
     admindbYear,
-    admindb } = require('../firebase/firebase-confix');
+    admindb,
+    admindbVocabulary } = require('../firebase/firebase-confix');
 
 exports.AddPart1 = (req, res) => {
     var object = req.body;
@@ -618,6 +619,31 @@ exports.GetDataTestByUid = async (req, res) => {
         res.send(arrResult);
     } catch (error) {
         console.log(error + '')
+        res.status(500).send(error);
+    }
+}
+exports.AddVocabulary = (req, res) => {
+    var object = req.body;
+    try {
+        object.forEach(element => {
+            admindbVocabulary.collection('data').add(element);
+        });
+        res.send("Add Compelete!");
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+exports.GetDataVocabulary = (req, res) => {
+    try {
+        var arr = [];
+        admindbVocabulary.collection('data').get().then(data => {
+            data.forEach(element => {
+                arr.push(element.data());
+            });
+            res.send(arr);
+        });
+
+    } catch (error) {
         res.status(500).send(error);
     }
 }
