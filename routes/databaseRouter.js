@@ -60,4 +60,9 @@ router.get('/test/:uid', controller.GetDataTestByUid);
 
 router.get('/vocabulary', controller.GetDataVocabulary);
 
+
+// delete
+router.delete('/delete/:one', controller.DeleteOne);
+router.delete('/delete', controller.DeleteAll);
+
 module.exports = router;
