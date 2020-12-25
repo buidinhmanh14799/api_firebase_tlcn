@@ -73,16 +73,26 @@ exports.deleteUser = (req, res) => {
         })
 }
 
-exports.listAllUserAuthen = (req, res) => {
+exports.listAllUserAuthen = async (req, res) => {
     var arr = [];
     admin.auth().listUsers(1000)
-        .then(listUserResult => {
-            listUserResult.users.forEach(userRecord => {
-                arr.push(userRecord)
-            });
-            if (listUserResult.pageToken) {
-                this.listAllUser(listUserResult.pageToken);
-            }
+        .then(async (listUserResult) => {
+            await Promise.all(listUserResult.users.map(async (userRecord) => {
+                const usertam = {...userRecord};
+                console.log(usertam.uid)
+                const user = await admindb.doc(usertam.uid).get();
+                const package = user._fieldsProto.package.stringValue;
+                const date = user._fieldsProto.expirationDate.timestampValue.seconds;
+                var datecurrent = new Date();
+                var dateTam = new Date(date * 1000 - datecurrent.getTime())
+                var result = dateTam.getDate();
+                usertam.package = package;
+                usertam.expirationDate = result;
+
+                console.log(usertam.expirationDate);
+                arr.push(usertam) 
+                
+            }));
             res.send(arr);
         })
         .catch(err => {

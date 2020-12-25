@@ -655,11 +655,16 @@ exports.GetDataVocabulary = (req, res) => {
 }
 exports.GetDataVocabularyByUid = async (req, res) => {
     try {
-        const arrListGet = []
         const user = await admindb.doc(req.params.uid).get();
         const number = user._fieldsProto.ValueVoca.integerValue;
-        const data = await admindbVocabulary.collection('data').where('ID', '>', number).get();
-        res.send(data);
+        console.log(number);
+        var arr = [];
+        await admindbVocabulary.collection('data').where('ID', '>', parseInt(number)).get().then(dataget=>{
+            dataget.forEach(element=>{
+                arr.push(element.data())
+            })
+        });
+        res.send(arr);
     } catch (error) {
         console.log(error + '')
         res.status(500).send(error);
