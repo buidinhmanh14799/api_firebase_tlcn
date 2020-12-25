@@ -26,6 +26,13 @@ exports.createUser = (req, res) => {
         })
 }
 
+exports.listAllUser = (req, res) => {
+    console.log('vao');
+    const arr = admin.auth().listUsers()
+    console.log(arr);
+    res.send(arr);
+}
+
 exports.updateUser = (req, res) => {
     admin.auth().updateUser(req.params.id, {
         email: req.body.email,
