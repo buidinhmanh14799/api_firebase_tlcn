@@ -653,6 +653,18 @@ exports.GetDataVocabulary = (req, res) => {
         res.status(500).send(error);
     }
 }
+exports.GetDataVocabularyByUid = async (req, res) => {
+    try {
+        const arrListGet = []
+        const user = await admindb.doc(req.params.uid).get();
+        const number = user._fieldsProto.ValueVoca.integerValue;
+        const data = await admindbVocabulary.collection('data').where('ID', '>', number).get();
+        res.send(data);
+    } catch (error) {
+        console.log(error + '')
+        res.status(500).send(error);
+    }
+}
 
 exports.DeleteAll = async (req, res) => {
     DeleteCustom('Part1');

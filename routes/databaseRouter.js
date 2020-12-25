@@ -59,6 +59,7 @@ router.get('/test', controller.GetDataTest);
 router.get('/test/:uid', controller.GetDataTestByUid);
 
 router.get('/vocabulary', controller.GetDataVocabulary);
+router.get('/vocabulary/:uid', controller.GetDataVocabularyByUid);
 
 
 // delete
