@@ -78,20 +78,23 @@ exports.listAllUserAuthen = async (req, res) => {
     admin.auth().listUsers(1000)
         .then(async (listUserResult) => {
             await Promise.all(listUserResult.users.map(async (userRecord) => {
-                const usertam = {...userRecord};
+                const usertam = { ...userRecord };
                 console.log(usertam.uid)
                 const user = await admindb.doc(usertam.uid).get();
                 const package = user._fieldsProto.package.stringValue;
                 const date = user._fieldsProto.expirationDate.timestampValue.seconds;
                 var datecurrent = new Date();
-                var dateTam = new Date(date * 1000 - datecurrent.getTime())
-                var result = dateTam.getDate();
+                if ((date * 1000 - datecurrent.getTime()) > 0) {
+                    var dateTam = new Date(date * 1000 - datecurrent.getTime())
+                    var result = dateTam.getDate();
+                    usertam.expirationDate = result;
+                } else {
+                    usertam.expirationDate = -1;
+                }
                 usertam.package = package;
-                usertam.expirationDate = result;
-
                 console.log(usertam.expirationDate);
-                arr.push(usertam) 
-                
+                arr.push(usertam)
+
             }));
             res.send(arr);
         })
@@ -130,19 +133,26 @@ exports.GetUserFireStore = (req, res) => {
 }
 exports.GetDateExpiration = (req, res) => {
     admindb.doc(req.params.uid).get().then(user => {
+        var type = user._fieldsProto.package.stringValue;
         var date = user._fieldsProto.expirationDate.timestampValue.seconds;
         console.log(date);
         var datecurrent = new Date();
-        var dateTam = new Date(date * 1000 - datecurrent.getTime())
-        var result = dateTam.getDate();
-        console.log("ngay con lai", result)
+        if ((date * 1000 - datecurrent.getTime()) > 0) {
+            var dateTam = new Date(date * 1000 - datecurrent.getTime())
+            var result = dateTam.getDate();
+            console.log("ngay con lai", result)
+            res.json({
+                'package': type,
+                'Expiration': result
+            });
+        } else {
+            res.json({
+                'package': type,
+                'Expiration': -1
+            });
+        }
 
-        var type = user._fieldsProto.package.stringValue;
 
-        res.json({
-            'package': type,
-            'Expiration': result
-        });
 
     }).catch(err => {
         res.status(500).send(err);
