@@ -137,7 +137,7 @@ exports.GetDateExpiration = (req, res) => {
         var date = user._fieldsProto.expirationDate.timestampValue.seconds;
         console.log(date);
         var datecurrent = new Date();
-        if (parseInt(date * 1000 - datecurrent.getTime()) > 0) {
+        if ((date * 1000 - datecurrent.getTime()) > 0) {
             var dateTam = new Date(date * 1000 - datecurrent.getTime())
             var result = dateTam.getDate();
             console.log("ngay con lai", result)
