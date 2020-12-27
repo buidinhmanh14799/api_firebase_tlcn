@@ -148,8 +148,10 @@ exports.AddTest = async (req, res) => {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear
             }
+            console.log(item);
             admindbTest.collection('data').add(element);
             const user = await admindb.get();
+            console.log(user.size);
             await Promise.all(user.map(elementuser => {
                 elementuser.collection('array').add(item);
             }))
