@@ -149,7 +149,16 @@ exports.AddTest = (req, res) => {
             await Promise.all(user.map(elementuser => {
                 elementuser.collection('array').add(element);
             }))
+            const item = {
+                IDTest: element.IDTest,
+                IDYear: element.IDYear
+            }
+            const userget = await admindb.get();
+            await Promise.all(userget.map(element=>{
+                element.collection('array').add(item);
+            }))
         });
+
         res.send("Add Compelete!");
     } catch (error) {
         console.log(error + '');
