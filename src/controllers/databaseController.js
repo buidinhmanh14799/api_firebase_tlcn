@@ -140,10 +140,10 @@ exports.AddPart7Detail = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.AddTest = (req, res) => {
+exports.AddTest = async (req, res) => {
     var object = req.body;
     try {
-        object.forEach(async (element) => {
+        await Promise.all(object.map(async (element) => {
             const item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear
@@ -153,7 +153,7 @@ exports.AddTest = (req, res) => {
             await Promise.all(user.map(elementuser => {
                 elementuser.collection('array').add(item);
             }))
-        });
+        }));
 
         res.send("Add Compelete!");
     } catch (error) {
