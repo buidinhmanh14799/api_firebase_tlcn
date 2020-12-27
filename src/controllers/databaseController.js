@@ -144,18 +144,14 @@ exports.AddTest = (req, res) => {
     var object = req.body;
     try {
         object.forEach(async (element) => {
-            admindbTest.collection('data').add(element);
-            const user = await admindb.get();
-            await Promise.all(user.map(elementuser => {
-                elementuser.collection('array').add(element);
-            }))
             const item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear
             }
-            const userget = await admindb.get();
-            await Promise.all(userget.map(element=>{
-                element.collection('array').add(item);
+            admindbTest.collection('data').add(element);
+            const user = await admindb.get();
+            await Promise.all(user.map(elementuser => {
+                elementuser.collection('array').add(item);
             }))
         });
 
@@ -668,8 +664,8 @@ exports.GetDataVocabularyByUid = async (req, res) => {
         const number = user._fieldsProto.ValueVoca.integerValue;
         console.log(number);
         var arr = [];
-        await admindbVocabulary.collection('data').where('ID', '>', parseInt(number)).get().then(dataget=>{
-            dataget.forEach(element=>{
+        await admindbVocabulary.collection('data').where('ID', '>', parseInt(number)).get().then(dataget => {
+            dataget.forEach(element => {
                 arr.push(element.data())
             })
         });
