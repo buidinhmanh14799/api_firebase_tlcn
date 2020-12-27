@@ -142,21 +142,23 @@ exports.AddPart7Detail = (req, res) => {
 }
 exports.AddTest = async (req, res) => {
     var object = req.body;
+    const arr = []
+    const user = await admindb.get();
+    user.forEach(elementuser => {
+        arr.push(elementuser.id)
+    })
     try {
         await Promise.all(object.map(async (element) => {
+            admindbTest.collection('data').add(element);
             const item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear
             }
             console.log(item);
-            admindbTest.collection('data').add(element);
-            const user = await admindb.get();
-            console.log(user.size);
-            await Promise.all(user.map(elementuser => {
-                elementuser.collection('array').add(item);
+            await Promise.all(arr.map(async id => {
+                await admindb.doc(id).collection('array').add(item)
             }))
         }));
-
         res.send("Add Compelete!");
     } catch (error) {
         console.log(error + '');
