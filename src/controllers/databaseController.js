@@ -22,7 +22,9 @@ exports.AddPart1 = (req, res) => {
         object.forEach(element => {
             admindbPart1.collection('data').add(element);
         });
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -33,7 +35,9 @@ exports.AddPart2 = (req, res) => {
         object.forEach(element => {
             admindbPart2.collection('data').add(element);
         });
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -44,7 +48,9 @@ exports.AddPart3 = (req, res) => {
         object.forEach(element => {
             admindbPart3.collection('data').add(element);
         });
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -55,7 +61,9 @@ exports.AddPart4 = (req, res) => {
         object.forEach(element => {
             admindbPart4.collection('data').add(element);
         });
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -66,7 +74,9 @@ exports.AddPart5 = (req, res) => {
         object.forEach(element => {
             admindbPart5.collection('data').add(element);
         });
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -77,7 +87,9 @@ exports.AddPart6 = (req, res) => {
         object.forEach(element => {
             admindbPart6.collection('data').add(element);
         });
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -88,7 +100,9 @@ exports.AddPart7 = (req, res) => {
         object.forEach(element => {
             admindbPart7.collection('data').add(element);
         });
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -102,7 +116,9 @@ exports.AddPart3Detail = (req, res) => {
         object.forEach(element => {
             admindbPart3Detail.collection('data').add(element);
         });
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -113,7 +129,9 @@ exports.AddPart4Detail = (req, res) => {
         object.forEach(element => {
             admindbPart4Detail.collection('data').add(element);
         });
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -124,7 +142,9 @@ exports.AddPart6Detail = (req, res) => {
         object.forEach(element => {
             admindbPart6Detail.collection('data').add(element);
         });
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -135,7 +155,9 @@ exports.AddPart7Detail = (req, res) => {
         object.forEach(element => {
             admindbPart7Detail.collection('data').add(element);
         });
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -159,7 +181,9 @@ exports.AddTest = async (req, res) => {
                 await admindb.doc(id).collection('array').add(item)
             }))
         }));
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         console.log(error + '');
         res.status(500).send(error);
@@ -172,7 +196,9 @@ exports.AddYear = (req, res) => {
         object.forEach(element => {
             admindbYear.collection('data').add(element);
         });
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         res.status(500).send(error);
     }
@@ -643,7 +669,9 @@ exports.AddVocabulary = (req, res) => {
         object.forEach(element => {
             admindbVocabulary.collection('data').add(element);
         });
-        res.send("Add Compelete!");
+        res.json({
+            status: true
+        });
     } catch (error) {
         res.status(500).send(error);
     }
