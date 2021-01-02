@@ -162,7 +162,36 @@ exports.AddPart7Detail = (req, res) => {
         res.status(500).send(error);
     }
 }
+// exports.AddTest = async (req, res) => {
+//     var object = req.body;
+//     const arr = []
+//     const user = await admindb.get();
+//     user.forEach(elementuser => {
+//         arr.push(elementuser.id)
+//     })
+//     try {
+//         await Promise.all(object.map(async (element) => {
+//             admindbTest.collection('data').add(element);
+//             const item = {
+//                 IDTest: element.IDTest,
+//                 IDYear: element.IDYear
+//             }
+//             console.log(item);
+//             await Promise.all(arr.map(async id => {
+//                 await admindb.doc(id).collection('array').add(item)
+//             }))
+//         }));
+//         res.json({
+//             status: true
+//         });
+//     } catch (error) {
+//         console.log(error + '');
+//         res.status(500).send(error);
+//     }
+
+// }
 exports.AddTest = async (req, res) => {
+
     var object = req.body;
     const arr = []
     const user = await admindb.get();
@@ -178,15 +207,35 @@ exports.AddTest = async (req, res) => {
             }
             console.log(item);
             await Promise.all(arr.map(async id => {
-                await admindb.doc(id).collection('array').add(item)
+                await admindb.doc(id).update({
+                    newData: true
+                })
             }))
+
+            const messages = [];
+            messages.push({
+                notification: {
+                    title: 'Cập nhật đề ☝☝☝',
+                    body: 'Đã có thêm ' + object.length + ' mới để cập nhật'
+                },
+                topic: 'NotificaAdmin',
+            });
+
+            admin.messaging().sendAll(messages)
+                .then((response) => {
+                    console.log(response.successCount + ' messages were sent successfully');
+                });
+
         }));
-        res.json({
+        return res.status(200).json({
             status: true
         });
     } catch (error) {
         console.log(error + '');
-        res.status(500).send(error);
+        return res.status(500).json({
+            status: false,
+            message: error + ''
+        })
     }
 
 }
@@ -663,15 +712,38 @@ exports.GetDataTestByUid = async (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.AddVocabulary = (req, res) => {
+exports.AddVocabulary = async (req, res) => {
     var object = req.body;
+    const arr = []
+    const user = await admindb.get();
+    user.forEach(elementuser => {
+        arr.push(elementuser.id)
+    })
     try {
-        object.forEach(element => {
+        await Promise.all(object.map(element => {
             admindbVocabulary.collection('data').add(element);
+        }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
+        }))
+        const messages = [];
+        messages.push({
+            notification: {
+                title: 'Cập nhật từ vựng mới 🐱‍🏍🐱‍🏍🐱‍🏍',
+                body: 'Đã có thêm ' + object.length + ' từ vựng mới để cập nhật'
+            },
+            topic: 'NotificaAdmin',
         });
-        res.json({
-            status: true
-        });
+
+        admin.messaging().sendAll(messages)
+            .then((response) => {
+                console.log(response.successCount + ' messages were sent successfully');
+            });
+        return res.status(200).json({
+            status: true,
+        })
     } catch (error) {
         res.status(500).send(error);
     }
