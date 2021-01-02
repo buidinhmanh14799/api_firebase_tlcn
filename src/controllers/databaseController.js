@@ -212,21 +212,20 @@ exports.AddTest = async (req, res) => {
                 })
             }))
 
-            const messages = [];
-            messages.push({
-                notification: {
-                    title: 'Cập nhật đề ☝☝☝',
-                    body: 'Đã có thêm ' + object.length + ' mới để cập nhật'
-                },
-                topic: 'NotificaAdmin',
-            });
-
-            admin.messaging().sendAll(messages)
-                .then((response) => {
-                    console.log(response.successCount + ' messages were sent successfully');
-                });
-
         }));
+        const messages = [];
+        messages.push({
+            notification: {
+                title: 'Cập nhật đề ☝☝☝',
+                body: 'Đã có thêm ' + object.length + ' mới để cập nhật'
+            },
+            topic: 'NotificaAdmin',
+        });
+
+        admin.messaging().sendAll(messages)
+            .then((response) => {
+                console.log(response.successCount + ' messages were sent successfully');
+            });
         return res.status(200).json({
             status: true
         });
