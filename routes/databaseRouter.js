@@ -20,6 +20,39 @@ router.post('/year/add', controller.AddYear);
 router.post('/test/add', controller.AddTest);
 router.post('/vocabulary/add', controller.AddVocabulary);
 
+
+
+router.put('/part1/update', controller.UpdatePart1);
+router.put('/part2/update', controller.UpdatePart2);
+router.put('/part3/update', controller.UpdatePart3);
+router.put('/part4/update', controller.UpdatePart4);
+router.put('/part5/update', controller.UpdatePart5);
+router.put('/part6/update', controller.UpdatePart6);
+router.put('/part7/update', controller.UpdatePart7);
+router.put('/part3detail/update', controller.UpdatePart3Detail);
+router.put('/part4detail/update', controller.UpdatePart4Detail);
+router.put('/part6detail/update', controller.UpdatePart6Detail);
+router.put('/part7detail/update', controller.UpdatePart7Detail);
+router.put('/year/update', controller.UpdateYear);
+router.put('/test/update', controller.UpdateTest);
+
+
+
+router.post('/part1/delete', controller.DeletePart1);
+router.post('/part2/delete', controller.DeletePart2);
+router.post('/part3/delete', controller.DeletePart3);
+router.post('/part4/delete', controller.DeletePart4);
+router.post('/part5/delete', controller.DeletePart5);
+router.post('/part6/delete', controller.DeletePart6);
+router.post('/part7/delete', controller.DeletePart7);
+router.post('/part3detail/delete', controller.DeletePart3Detail);
+router.post('/part4detail/delete', controller.DeletePart4Detail);
+router.post('/part6detail/delete', controller.DeletePart6Detail);
+router.post('/part7detail/delete', controller.DeletePart7Detail);
+router.post('/year/delete', controller.DeleteYear);
+router.post('/test/delete', controller.DeleteTest);
+
+
 router.get('/part1', controller.GetDataPart1);
 router.get('/part1/:uid', controller.GetDataPart1ByUid);
 

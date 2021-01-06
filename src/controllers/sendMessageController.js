@@ -34,6 +34,7 @@ exports.sendMessageVoca = (req, res) => {
         });
 }
 exports.sendMessageVocaRandom = async (req, res) => {
+    console.log('vao');
     const arrayCloudVoca = [];
     const arrayCloud = await admindbVocabulary.collection('data').get();
     arrayCloud.forEach(element => {

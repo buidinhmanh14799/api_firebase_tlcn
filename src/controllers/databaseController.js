@@ -22,24 +22,99 @@ exports.AddPart1 = (req, res) => {
         object.forEach(element => {
             admindbPart1.collection('data').add(element);
         });
-        res.json({
+        return res.json({
             status: true
         });
     } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send(error);
     }
 }
+exports.UpdatePart1 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(async element => {
+            console.log('element');
+            await admindbPart1.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(async data => {
+                console.log(data);
+                data.forEach(docData => {
+                    admindbPart1.collection('data').doc(docData.id).update(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        console.log(error + '');
+        return res.status(500).send(error);
+    }
+}
+exports.DeletePart1 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(async element => {
+            console.log('element');
+            await admindbPart1.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(async data => {
+                console.log(data);
+                data.forEach(docData => {
+                    admindbPart1.collection('data').doc(docData.id).delete(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        console.log(error + '');
+        return res.status(500).send(error);
+    }
+}
+
 exports.AddPart2 = (req, res) => {
     var object = req.body;
     try {
         object.forEach(element => {
             admindbPart2.collection('data').add(element);
         });
-        res.json({
+        return res.json({
             status: true
         });
     } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send(error);
+    }
+}
+exports.UpdatePart2 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart2.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart2.collection('data').doc(docData.id).update(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+exports.DeletePart2 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart2.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart2.collection('data').doc(docData.id).delete(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
     }
 }
 exports.AddPart3 = (req, res) => {
@@ -48,24 +123,93 @@ exports.AddPart3 = (req, res) => {
         object.forEach(element => {
             admindbPart3.collection('data').add(element);
         });
-        res.json({
+        return res.json({
             status: true
         });
     } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send(error);
     }
 }
+exports.UpdatePart3 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart3.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDAudio', '==', element.IDAudio).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart3.collection('data').doc(docData.id).update(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+exports.DeletePart3 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart3.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDAudio', '==', element.IDAudio).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart3.collection('data').doc(docData.id).delete(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+
 exports.AddPart4 = (req, res) => {
     var object = req.body;
     try {
         object.forEach(element => {
             admindbPart4.collection('data').add(element);
         });
-        res.json({
+        return res.json({
             status: true
         });
     } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send(error);
+    }
+}
+exports.UpdatePart4 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart4.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDAudio', '==', element.IDAudio).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart4.collection('data').doc(docData.id).update(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+exports.DeletePart4 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart4.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDAudio', '==', element.IDAudio).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart4.collection('data').doc(docData.id).delete(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
     }
 }
 exports.AddPart5 = (req, res) => {
@@ -74,11 +218,47 @@ exports.AddPart5 = (req, res) => {
         object.forEach(element => {
             admindbPart5.collection('data').add(element);
         });
-        res.json({
+        return res.json({
             status: true
         });
     } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send(error);
+    }
+}
+exports.UpdatePart5 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart5.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+                console.log(data);
+                data.forEach(docData => {
+                    admindbPart5.collection('data').doc(docData.id).update(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+exports.DeletePart5 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart5.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+                console.log(data);
+                data.forEach(docData => {
+                    admindbPart5.collection('data').doc(docData.id).delete(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
     }
 }
 exports.AddPart6 = (req, res) => {
@@ -87,11 +267,45 @@ exports.AddPart6 = (req, res) => {
         object.forEach(element => {
             admindbPart6.collection('data').add(element);
         });
-        res.json({
+        return res.json({
             status: true
         });
     } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send(error);
+    }
+}
+exports.UpdatePart6 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart6.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDReading', '==', element.IDReading).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart6.collection('data').doc(docData.id).update(element);
+                })
+            })
+        }));
+        returnres.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+exports.DeletePart6 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart6.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDReading', '==', element.IDReading).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart6.collection('data').doc(docData.id).delete(element);
+                })
+            })
+        }));
+        returnres.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
     }
 }
 exports.AddPart7 = (req, res) => {
@@ -100,14 +314,47 @@ exports.AddPart7 = (req, res) => {
         object.forEach(element => {
             admindbPart7.collection('data').add(element);
         });
-        res.json({
+        return res.json({
             status: true
         });
     } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send(error);
     }
 }
-
+exports.UpdatePart7 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart7.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDReading', '==', element.IDReading).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart7.collection('data').doc(docData.id).update(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+exports.DeletePart7 = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart7.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDReading', '==', element.IDReading).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart7.collection('data').doc(docData.id).delete(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
 
 
 exports.AddPart3Detail = (req, res) => {
@@ -116,24 +363,93 @@ exports.AddPart3Detail = (req, res) => {
         object.forEach(element => {
             admindbPart3Detail.collection('data').add(element);
         });
-        res.json({
+        return res.json({
             status: true
         });
     } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send(error);
     }
 }
+exports.UpdatePart3Detail = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart3Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart3Detail.collection('data').doc(docData.id).update(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+exports.DeletePart3Detail = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart3Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart3Detail.collection('data').doc(docData.id).delete(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+
 exports.AddPart4Detail = (req, res) => {
     var object = req.body;
     try {
         object.forEach(element => {
             admindbPart4Detail.collection('data').add(element);
         });
-        res.json({
+        return res.json({
             status: true
         });
     } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send(error);
+    }
+}
+exports.UpdatePart4Detail = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart4Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart4Detail.collection('data').doc(docData.id).update(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+exports.DeletePart4Detail = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart4Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart4Detail.collection('data').doc(docData.id).delete(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
     }
 }
 exports.AddPart6Detail = (req, res) => {
@@ -142,11 +458,45 @@ exports.AddPart6Detail = (req, res) => {
         object.forEach(element => {
             admindbPart6Detail.collection('data').add(element);
         });
-        res.json({
+        return res.json({
             status: true
         });
     } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send(error);
+    }
+}
+exports.UpdatePart6Detail = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart6Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart6Detail.collection('data').doc(docData.id).update(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+exports.DeletePart6Detail = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart6Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart6Detail.collection('data').doc(docData.id).delete(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
     }
 }
 exports.AddPart7Detail = (req, res) => {
@@ -155,11 +505,45 @@ exports.AddPart7Detail = (req, res) => {
         object.forEach(element => {
             admindbPart7Detail.collection('data').add(element);
         });
-        res.json({
+        return res.json({
             status: true
         });
     } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send(error);
+    }
+}
+exports.UpdatePart7Detail = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart7Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart7Detail.collection('data').doc(docData.id).update(element);;
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+exports.DeletePart7Detail = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbPart7Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+                data.forEach(docData => {
+                    admindbPart7Detail.collection('data').doc(docData.id).delete(element);;
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
     }
 }
 // exports.AddTest = async (req, res) => {
@@ -201,11 +585,6 @@ exports.AddTest = async (req, res) => {
     try {
         await Promise.all(object.map(async (element) => {
             admindbTest.collection('data').add(element);
-            const item = {
-                IDTest: element.IDTest,
-                IDYear: element.IDYear
-            }
-            console.log(item);
             await Promise.all(arr.map(async id => {
                 await admindb.doc(id).update({
                     newData: true
@@ -238,17 +617,162 @@ exports.AddTest = async (req, res) => {
     }
 
 }
+exports.UpdateTest = async (req, res) => {
+    console.log('vao');
+    var object = req.body;
+    const arr = []
+    const user = await admindb.get();
+    user.forEach(elementuser => {
+        arr.push(elementuser.id)
+    })
+    try {
+        console.log('vao try');
+        await Promise.all(object.map(async element => {
+            await admindbTest.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(async data => {
+                data.forEach(async docTest => {
+                    admindbTest.collection('data').doc(docTest.id).update(element);
+                    const Item = {
+                        IDTest: docTest.data().IDTest,
+                        IDYear: docTest.data().IDYear,
+                        TypeUpdate: 2
+                    }
+
+                    await Promise.all(arr.map(async id => {
+                        await admindb.doc(id).collection('array').add(Item);
+                        await admindb.doc(id).update({
+                            newData: true
+                        })
+                    }))
+                })
+            });
+        }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
+        }))
+        const messages = [];
+        messages.push({
+            notification: {
+                title: 'Bản cập nhật sửa lỗi đề',
+                body: 'Vui lòng cập nhật để sửa lỗi đề'
+            },
+            topic: 'NotificaAdmin',
+        });
+
+        admin.messaging().sendAll(messages)
+            .then((response) => {
+                console.log(response.successCount + ' messages were sent successfully');
+            });
+        return res.status(200).json({
+            status: true
+        });
+    } catch (error) {
+        console.log('loi', error + '');
+        res.status(500).send(error);
+    }
+}
+exports.DeleteTest = async (req, res) => {
+    console.log('vao');
+    var object = req.body;
+    const arr = []
+    const user = await admindb.get();
+    user.forEach(elementuser => {
+        arr.push(elementuser.id)
+    })
+    try {
+        console.log('vao try');
+        await Promise.all(object.map(async element => {
+            await admindbTest.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(async data => {
+                data.forEach(async docTest => {
+                    admindbTest.collection('data').doc(docTest.id).delete(element);
+                    const Item = {
+                        IDTest: docTest.data().IDTest,
+                        IDYear: docTest.data().IDYear,
+                        TypeUpdate: 1
+                    }
+
+                    await Promise.all(arr.map(async id => {
+                        await admindb.doc(id).collection('array').add(Item);
+                        await admindb.doc(id).update({
+                            newData: true
+                        })
+                    }))
+                })
+            });
+        }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
+        }))
+        const messages = [];
+        messages.push({
+            notification: {
+                title: 'Đã xóa một số đề',
+                body: 'Vui lòng cập nhật lại cơ sở dữ liệu'
+            },
+            topic: 'NotificaAdmin',
+        });
+
+        admin.messaging().sendAll(messages)
+            .then((response) => {
+                console.log(response.successCount + ' messages were sent successfully');
+            });
+        return res.status(200).json({
+            status: true
+        });
+    } catch (error) {
+        console.log('loi', error + '');
+        res.status(500).send(error);
+    }
+}
 exports.AddYear = (req, res) => {
     var object = req.body;
     try {
         object.forEach(element => {
             admindbYear.collection('data').add(element);
         });
-        res.json({
+        return res.json({
             status: true
         });
     } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send(error);
+    }
+}
+
+exports.UpdateYear = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbYear.collection('data').where('IDYear', '==', element.IDYear).get().then(data => {
+                data.forEach(docData => {
+                    admindbYear.collection('data').doc(docData.id).update(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+exports.DeleteYear = async (req, res) => {
+    var object = req.body;
+    try {
+        await Promise.all(object.map(element => {
+            admindbYear.collection('data').where('IDYear', '==', element.IDYear).get().then(data => {
+                data.forEach(docData => {
+                    admindbYear.collection('data').doc(docData.id).delete(element);
+                })
+            })
+        }));
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        return res.status(500).send(error);
     }
 }
 exports.GetDataPart1 = (req, res) => {
@@ -789,7 +1313,6 @@ exports.DeleteAll = async (req, res) => {
     DeleteCustom('Part7');
     DeleteCustom('Year');
     DeleteCustom('Test');
-    DeleteCustom('Vocabulary');
     DeleteCustom('Part3Detail');
     DeleteCustom('Part4Detail');
     DeleteCustom('Part6Detail');
