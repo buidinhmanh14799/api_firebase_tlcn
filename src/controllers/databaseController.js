@@ -1,3 +1,4 @@
+const e = require('cors');
 const {
     admin,
     admindbPart1,
@@ -794,7 +795,9 @@ exports.GetDataPart1ByUid = async (req, res) => {
         const arrListGet = []
         const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
         arrListGettam.forEach(element => {
-            arrListGet.push(element.data());
+            if (element.data().TypeUpdate != 1) {
+                arrListGet.push(element.data());
+            }
         });
         var arrResult = [];
         await Promise.all(arrListGet.map(async (element) => {
