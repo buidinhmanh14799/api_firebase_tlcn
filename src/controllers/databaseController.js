@@ -50,7 +50,7 @@ exports.UpdatePart1 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.DeletePart1 = async (req, res) => {
+async function deletePart1(){
     var object = req.body;
     try {
         await Promise.all(object.map(async element => {
@@ -62,12 +62,8 @@ exports.DeletePart1 = async (req, res) => {
                 })
             })
         }));
-        return res.json({
-            status: true
-        });
     } catch (error) {
         console.log(error + '');
-        return res.status(500).send(error);
     }
 }
 
@@ -101,7 +97,7 @@ exports.UpdatePart2 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.DeletePart2 = async (req, res) => {
+async function deletePart2(){
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -111,11 +107,7 @@ exports.DeletePart2 = async (req, res) => {
                 })
             })
         }));
-        return res.json({
-            status: true
-        });
     } catch (error) {
-        return res.status(500).send(error);
     }
 }
 exports.AddPart3 = (req, res) => {
@@ -148,7 +140,7 @@ exports.UpdatePart3 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.DeletePart3 = async (req, res) => {
+async function deletePart3(){
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -158,11 +150,7 @@ exports.DeletePart3 = async (req, res) => {
                 })
             })
         }));
-        return res.json({
-            status: true
-        });
     } catch (error) {
-        return res.status(500).send(error);
     }
 }
 
@@ -196,7 +184,7 @@ exports.UpdatePart4 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.DeletePart4 = async (req, res) => {
+async function deletePart4(){
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -206,11 +194,7 @@ exports.DeletePart4 = async (req, res) => {
                 })
             })
         }));
-        return res.json({
-            status: true
-        });
     } catch (error) {
-        return res.status(500).send(error);
     }
 }
 exports.AddPart5 = (req, res) => {
@@ -244,7 +228,7 @@ exports.UpdatePart5 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.DeletePart5 = async (req, res) => {
+async function deletePart5(){
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -255,11 +239,7 @@ exports.DeletePart5 = async (req, res) => {
                 })
             })
         }));
-        return res.json({
-            status: true
-        });
     } catch (error) {
-        return res.status(500).send(error);
     }
 }
 exports.AddPart6 = (req, res) => {
@@ -292,7 +272,7 @@ exports.UpdatePart6 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.DeletePart6 = async (req, res) => {
+async function deletePart6(){
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -302,11 +282,7 @@ exports.DeletePart6 = async (req, res) => {
                 })
             })
         }));
-        returnres.json({
-            status: true
-        });
     } catch (error) {
-        return res.status(500).send(error);
     }
 }
 exports.AddPart7 = (req, res) => {
@@ -339,7 +315,7 @@ exports.UpdatePart7 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.DeletePart7 = async (req, res) => {
+async function deletePart7(){
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -349,11 +325,7 @@ exports.DeletePart7 = async (req, res) => {
                 })
             })
         }));
-        return res.json({
-            status: true
-        });
     } catch (error) {
-        return res.status(500).send(error);
     }
 }
 
@@ -388,7 +360,7 @@ exports.UpdatePart3Detail = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.DeletePart3Detail = async (req, res) => {
+async function deletePart3dt(){
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -398,11 +370,7 @@ exports.DeletePart3Detail = async (req, res) => {
                 })
             })
         }));
-        return res.json({
-            status: true
-        });
     } catch (error) {
-        return res.status(500).send(error);
     }
 }
 
@@ -436,7 +404,7 @@ exports.UpdatePart4Detail = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.DeletePart4Detail = async (req, res) => {
+async function deletePart4dt(){
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -446,11 +414,7 @@ exports.DeletePart4Detail = async (req, res) => {
                 })
             })
         }));
-        return res.json({
-            status: true
-        });
     } catch (error) {
-        return res.status(500).send(error);
     }
 }
 exports.AddPart6Detail = (req, res) => {
@@ -483,7 +447,7 @@ exports.UpdatePart6Detail = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.DeletePart6Detail = async (req, res) => {
+async function deletePart6dt(){
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -493,11 +457,7 @@ exports.DeletePart6Detail = async (req, res) => {
                 })
             })
         }));
-        return res.json({
-            status: true
-        });
     } catch (error) {
-        return res.status(500).send(error);
     }
 }
 exports.AddPart7Detail = (req, res) => {
@@ -530,7 +490,7 @@ exports.UpdatePart7Detail = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.DeletePart7Detail = async (req, res) => {
+async function deletePart7dt(){
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -540,11 +500,7 @@ exports.DeletePart7Detail = async (req, res) => {
                 })
             })
         }));
-        return res.json({
-            status: true
-        });
     } catch (error) {
-        return res.status(500).send(error);
     }
 }
 // exports.AddTest = async (req, res) => {
@@ -674,6 +630,17 @@ exports.UpdateTest = async (req, res) => {
     }
 }
 exports.DeleteTest = async (req, res) => {
+    deletePart1();
+    deletePart2();
+    deletePart3();
+    deletePart4();
+    deletePart5();
+    deletePart6();
+    deletePart7();
+    deletePart3dt();
+    deletePart4dt();
+    deletePart6dt();
+    deletePart7dt();
     console.log('vao');
     var object = req.body;
     const arr = []

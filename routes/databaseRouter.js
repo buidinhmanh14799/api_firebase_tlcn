@@ -38,17 +38,17 @@ router.put('/test/update', controller.UpdateTest);
 
 
 
-router.post('/part1/delete', controller.DeletePart1);
-router.post('/part2/delete', controller.DeletePart2);
-router.post('/part3/delete', controller.DeletePart3);
-router.post('/part4/delete', controller.DeletePart4);
-router.post('/part5/delete', controller.DeletePart5);
-router.post('/part6/delete', controller.DeletePart6);
-router.post('/part7/delete', controller.DeletePart7);
-router.post('/part3detail/delete', controller.DeletePart3Detail);
-router.post('/part4detail/delete', controller.DeletePart4Detail);
-router.post('/part6detail/delete', controller.DeletePart6Detail);
-router.post('/part7detail/delete', controller.DeletePart7Detail);
+// router.post('/part1/delete', controller.DeletePart1);
+// router.post('/part2/delete', controller.DeletePart2);
+// router.post('/part3/delete', controller.DeletePart3);
+// router.post('/part4/delete', controller.DeletePart4);
+// router.post('/part5/delete', controller.DeletePart5);
+// router.post('/part6/delete', controller.DeletePart6);
+// router.post('/part7/delete', controller.DeletePart7);
+// router.post('/part3detail/delete', controller.DeletePart3Detail);
+// router.post('/part4detail/delete', controller.DeletePart4Detail);
+// router.post('/part6detail/delete', controller.DeletePart6Detail);
+// router.post('/part7detail/delete', controller.DeletePart7Detail);
 router.post('/year/delete', controller.DeleteYear);
 router.post('/test/delete', controller.DeleteTest);
 
