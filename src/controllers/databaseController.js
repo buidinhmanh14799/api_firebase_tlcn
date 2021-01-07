@@ -695,15 +695,13 @@ exports.UpdateYear = async (req, res) => {
     }
 }
 exports.DeleteYear = async (req, res) => {
-    var object = req.body;
+    const IDYear = req.query.IDYear;
     try {
-        await Promise.all(object.map(element => {
-            admindbYear.collection('data').where('IDYear', '==', element.IDYear).get().then(data => {
-                data.forEach(docData => {
-                    admindbYear.collection('data').doc(docData.id).delete();
-                })
+        admindbYear.collection('data').where('IDYear', '==', IDYear).get().then(data => {
+            data.forEach(docData => {
+                admindbYear.collection('data').doc(docData.id).delete();
             })
-        }));
+        })
         return res.json({
             status: true
         });
