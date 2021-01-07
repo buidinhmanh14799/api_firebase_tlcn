@@ -50,18 +50,14 @@ exports.UpdatePart1 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-async function deletePart1(){
-    var object = req.body;
+async function deletePart1(IDTest, IDYear) {
     try {
-        await Promise.all(object.map(async element => {
-            console.log('element');
-            await admindbPart1.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(async data => {
-                console.log(data);
-                data.forEach(docData => {
-                    admindbPart1.collection('data').doc(docData.id).delete();
-                })
+        await admindbPart1.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(async data => {
+            console.log(data);
+            data.forEach(docData => {
+                admindbPart1.collection('data').doc(docData.id).delete();
             })
-        }));
+        })
     } catch (error) {
         console.log(error + '');
     }
@@ -97,16 +93,13 @@ exports.UpdatePart2 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-async function deletePart2(){
-    var object = req.body;
+async function deletePart2(IDTest, IDYear) {
     try {
-        await Promise.all(object.map(element => {
-            admindbPart2.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
-                data.forEach(docData => {
-                    admindbPart2.collection('data').doc(docData.id).delete();
-                })
+        admindbPart2.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(data => {
+            data.forEach(docData => {
+                admindbPart2.collection('data').doc(docData.id).delete();
             })
-        }));
+        })
     } catch (error) {
     }
 }
@@ -140,16 +133,13 @@ exports.UpdatePart3 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-async function deletePart3(){
-    var object = req.body;
+async function deletePart3(IDTest, IDYear) {
     try {
-        await Promise.all(object.map(element => {
-            admindbPart3.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDAudio', '==', element.IDAudio).get().then(data => {
-                data.forEach(docData => {
-                    admindbPart3.collection('data').doc(docData.id).delete();
-                })
+        admindbPart3.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(data => {
+            data.forEach(docData => {
+                admindbPart3.collection('data').doc(docData.id).delete();
             })
-        }));
+        })
     } catch (error) {
     }
 }
@@ -184,16 +174,13 @@ exports.UpdatePart4 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-async function deletePart4(){
-    var object = req.body;
+async function deletePart4(IDTest, IDYear) {
     try {
-        await Promise.all(object.map(element => {
-            admindbPart4.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
-                data.forEach(docData => {
-                    admindbPart4.collection('data').doc(docData.id).delete();
-                })
+        admindbPart4.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(data => {
+            data.forEach(docData => {
+                admindbPart4.collection('data').doc(docData.id).delete();
             })
-        }));
+        })
     } catch (error) {
     }
 }
@@ -228,17 +215,14 @@ exports.UpdatePart5 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-async function deletePart5(){
-    var object = req.body;
+async function deletePart5(IDTest, IDYear) {
     try {
-        await Promise.all(object.map(element => {
-            admindbPart5.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
-                console.log(data);
-                data.forEach(docData => {
-                    admindbPart5.collection('data').doc(docData.id).delete();
-                })
+        admindbPart5.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(data => {
+            console.log(data);
+            data.forEach(docData => {
+                admindbPart5.collection('data').doc(docData.id).delete();
             })
-        }));
+        })
     } catch (error) {
     }
 }
@@ -272,16 +256,13 @@ exports.UpdatePart6 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-async function deletePart6(){
-    var object = req.body;
+async function deletePart6(IDTest, IDYear) {
     try {
-        await Promise.all(object.map(element => {
-            admindbPart6.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
-                data.forEach(docData => {
-                    admindbPart6.collection('data').doc(docData.id).delete();
-                })
+        admindbPart6.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(data => {
+            data.forEach(docData => {
+                admindbPart6.collection('data').doc(docData.id).delete();
             })
-        }));
+        })
     } catch (error) {
     }
 }
@@ -315,16 +296,13 @@ exports.UpdatePart7 = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-async function deletePart7(){
-    var object = req.body;
+async function deletePart7(IDTest, IDYear) {
     try {
-        await Promise.all(object.map(element => {
-            admindbPart7.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
-                data.forEach(docData => {
-                    admindbPart7.collection('data').doc(docData.id).delete();
-                })
+        admindbPart7.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(data => {
+            data.forEach(docData => {
+                admindbPart7.collection('data').doc(docData.id).delete();
             })
-        }));
+        })
     } catch (error) {
     }
 }
@@ -360,16 +338,13 @@ exports.UpdatePart3Detail = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-async function deletePart3dt(){
-    var object = req.body;
+async function deletePart3dt(IDTest, IDYear) {
     try {
-        await Promise.all(object.map(element => {
-            admindbPart3Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).then(data => {
-                data.forEach(docData => {
-                    admindbPart3Detail.collection('data').doc(docData.id).delete();
-                })
+        admindbPart3Detail.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).then(data => {
+            data.forEach(docData => {
+                admindbPart3Detail.collection('data').doc(docData.id).delete();
             })
-        }));
+        })
     } catch (error) {
     }
 }
@@ -404,16 +379,13 @@ exports.UpdatePart4Detail = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-async function deletePart4dt(){
-    var object = req.body;
+async function deletePart4dt(IDTest, IDYear) {
     try {
-        await Promise.all(object.map(element => {
-            admindbPart4Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
-                data.forEach(docData => {
-                    admindbPart4Detail.collection('data').doc(docData.id).delete();
-                })
+        admindbPart4Detail.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(data => {
+            data.forEach(docData => {
+                admindbPart4Detail.collection('data').doc(docData.id).delete();
             })
-        }));
+        })
     } catch (error) {
     }
 }
@@ -447,16 +419,13 @@ exports.UpdatePart6Detail = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-async function deletePart6dt(){
-    var object = req.body;
+async function deletePart6dt(IDTest, IDYear) {
     try {
-        await Promise.all(object.map(element => {
-            admindbPart6Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
-                data.forEach(docData => {
-                    admindbPart6Detail.collection('data').doc(docData.id).delete();
-                })
+        admindbPart6Detail.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(data => {
+            data.forEach(docData => {
+                admindbPart6Detail.collection('data').doc(docData.id).delete();
             })
-        }));
+        })
     } catch (error) {
     }
 }
@@ -490,16 +459,13 @@ exports.UpdatePart7Detail = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-async function deletePart7dt(){
-    var object = req.body;
+async function deletePart7dt(IDTest, IDYear) {
     try {
-        await Promise.all(object.map(element => {
-            admindbPart7Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
-                data.forEach(docData => {
-                    admindbPart7Detail.collection('data').doc(docData.id).delete();;
-                })
+        admindbPart7Detail.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(data => {
+            data.forEach(docData => {
+                admindbPart7Detail.collection('data').doc(docData.id).delete();;
             })
-        }));
+        })
     } catch (error) {
     }
 }
@@ -630,17 +596,19 @@ exports.UpdateTest = async (req, res) => {
     }
 }
 exports.DeleteTest = async (req, res) => {
-    deletePart1();
-    deletePart2();
-    deletePart3();
-    deletePart4();
-    deletePart5();
-    deletePart6();
-    deletePart7();
-    deletePart3dt();
-    deletePart4dt();
-    deletePart6dt();
-    deletePart7dt();
+    const IDTest = req.query.IDTest;
+    const IDYear = req.query.IDYear;
+    deletePart1(IDTest, IDYear);
+    deletePart2(IDTest, IDYear);
+    deletePart3(IDTest, IDYear);
+    deletePart4(IDTest, IDYear);
+    deletePart5(IDTest, IDYear);
+    deletePart6(IDTest, IDYear);
+    deletePart7(IDTest, IDYear);
+    deletePart3dt(IDTest, IDYear);
+    deletePart4dt(IDTest, IDYear);
+    deletePart6dt(IDTest, IDYear);
+    deletePart7dt(IDTest, IDYear);
     console.log('vao');
     var object = req.body;
     const arr = []

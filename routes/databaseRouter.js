@@ -50,7 +50,7 @@ router.put('/test/update', controller.UpdateTest);
 // router.post('/part6detail/delete', controller.DeletePart6Detail);
 // router.post('/part7detail/delete', controller.DeletePart7Detail);
 router.post('/year/delete', controller.DeleteYear);
-router.post('/test/delete', controller.DeleteTest);
+router.delete('/test/delete', controller.DeleteTest);
 
 
 router.get('/part1', controller.GetDataPart1);
