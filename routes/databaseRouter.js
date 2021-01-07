@@ -49,7 +49,7 @@ router.put('/test/update', controller.UpdateTest);
 // router.post('/part4detail/delete', controller.DeletePart4Detail);
 // router.post('/part6detail/delete', controller.DeletePart6Detail);
 // router.post('/part7detail/delete', controller.DeletePart7Detail);
-router.post('/year/delete', controller.DeleteYear);
+router.delete('/year/delete', controller.DeleteYear);
 router.delete('/test/delete', controller.DeleteTest);
 
 

@@ -596,8 +596,9 @@ exports.UpdateTest = async (req, res) => {
     }
 }
 exports.DeleteTest = async (req, res) => {
-    const IDTest = req.query.IDTest;
-    const IDYear = req.query.IDYear;
+    const IDTest = parseInt(req.query.IDTest);
+    const IDYear = parseInt(req.query.IDYear);
+    console.log(typeof IDTest+'   '+ IDYear)
     deletePart1(IDTest, IDYear);
     deletePart2(IDTest, IDYear);
     deletePart3(IDTest, IDYear);
@@ -610,7 +611,6 @@ exports.DeleteTest = async (req, res) => {
     deletePart6dt(IDTest, IDYear);
     deletePart7dt(IDTest, IDYear);
     console.log('vao');
-    var object = req.body;
     const arr = []
     const user = await admindb.get();
     user.forEach(elementuser => {
@@ -618,25 +618,25 @@ exports.DeleteTest = async (req, res) => {
     })
     try {
         console.log('vao try');
-        await Promise.all(object.map(async element => {
-            await admindbTest.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(async data => {
-                data.forEach(async docTest => {
-                    admindbTest.collection('data').doc(docTest.id).delete();
-                    const Item = {
-                        IDTest: docTest.data().IDTest,
-                        IDYear: docTest.data().IDYear,
-                        TypeUpdate: 1
-                    }
 
-                    await Promise.all(arr.map(async id => {
-                        await admindb.doc(id).collection('array').add(Item);
-                        await admindb.doc(id).update({
-                            newData: true
-                        })
-                    }))
-                })
-            });
-        }));
+        await admindbTest.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(async data => {
+            data.forEach(async docTest => {
+                admindbTest.collection('data').doc(docTest.id).delete();
+                const Item = {
+                    IDTest: docTest.data().IDTest,
+                    IDYear: docTest.data().IDYear,
+                    TypeUpdate: 1
+                }
+
+                await Promise.all(arr.map(async id => {
+                    await admindb.doc(id).collection('array').add(Item);
+                    await admindb.doc(id).update({
+                        newData: true
+                    })
+                }))
+            })
+        });
+
         await Promise.all(arr.map(async id => {
             await admindb.doc(id).update({
                 newData: true
@@ -695,7 +695,7 @@ exports.UpdateYear = async (req, res) => {
     }
 }
 exports.DeleteYear = async (req, res) => {
-    const IDYear = req.query.IDYear;
+    const IDYear = parseInt(req.query.IDYear);
     try {
         admindbYear.collection('data').where('IDYear', '==', IDYear).get().then(data => {
             data.forEach(docData => {
