@@ -55,10 +55,10 @@ exports.DeletePart1 = async (req, res) => {
     try {
         await Promise.all(object.map(async element => {
             console.log('element');
-            await admindbPart1.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(async data => {
+            await admindbPart1.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(async data => {
                 console.log(data);
                 data.forEach(docData => {
-                    admindbPart1.collection('data').doc(docData.id).delete(element);
+                    admindbPart1.collection('data').doc(docData.id).delete();
                 })
             })
         }));
@@ -105,9 +105,9 @@ exports.DeletePart2 = async (req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
-            admindbPart2.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+            admindbPart2.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
                 data.forEach(docData => {
-                    admindbPart2.collection('data').doc(docData.id).delete(element);
+                    admindbPart2.collection('data').doc(docData.id).delete();
                 })
             })
         }));
@@ -154,7 +154,7 @@ exports.DeletePart3 = async (req, res) => {
         await Promise.all(object.map(element => {
             admindbPart3.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDAudio', '==', element.IDAudio).get().then(data => {
                 data.forEach(docData => {
-                    admindbPart3.collection('data').doc(docData.id).delete(element);
+                    admindbPart3.collection('data').doc(docData.id).delete();
                 })
             })
         }));
@@ -200,9 +200,9 @@ exports.DeletePart4 = async (req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
-            admindbPart4.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDAudio', '==', element.IDAudio).get().then(data => {
+            admindbPart4.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
                 data.forEach(docData => {
-                    admindbPart4.collection('data').doc(docData.id).delete(element);
+                    admindbPart4.collection('data').doc(docData.id).delete();
                 })
             })
         }));
@@ -248,10 +248,10 @@ exports.DeletePart5 = async (req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
-            admindbPart5.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+            admindbPart5.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
                 console.log(data);
                 data.forEach(docData => {
-                    admindbPart5.collection('data').doc(docData.id).delete(element);
+                    admindbPart5.collection('data').doc(docData.id).delete();
                 })
             })
         }));
@@ -296,9 +296,9 @@ exports.DeletePart6 = async (req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
-            admindbPart6.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDReading', '==', element.IDReading).get().then(data => {
+            admindbPart6.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
                 data.forEach(docData => {
-                    admindbPart6.collection('data').doc(docData.id).delete(element);
+                    admindbPart6.collection('data').doc(docData.id).delete();
                 })
             })
         }));
@@ -343,9 +343,9 @@ exports.DeletePart7 = async (req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
-            admindbPart7.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDReading', '==', element.IDReading).get().then(data => {
+            admindbPart7.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
                 data.forEach(docData => {
-                    admindbPart7.collection('data').doc(docData.id).delete(element);
+                    admindbPart7.collection('data').doc(docData.id).delete();
                 })
             })
         }));
@@ -392,9 +392,9 @@ exports.DeletePart3Detail = async (req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
-            admindbPart3Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+            admindbPart3Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).then(data => {
                 data.forEach(docData => {
-                    admindbPart3Detail.collection('data').doc(docData.id).delete(element);
+                    admindbPart3Detail.collection('data').doc(docData.id).delete();
                 })
             })
         }));
@@ -440,9 +440,9 @@ exports.DeletePart4Detail = async (req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
-            admindbPart4Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+            admindbPart4Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
                 data.forEach(docData => {
-                    admindbPart4Detail.collection('data').doc(docData.id).delete(element);
+                    admindbPart4Detail.collection('data').doc(docData.id).delete();
                 })
             })
         }));
@@ -487,9 +487,9 @@ exports.DeletePart6Detail = async (req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
-            admindbPart6Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+            admindbPart6Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
                 data.forEach(docData => {
-                    admindbPart6Detail.collection('data').doc(docData.id).delete(element);
+                    admindbPart6Detail.collection('data').doc(docData.id).delete();
                 })
             })
         }));
@@ -534,9 +534,9 @@ exports.DeletePart7Detail = async (req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
-            admindbPart7Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
+            admindbPart7Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(data => {
                 data.forEach(docData => {
-                    admindbPart7Detail.collection('data').doc(docData.id).delete(element);;
+                    admindbPart7Detail.collection('data').doc(docData.id).delete();;
                 })
             })
         }));
@@ -686,7 +686,7 @@ exports.DeleteTest = async (req, res) => {
         await Promise.all(object.map(async element => {
             await admindbTest.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(async data => {
                 data.forEach(async docTest => {
-                    admindbTest.collection('data').doc(docTest.id).delete(element);
+                    admindbTest.collection('data').doc(docTest.id).delete();
                     const Item = {
                         IDTest: docTest.data().IDTest,
                         IDYear: docTest.data().IDYear,
@@ -765,7 +765,7 @@ exports.DeleteYear = async (req, res) => {
         await Promise.all(object.map(element => {
             admindbYear.collection('data').where('IDYear', '==', element.IDYear).get().then(data => {
                 data.forEach(docData => {
-                    admindbYear.collection('data').doc(docData.id).delete(element);
+                    admindbYear.collection('data').doc(docData.id).delete();
                 })
             })
         }));
