@@ -13,6 +13,8 @@ router.get('/email/:id', userController.GetUserbyEmail);
 router.get('/phone/:id', userController.GetUserbyPhone);
 router.get('/uid/:id', userController.GetUserbyUid);
 
+router.post('/checkemail',userController.checkEmail)
+
 router.get('/firestore/:uid', userController.GetUserFireStore);
 router.get('/expirationDate/:uid', userController.GetDateExpiration);
 router.put('/disable/:uid', userController.DisabledUser);

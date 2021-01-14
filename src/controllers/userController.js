@@ -102,7 +102,39 @@ exports.listAllUserAuthen = async (req, res) => {
             res.status(500).send(err);
         })
 }
+exports.checkEmail = async (req, res) => {
+    var arr = [];
+    let resultcheck = 0;
+    console.log(req.body.email)
+    admin.auth().listUsers(1000)
+        .then(async (listUserResult) => {
+            await Promise.all(listUserResult.users.map(async (userRecord) => {
+                const arr1 = { ...userRecord };
+                arr.push(arr1);
+            }));
+            console.log(typeof arr)
+            await Promise.all(arr.map(user => {
+                if (user.email === req.body.email) {
+                    console.log('??', user.email)
+                    resultcheck = 1;
+                }
+            }))
+            console.log(resultcheck)
+            if (resultcheck === 1) {
+                res.status(200).json({
+                    success: true,
+                });
+            } else {
+                res.status(500).json({
+                    success: false,
+                });
+            }
 
+        })
+        .catch(err => {
+            res.status(500).send(err);
+        })
+}
 exports.GetUserbyEmail = (req, res) => {
     admin.auth().getUserByEmail(req.params.id).then(user => {
         res.send(user)
