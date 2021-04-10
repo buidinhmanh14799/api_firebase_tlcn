@@ -8,8 +8,8 @@ exports.sendmail = function (req, res) {
         port: 465,
         secure: true,
         auth: {
-            user: 'toeicseb@gmail.com', //Tài khoản gmail vừa tạo
-            pass: 'Hoilamgi4' //Mật khẩu tài khoản gmail vừa tạo
+            user: 'MPMShopOnline@gmail.com', //Tài khoản gmail vừa tạo
+            pass: 'Hoilamgi3' //Mật khẩu tài khoản gmail vừa tạo
         },
         tls: {
             // do not fail on invalid certs
