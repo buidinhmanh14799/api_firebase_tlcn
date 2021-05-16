@@ -8,6 +8,8 @@ const cors = require('cors');
 var usersRouter = require('./routes/userRouter');
 var SendCode = require('./routes/sendcodeRouter');
 var database = require('./routes/databaseRouter');
+
+var practiceonline =require('./routes/practiceOnline');
 var SendMessage = require('./routes/sendMessageRouter');
 
 var app = express();
@@ -32,6 +34,7 @@ app.use('/users', usersRouter);
 app.use('/sendcode', SendCode);
 app.use('/database', database);
 app.use('/sendmessage', SendMessage);
+app.use('/practiceonline',practiceonline);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
