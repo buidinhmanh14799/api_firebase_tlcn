@@ -4,9 +4,9 @@ const {
 exports.GetDataPractice = async (req, res) => {
     var practice = adminPractice.doc(req.params.id);
     var object = {};
+    var data = [];
     try {
         dataPart1 = await practice.collection('part1').get();
-        const arrPart1 = []
         dataPart1.forEach(part1 => {
             var objectT = {
                 id: part1._fieldsProto.idQuestion.integerValue,
@@ -18,7 +18,7 @@ exports.GetDataPractice = async (req, res) => {
                 showQuestion: false,
                 showDA: true,
             };
-            arrPart1.push(objectT);
+            data.push(objectT);
         });
         // await Promise.all(dataPart1.map(element=>{
         //     console.log("???");
@@ -27,7 +27,6 @@ exports.GetDataPractice = async (req, res) => {
 
 
         dataPart2 = await practice.collection('part2').get();
-        const arrPart2 = []
         dataPart1.forEach(part2 => {
             var objectT = {
                 id: part2._fieldsProto.idQuestion.integerValue,
@@ -39,7 +38,7 @@ exports.GetDataPractice = async (req, res) => {
                 showQuestion: false,
                 showDA: true,
             };
-            arrPart2.push(objectT);
+            data.push(objectT);
         });
 
         dataPart3 = await practice.collection('part3').get();
@@ -55,7 +54,6 @@ exports.GetDataPractice = async (req, res) => {
         });
 
         dataPart5 = await practice.collection('part5').get();
-        const arrPart5 = []
         dataPart5.forEach(part5 => {
             part5.showQuestion = true;
             part5.showDA = true;
@@ -63,12 +61,10 @@ exports.GetDataPractice = async (req, res) => {
                 audio: '',
                 image: null,
                 questions: [
-                    {
-                        part5,
-                    },
+                    part5.data(),
                 ]
             };
-            arrPart5.push(objectT);
+            data.push(objectT);
         });
 
         dataPart6 = await practice.collection('part6').get();
@@ -112,7 +108,6 @@ exports.GetDataPractice = async (req, res) => {
         });
         // id: part2._fieldsProto.idQuestion.integerValue,
         // audio: part2._fieldsProto.audio.stringValue,
-        const part3RS = [];
         arrPart3.forEach(part3 => {
             var objectT = {
                 id: 1,
@@ -128,10 +123,9 @@ exports.GetDataPractice = async (req, res) => {
                 }
             })
             objectT.questions = lstQuestionPart3;
-            part3RS.push(objectT);
+            data.push(objectT);
         })
 
-        const part4RS = [];
         arrPart4.forEach(part4 => {
             var objectT = {
                 id: 1,
@@ -147,9 +141,8 @@ exports.GetDataPractice = async (req, res) => {
                 }
             })
             objectT.questions = lstQuestionPart4;
-            part4RS.push(objectT);
+            data.push(objectT);
         })
-        const part6RS = [];
         arrPart6.forEach(part6 => {
             var objectT = {
                 id: part6.idQuestion,
@@ -165,9 +158,8 @@ exports.GetDataPractice = async (req, res) => {
                 }
             })
             objectT.questions = lstQuestionPart6;
-            part6RS.push(objectT);
+            data.push(objectT);
         })
-        const part7RS = [];
         arrPart7.forEach(part7 => {
             var objectT = {
                 id: part7.idQuestion,
@@ -183,18 +175,9 @@ exports.GetDataPractice = async (req, res) => {
                 }
             })
             objectT.questions = lstQuestionPart7;
-            part7RS.push(objectT);
+            data.push(objectT);
         })
-
-        var data = {};
-        data.dataPart1 = arrPart1;
-        data.dataPart2 = arrPart2;
-        data.dataPart3 = part3RS;
-        data.dataPart4 = part4RS;
-        data.dataPart5 = arrPart5;
-        data.dataPart6 = part6RS;
-        data.dataPart7 = part7RS;
-        object.data = data;
+        object.listQuestions = data;
         return res.json(
             object
         );
@@ -339,7 +322,7 @@ const AddPart7Detail = async (part7Detail, practice) => {
     }
 }
 
-const getListUpcommingElement =  () => {
+const getListUpcommingElement = () => {
     return new Promise(async (resolve, reject) => {
         try {
             const listPractce = await adminPractice.listDocuments();
