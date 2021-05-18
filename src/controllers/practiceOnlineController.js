@@ -8,13 +8,14 @@ exports.GetDataPractice = async (req, res) => {
     try {
         dataPart1 = await practice.collection('part1').get();
         dataPart1.forEach(part1 => {
-            part1.result = "";
+            var object = part1.data();
+            object.result = "";
             var objectT = {
                 id: part1._fieldsProto.idQuestion.integerValue,
                 audio: part1._fieldsProto.audio.stringValue,
                 image: part1._fieldsProto.image.stringValue,
                 questions: [
-                    part1.data()
+                    object
                 ],
                 showQuestion: false,
                 showDA: true,
@@ -29,13 +30,14 @@ exports.GetDataPractice = async (req, res) => {
 
         dataPart2 = await practice.collection('part2').get();
         dataPart2.forEach(part2 => {
-            part2.result = "";
+            var object = part1.data();
+            object.result = "";
             var objectT = {
                 id: part2._fieldsProto.idQuestion.integerValue,
                 audio: part2._fieldsProto.audio.stringValue,
                 image: null,
                 questions: [
-                    part2.data(),
+                    object
                 ],
                 showQuestion: false,
                 showDA: false,
@@ -139,12 +141,13 @@ exports.GetDataPractice = async (req, res) => {
         dataPart5.forEach(part5 => {
             part5.showQuestion = true;
             part5.showDA = true;
-            part5.result =""
+            var object = part5.data();
+            object.result = "";
             var objectT = {
                 audio: '',
                 image: null,
                 questions: [
-                    part5.data(),
+                    object
                 ]
             };
             data.push(objectT);
