@@ -193,6 +193,14 @@ exports.GetDataPractice = async (req, res) => {
                 idQs++;
             }
         }
+        data.sort((a, b) => {
+            return a.id - b.id;
+        })
+        data.forEach(question=>{
+            question.questions.sort((a, b) => {
+                return a.idQuestion -b.idQuestion;
+            })
+        })
         object.listQuestions = data;
         return res.json(
             object
