@@ -169,7 +169,7 @@ exports.GetDataPractice = async (req, res) => {
                 showDA: true,
             };
             var lstQuestionPart7 = [];
-            arrPart6Detail.forEach(part7Detail => {
+            arrPart7Detail.forEach(part7Detail => {
                 if (part7Detail.idReading === part7.idReading) {
                     lstQuestionPart7.push(part7Detail);
                 }
