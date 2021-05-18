@@ -8,7 +8,7 @@ exports.GetDataPractice = async (req, res) => {
     try {
         dataPart1 = await practice.collection('part1').get();
         dataPart1.forEach(part1 => {
-            part1.results = '';
+            part1.result = "";
             var objectT = {
                 id: part1._fieldsProto.idQuestion.integerValue,
                 audio: part1._fieldsProto.audio.stringValue,
@@ -29,7 +29,7 @@ exports.GetDataPractice = async (req, res) => {
 
         dataPart2 = await practice.collection('part2').get();
         dataPart2.forEach(part2 => {
-            part2.results = '';
+            part2.result = "";
             var objectT = {
                 id: part2._fieldsProto.idQuestion.integerValue,
                 audio: part2._fieldsProto.audio.stringValue,
@@ -139,6 +139,7 @@ exports.GetDataPractice = async (req, res) => {
         dataPart5.forEach(part5 => {
             part5.showQuestion = true;
             part5.showDA = true;
+            part5.result =""
             var objectT = {
                 audio: '',
                 image: null,
