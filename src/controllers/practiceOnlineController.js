@@ -30,7 +30,7 @@ exports.GetDataPractice = async (req, res) => {
 
         dataPart2 = await practice.collection('part2').get();
         dataPart2.forEach(part2 => {
-            var object = part1.data();
+            var object = part2.data();
             object.results = "";
             var objectT = {
                 id: part2._fieldsProto.idQuestion.integerValue,
