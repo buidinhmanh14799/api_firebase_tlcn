@@ -177,6 +177,15 @@ exports.GetDataPractice = async (req, res) => {
             objectT.questions = lstQuestionPart7;
             data.push(objectT);
         })
+        let idQs=1;
+        for(let i =0; i < data.length; i++){
+            data[i].id = i;
+            for(let j = 0; j < data[i].questions.length; j++){
+               
+                data[i].questions[j].idQuestion = idQs;
+                idQs++;
+            }
+        }
         object.listQuestions = data;
         return res.json(
             object
