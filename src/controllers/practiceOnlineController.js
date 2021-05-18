@@ -56,18 +56,6 @@ exports.GetDataPractice = async (req, res) => {
         });
 
         dataPart5 = await practice.collection('part5').get();
-        dataPart5.forEach(part5 => {
-            part5.showQuestion = true;
-            part5.showDA = true;
-            var objectT = {
-                audio: '',
-                image: null,
-                questions: [
-                    part5.data(),
-                ]
-            };
-            data.push(objectT);
-        });
 
         dataPart6 = await practice.collection('part6').get();
         const arrPart6 = []
@@ -148,6 +136,18 @@ exports.GetDataPractice = async (req, res) => {
             objectT.questions = lstQuestionPart4;
             data.push(objectT);
         })
+        dataPart5.forEach(part5 => {
+            part5.showQuestion = true;
+            part5.showDA = true;
+            var objectT = {
+                audio: '',
+                image: null,
+                questions: [
+                    part5.data(),
+                ]
+            };
+            data.push(objectT);
+        });
         arrPart6.forEach(part6 => {
             var objectT = {
                 id: part6.idQuestion,
