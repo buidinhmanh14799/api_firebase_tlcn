@@ -9,7 +9,7 @@ exports.GetDataPractice = async (req, res) => {
         dataPart1 = await practice.collection('part1').get();
         dataPart1.forEach(part1 => {
             var object = part1.data();
-            object.result = "";
+            object.results = "";
             var objectT = {
                 id: part1._fieldsProto.idQuestion.integerValue,
                 audio: part1._fieldsProto.audio.stringValue,
@@ -31,7 +31,7 @@ exports.GetDataPractice = async (req, res) => {
         dataPart2 = await practice.collection('part2').get();
         dataPart2.forEach(part2 => {
             var object = part1.data();
-            object.result = "";
+            object.results = "";
             var objectT = {
                 id: part2._fieldsProto.idQuestion.integerValue,
                 audio: part2._fieldsProto.audio.stringValue,
@@ -112,7 +112,7 @@ exports.GetDataPractice = async (req, res) => {
             arrPart3Detail.forEach(part3Detail => {
 
                 if (part3Detail.idAudio === part3.idAudio) {
-                    part3Detail.result = "",
+                    part3Detail.results = "",
                     lstQuestionPart3.push(part3Detail);
                 }
             })
@@ -131,7 +131,7 @@ exports.GetDataPractice = async (req, res) => {
             var lstQuestionPart4 = [];
             arrPart4Detail.forEach(part4Detail => {
                 if (part4Detail.idAudio === part4.idAudio) {
-                    part4Detail.result = "",
+                    part4Detail.results = "",
                     lstQuestionPart4.push(part4Detail);
                 }
             })
@@ -142,7 +142,7 @@ exports.GetDataPractice = async (req, res) => {
             part5.showQuestion = true;
             part5.showDA = true;
             var object = part5.data();
-            object.result = "";
+            object.results = "";
             var objectT = {
                 audio: '',
                 image: null,
@@ -163,7 +163,7 @@ exports.GetDataPractice = async (req, res) => {
             var lstQuestionPart6 = [];
             arrPart6Detail.forEach(part6Detail => {
                 if (part6Detail.idReading === part6.idReading) {
-                    part6Detail.result = "",
+                    part6Detail.results = "",
                     lstQuestionPart6.push(part6Detail);
                 }
             })
@@ -181,7 +181,7 @@ exports.GetDataPractice = async (req, res) => {
             var lstQuestionPart7 = [];
             arrPart7Detail.forEach(part7Detail => {
                 if (part7Detail.idReading === part7.idReading) {
-                    part7Detail.result = "",
+                    part7Detail.results = "",
                     lstQuestionPart7.push(part7Detail);
                 }
             })
