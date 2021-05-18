@@ -8,6 +8,7 @@ exports.GetDataPractice = async (req, res) => {
     try {
         dataPart1 = await practice.collection('part1').get();
         dataPart1.forEach(part1 => {
+            part1.results = '';
             var objectT = {
                 id: part1._fieldsProto.idQuestion.integerValue,
                 audio: part1._fieldsProto.audio.stringValue,
@@ -27,16 +28,17 @@ exports.GetDataPractice = async (req, res) => {
 
 
         dataPart2 = await practice.collection('part2').get();
-        dataPart1.forEach(part2 => {
+        dataPart2.forEach(part2 => {
+            part2.results = '';
             var objectT = {
                 id: part2._fieldsProto.idQuestion.integerValue,
                 audio: part2._fieldsProto.audio.stringValue,
                 image: null,
                 questions: [
-                    part2.data()
+                    part2.data(),
                 ],
                 showQuestion: false,
-                showDA: true,
+                showDA: false,
             };
             data.push(objectT);
         });
@@ -118,7 +120,9 @@ exports.GetDataPractice = async (req, res) => {
             };
             var lstQuestionPart3 = [];
             arrPart3Detail.forEach(part3Detail => {
+
                 if (part3Detail.idAudio === part3.idAudio) {
+                    part3Detail.result = "",
                     lstQuestionPart3.push(part3Detail);
                 }
             })
@@ -137,6 +141,7 @@ exports.GetDataPractice = async (req, res) => {
             var lstQuestionPart4 = [];
             arrPart4Detail.forEach(part4Detail => {
                 if (part4Detail.idAudio === part4.idAudio) {
+                    part4Detail.result = "",
                     lstQuestionPart4.push(part4Detail);
                 }
             })
@@ -154,6 +159,7 @@ exports.GetDataPractice = async (req, res) => {
             var lstQuestionPart6 = [];
             arrPart6Detail.forEach(part6Detail => {
                 if (part6Detail.idReading === part6.idReading) {
+                    part6Detail.result = "",
                     lstQuestionPart6.push(part6Detail);
                 }
             })
@@ -171,6 +177,7 @@ exports.GetDataPractice = async (req, res) => {
             var lstQuestionPart7 = [];
             arrPart7Detail.forEach(part7Detail => {
                 if (part7Detail.idReading === part7.idReading) {
+                    part7Detail.result = "",
                     lstQuestionPart7.push(part7Detail);
                 }
             })
