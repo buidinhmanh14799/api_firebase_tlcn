@@ -15,7 +15,8 @@ const {
     admindbTest,
     admindbYear,
     admindb,
-    admindbVocabulary } = require('../firebase/firebase-confix');
+    admindbVocabulary
+} = require('../firebase/firebase-confix');
 
 exports.AddPart1 = (req, res) => {
     var object = req.body;
@@ -30,13 +31,13 @@ exports.AddPart1 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart1 = async (req, res) => {
+exports.UpdatePart1 = async(req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(async element => {
             console.log('element');
             await admindbPart1.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(async data => {
-                console.log(data);
+                console.log("haha");
                 data.forEach(docData => {
                     admindbPart1.collection('data').doc(docData.id).update(element);
                 })
@@ -76,7 +77,7 @@ exports.AddPart2 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart2 = async (req, res) => {
+exports.UpdatePart2 = async(req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -100,8 +101,7 @@ async function deletePart2(IDTest, IDYear) {
                 admindbPart2.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {
-    }
+    } catch (error) {}
 }
 exports.AddPart3 = (req, res) => {
     var object = req.body;
@@ -116,7 +116,7 @@ exports.AddPart3 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart3 = async (req, res) => {
+exports.UpdatePart3 = async(req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -140,8 +140,7 @@ async function deletePart3(IDTest, IDYear) {
                 admindbPart3.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {
-    }
+    } catch (error) {}
 }
 
 exports.AddPart4 = (req, res) => {
@@ -157,7 +156,7 @@ exports.AddPart4 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart4 = async (req, res) => {
+exports.UpdatePart4 = async(req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -181,8 +180,7 @@ async function deletePart4(IDTest, IDYear) {
                 admindbPart4.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {
-    }
+    } catch (error) {}
 }
 exports.AddPart5 = (req, res) => {
     var object = req.body;
@@ -197,7 +195,7 @@ exports.AddPart5 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart5 = async (req, res) => {
+exports.UpdatePart5 = async(req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -223,8 +221,7 @@ async function deletePart5(IDTest, IDYear) {
                 admindbPart5.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {
-    }
+    } catch (error) {}
 }
 exports.AddPart6 = (req, res) => {
     var object = req.body;
@@ -239,7 +236,7 @@ exports.AddPart6 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart6 = async (req, res) => {
+exports.UpdatePart6 = async(req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -263,8 +260,7 @@ async function deletePart6(IDTest, IDYear) {
                 admindbPart6.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {
-    }
+    } catch (error) {}
 }
 exports.AddPart7 = (req, res) => {
     var object = req.body;
@@ -279,7 +275,7 @@ exports.AddPart7 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart7 = async (req, res) => {
+exports.UpdatePart7 = async(req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -303,8 +299,7 @@ async function deletePart7(IDTest, IDYear) {
                 admindbPart7.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {
-    }
+    } catch (error) {}
 }
 
 
@@ -321,7 +316,7 @@ exports.AddPart3Detail = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart3Detail = async (req, res) => {
+exports.UpdatePart3Detail = async(req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -345,8 +340,7 @@ async function deletePart3dt(IDTest, IDYear) {
                 admindbPart3Detail.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {
-    }
+    } catch (error) {}
 }
 
 exports.AddPart4Detail = (req, res) => {
@@ -362,7 +356,7 @@ exports.AddPart4Detail = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart4Detail = async (req, res) => {
+exports.UpdatePart4Detail = async(req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -386,8 +380,7 @@ async function deletePart4dt(IDTest, IDYear) {
                 admindbPart4Detail.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {
-    }
+    } catch (error) {}
 }
 exports.AddPart6Detail = (req, res) => {
     var object = req.body;
@@ -402,7 +395,7 @@ exports.AddPart6Detail = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart6Detail = async (req, res) => {
+exports.UpdatePart6Detail = async(req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -426,8 +419,7 @@ async function deletePart6dt(IDTest, IDYear) {
                 admindbPart6Detail.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {
-    }
+    } catch (error) {}
 }
 exports.AddPart7Detail = (req, res) => {
     var object = req.body;
@@ -442,7 +434,7 @@ exports.AddPart7Detail = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart7Detail = async (req, res) => {
+exports.UpdatePart7Detail = async(req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -466,8 +458,7 @@ async function deletePart7dt(IDTest, IDYear) {
                 admindbPart7Detail.collection('data').doc(docData.id).delete();;
             })
         })
-    } catch (error) {
-    }
+    } catch (error) {}
 }
 // exports.AddTest = async (req, res) => {
 //     var object = req.body;
@@ -497,7 +488,7 @@ async function deletePart7dt(IDTest, IDYear) {
 //     }
 
 // }
-exports.AddTest = async (req, res) => {
+exports.AddTest = async(req, res) => {
 
     var object = req.body;
     const arr = []
@@ -506,7 +497,7 @@ exports.AddTest = async (req, res) => {
         arr.push(elementuser.id)
     })
     try {
-        await Promise.all(object.map(async (element) => {
+        await Promise.all(object.map(async(element) => {
             admindbTest.collection('data').add(element);
             await Promise.all(arr.map(async id => {
                 await admindb.doc(id).update({
@@ -540,7 +531,7 @@ exports.AddTest = async (req, res) => {
     }
 
 }
-exports.UpdateTest = async (req, res) => {
+exports.UpdateTest = async(req, res) => {
     console.log('vao');
     var object = req.body;
     const arr = []
@@ -562,9 +553,6 @@ exports.UpdateTest = async (req, res) => {
 
                     await Promise.all(arr.map(async id => {
                         await admindb.doc(id).collection('array').add(Item);
-                        await admindb.doc(id).update({
-                            newData: true
-                        })
                     }))
                 })
             });
@@ -595,10 +583,10 @@ exports.UpdateTest = async (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.DeleteTest = async (req, res) => {
+exports.DeleteTest = async(req, res) => {
     const IDTest = parseInt(req.query.IDTest);
     const IDYear = parseInt(req.query.IDYear);
-    console.log(typeof IDTest+'   '+ IDYear)
+    console.log(typeof IDTest + '   ' + IDYear)
     deletePart1(IDTest, IDYear);
     deletePart2(IDTest, IDYear);
     deletePart3(IDTest, IDYear);
@@ -677,7 +665,7 @@ exports.AddYear = (req, res) => {
     }
 }
 
-exports.UpdateYear = async (req, res) => {
+exports.UpdateYear = async(req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -694,7 +682,7 @@ exports.UpdateYear = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.DeleteYear = async (req, res) => {
+exports.DeleteYear = async(req, res) => {
     const IDYear = parseInt(req.query.IDYear);
     try {
         admindbYear.collection('data').where('IDYear', '==', IDYear).get().then(data => {
@@ -723,7 +711,7 @@ exports.GetDataPart1 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart1ByUid = async (req, res) => {
+exports.GetDataPart1ByUid = async(req, res) => {
     try {
         const arrListGet = []
         const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
@@ -733,7 +721,7 @@ exports.GetDataPart1ByUid = async (req, res) => {
             }
         });
         var arrResult = [];
-        await Promise.all(arrListGet.map(async (element) => {
+        await Promise.all(arrListGet.map(async(element) => {
             const data = await admindbPart1.collection('data')
                 .where('IDTest', '==', element.IDTest)
                 .where('IDYear', '==', element.IDYear)
@@ -763,7 +751,7 @@ exports.GetDataPart2 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart2ByUid = async (req, res) => {
+exports.GetDataPart2ByUid = async(req, res) => {
     try {
         const arrListGet = []
         const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
@@ -771,7 +759,7 @@ exports.GetDataPart2ByUid = async (req, res) => {
             arrListGet.push(element.data());
         });
         var arrResult = [];
-        await Promise.all(arrListGet.map(async (element) => {
+        await Promise.all(arrListGet.map(async(element) => {
             const data = await admindbPart2.collection('data')
                 .where('IDTest', '==', element.IDTest)
                 .where('IDYear', '==', element.IDYear)
@@ -800,7 +788,7 @@ exports.GetDataPart3 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart3ByUid = async (req, res) => {
+exports.GetDataPart3ByUid = async(req, res) => {
     try {
         const arrListGet = []
         const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
@@ -808,7 +796,7 @@ exports.GetDataPart3ByUid = async (req, res) => {
             arrListGet.push(element.data());
         });
         var arrResult = [];
-        await Promise.all(arrListGet.map(async (element) => {
+        await Promise.all(arrListGet.map(async(element) => {
             const data = await admindbPart3.collection('data')
                 .where('IDTest', '==', element.IDTest)
                 .where('IDYear', '==', element.IDYear)
@@ -837,7 +825,7 @@ exports.GetDataPart4 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart4ByUid = async (req, res) => {
+exports.GetDataPart4ByUid = async(req, res) => {
     try {
         const arrListGet = []
         const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
@@ -845,7 +833,7 @@ exports.GetDataPart4ByUid = async (req, res) => {
             arrListGet.push(element.data());
         });
         var arrResult = [];
-        await Promise.all(arrListGet.map(async (element) => {
+        await Promise.all(arrListGet.map(async(element) => {
             const data = await admindbPart4.collection('data')
                 .where('IDTest', '==', element.IDTest)
                 .where('IDYear', '==', element.IDYear)
@@ -874,7 +862,7 @@ exports.GetDataPart5 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart5ByUid = async (req, res) => {
+exports.GetDataPart5ByUid = async(req, res) => {
     try {
         const arrListGet = []
         const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
@@ -882,7 +870,7 @@ exports.GetDataPart5ByUid = async (req, res) => {
             arrListGet.push(element.data());
         });
         var arrResult = [];
-        await Promise.all(arrListGet.map(async (element) => {
+        await Promise.all(arrListGet.map(async(element) => {
             const data = await admindbPart5.collection('data')
                 .where('IDTest', '==', element.IDTest)
                 .where('IDYear', '==', element.IDYear)
@@ -911,7 +899,7 @@ exports.GetDataPart6 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart6ByUid = async (req, res) => {
+exports.GetDataPart6ByUid = async(req, res) => {
     try {
         const arrListGet = []
         const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
@@ -919,7 +907,7 @@ exports.GetDataPart6ByUid = async (req, res) => {
             arrListGet.push(element.data());
         });
         var arrResult = [];
-        await Promise.all(arrListGet.map(async (element) => {
+        await Promise.all(arrListGet.map(async(element) => {
             const data = await admindbPart6.collection('data')
                 .where('IDTest', '==', element.IDTest)
                 .where('IDYear', '==', element.IDYear)
@@ -948,7 +936,7 @@ exports.GetDataPart7 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart7ByUid = async (req, res) => {
+exports.GetDataPart7ByUid = async(req, res) => {
     try {
         const arrListGet = []
         const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
@@ -956,7 +944,7 @@ exports.GetDataPart7ByUid = async (req, res) => {
             arrListGet.push(element.data());
         });
         var arrResult = [];
-        await Promise.all(arrListGet.map(async (element) => {
+        await Promise.all(arrListGet.map(async(element) => {
             const data = await admindbPart7.collection('data')
                 .where('IDTest', '==', element.IDTest)
                 .where('IDYear', '==', element.IDYear)
@@ -986,7 +974,7 @@ exports.GetDataPart3Detail = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart3DetailByUid = async (req, res) => {
+exports.GetDataPart3DetailByUid = async(req, res) => {
     try {
         const arrListGet = []
         const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
@@ -994,7 +982,7 @@ exports.GetDataPart3DetailByUid = async (req, res) => {
             arrListGet.push(element.data());
         });
         var arrResult = [];
-        await Promise.all(arrListGet.map(async (element) => {
+        await Promise.all(arrListGet.map(async(element) => {
             const data = await admindbPart3Detail.collection('data')
                 .where('IDTest', '==', element.IDTest)
                 .where('IDYear', '==', element.IDYear)
@@ -1023,7 +1011,7 @@ exports.GetDataPart4Detail = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart4DetailByUid = async (req, res) => {
+exports.GetDataPart4DetailByUid = async(req, res) => {
     try {
         const arrListGet = []
         const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
@@ -1031,7 +1019,7 @@ exports.GetDataPart4DetailByUid = async (req, res) => {
             arrListGet.push(element.data());
         });
         var arrResult = [];
-        await Promise.all(arrListGet.map(async (element) => {
+        await Promise.all(arrListGet.map(async(element) => {
             const data = await admindbPart4Detail.collection('data')
                 .where('IDTest', '==', element.IDTest)
                 .where('IDYear', '==', element.IDYear)
@@ -1060,7 +1048,7 @@ exports.GetDataPart6Detail = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart6DetailByUid = async (req, res) => {
+exports.GetDataPart6DetailByUid = async(req, res) => {
     try {
         const arrListGet = []
         const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
@@ -1068,7 +1056,7 @@ exports.GetDataPart6DetailByUid = async (req, res) => {
             arrListGet.push(element.data());
         });
         var arrResult = [];
-        await Promise.all(arrListGet.map(async (element) => {
+        await Promise.all(arrListGet.map(async(element) => {
             const data = await admindbPart6Detail.collection('data')
                 .where('IDTest', '==', element.IDTest)
                 .where('IDYear', '==', element.IDYear)
@@ -1097,7 +1085,7 @@ exports.GetDataPart7Detail = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart7DetailByUid = async (req, res) => {
+exports.GetDataPart7DetailByUid = async(req, res) => {
     try {
         const arrListGet = []
         const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
@@ -1105,7 +1093,7 @@ exports.GetDataPart7DetailByUid = async (req, res) => {
             arrListGet.push(element.data());
         });
         var arrResult = [];
-        await Promise.all(arrListGet.map(async (element) => {
+        await Promise.all(arrListGet.map(async(element) => {
             const data = await admindbPart7Detail.collection('data')
                 .where('IDTest', '==', element.IDTest)
                 .where('IDYear', '==', element.IDYear)
@@ -1148,7 +1136,7 @@ exports.GetDataTest = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataTestByUid = async (req, res) => {
+exports.GetDataTestByUid = async(req, res) => {
     try {
         const arrListGet = []
         const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
@@ -1156,7 +1144,7 @@ exports.GetDataTestByUid = async (req, res) => {
             arrListGet.push(element.data());
         });
         var arrResult = [];
-        await Promise.all(arrListGet.map(async (element) => {
+        await Promise.all(arrListGet.map(async(element) => {
             const data = await admindbTest.collection('data')
                 .where('IDTest', '==', element.IDTest)
                 .where('IDYear', '==', element.IDYear)
@@ -1171,7 +1159,7 @@ exports.GetDataTestByUid = async (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.AddVocabulary = async (req, res) => {
+exports.AddVocabulary = async(req, res) => {
     var object = req.body;
     const arr = []
     const user = await admindb.get();
@@ -1221,7 +1209,7 @@ exports.GetDataVocabulary = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataVocabularyByUid = async (req, res) => {
+exports.GetDataVocabularyByUid = async(req, res) => {
     try {
         const user = await admindb.doc(req.params.uid).get();
         const number = user._fieldsProto.ValueVoca.integerValue;
@@ -1239,7 +1227,7 @@ exports.GetDataVocabularyByUid = async (req, res) => {
     }
 }
 
-exports.DeleteAll = async (req, res) => {
+exports.DeleteAll = async(req, res) => {
     DeleteCustom('Part1');
     DeleteCustom('Part2');
     DeleteCustom('Part3');
@@ -1293,7 +1281,7 @@ async function DeleteCustom(nameTable) {
                 operationCounter = 0;
             }
         });
-        await Promise.all(batchArray.map(async (batch) => {
+        await Promise.all(batchArray.map(async(batch) => {
             await batch.commit();
         }))
         res.send('ok');
@@ -1302,7 +1290,7 @@ async function DeleteCustom(nameTable) {
     }
 }
 
-exports.DeleteOne = async (req, res) => {
+exports.DeleteOne = async(req, res) => {
     try {
         const batchArray = [];
         batchArray.push(admin.firestore().batch());
@@ -1321,7 +1309,7 @@ exports.DeleteOne = async (req, res) => {
                 operationCounter = 0;
             }
         });
-        await Promise.all(batchArray.map(async (batch) => {
+        await Promise.all(batchArray.map(async(batch) => {
             await batch.commit();
         }))
         res.send('ok');
@@ -1329,4 +1317,3 @@ exports.DeleteOne = async (req, res) => {
         res.status(500).send(error + '');
     }
 }
-

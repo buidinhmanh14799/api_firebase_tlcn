@@ -1,5 +1,6 @@
 
 const {
+    admin,
     adminPractice } = require('../firebase/firebase-confix');
 exports.GetDataPractice = async (req, res) => {
     var practice = adminPractice.doc(req.params.id);
@@ -487,6 +488,21 @@ exports.Result = (req, res) => {
     }
 }
 exports.GetResult = async (req, res) => {
+
+    var idToken = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjNkOWNmYsdWE4OGVmMDViNDI0YmU2MjA1ZjQ2YjE4OGQ3MzI1N2JjNDIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTmd1eeG7hW4gWHXDom4gTmFtIiwicGljdHVyZSI6Imh0dHBzOi8vZ3JhcGguZmFjZWJvb2suY29tLzI3MzAzNTM3NTcyNzY4MDEvcGljdHVyZSIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS90b2VpYy1zZWIiLCJhdWQiOiJ0b2VpYy1zZWIiLCJhdXRoX3RpbWUiOjE2MjE3NjAxMDYsInVzZXJfaWQiOiJRTXBLcDVyTVNMWUhnbk1LVHVGMEZzSGQzWUIyIiwic3ViIjoiUU1wS3A1ck1TTFlIZ25NS1R1RjBGc0hkM1lCMiIsImlhdCI6MTYyMTc2MzQwNywiZXhwIjoxNjIxNzY3MDA3LCJlbWFpbCI6InRlbzEyMDExOTk5QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJmYWNlYm9vay5jb20iOlsiMjczMDM1Mzc1NzI3NjgwMSJdLCJlbWFpbCI6WyJ0ZW8xMjAxMTk5OUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJmYWNlYm9vay5jb20ifX0.GSyWEbo3iofIIPtM5k2rfsKIe5gMgVb-69-msgaThYI2eod0T4TGt691JF_llxIJqdUm-7bRWOefps7-9yaqfS83spN2oyLJeJPeHtOY7EGSaHo-4iJGeF-8Or3o8NdUogL48rIvMtL6Rz-5O66bDDoRgHUvVn7OULIyKHV6f-laQMzQOOWQFl1TEgod1Gh7MIAtherw6aqahC8IHV4rZtKVLT8d6jIHeXysp62LbT8Uc69GMFr5Co6rVvFuoN9lmkBmfFe_uhnvkkCj-CgWlUHzGn0IdSu9BpQXsQTCTaa4AY8hdpKKNqqjMi3IYnHIXevLQNA7iSRHqB8V7mjdZA';
+    admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+        console.log('ID Token correctly decoded', decodedIdToken);
+        admin.auth().getUser(decodedIdToken.uid).then((userRecord) => {
+            console.log(userRecord);
+
+        }).catch(error => {
+         console.error('Error while getting Firebase User record:', error);
+         res.status(403).json({error: 'Unauthorized'});
+        });
+       }).catch(error => {
+        console.error('Error while verifying Firebase ID token:', error);
+        res.status(403).json({error: 'Unauthorized'});
+       });
     try {
         console.log(req.params.id);
         const collectionPractice = await adminPractice.doc(req.params.id).collection('listResult').orderBy('amountCorrect', 'desc').limit(15).get();
