@@ -35,7 +35,6 @@ exports.UpdatePart1 = async(req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(async element => {
-            console.log('element');
             await admindbPart1.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(async data => {
                 console.log("haha");
                 data.forEach(docData => {
