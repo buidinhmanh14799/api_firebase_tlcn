@@ -33,13 +33,22 @@ exports.AddPart1 = (req, res) => {
 }
 exports.UpdatePart1 = async(req, res) => {
     var object = req.body;
+
     try {
         await Promise.all(object.map(async element => {
             await admindbPart1.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(async data => {
-                console.log("haha");
                 data.forEach(docData => {
                     admindbPart1.collection('data').doc(docData.id).update(element);
                 })
+                const Item = {
+                    IDTest: docTest.data().IDTest,
+                    IDYear: docTest.data().IDYear,
+                    TypeUpdate: 2
+                }
+
+                await Promise.all(arr.map(async id => {
+                    await admindb.doc(id).collection('array').add(Item);
+                }))
             })
         }));
         return res.json({
