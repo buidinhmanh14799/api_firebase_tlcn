@@ -32,7 +32,7 @@ exports.AddPart1 = (req, res) => {
     }
 }
 exports.UpdatePart1 = async(req, res) => {
-    console.log("vao");
+    //console.log("vao");
     var object = req.body;
     try {
         var Item = {};
@@ -42,7 +42,7 @@ exports.UpdatePart1 = async(req, res) => {
             arr.push(elementuser.id)
         })
         await Promise.all(object.map(async element => {
-            console.log(element.IDYear);
+            //console.log(element.IDYear);
             await admindbPart1.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(async data => {
                 data.forEach(docData => {
                     admindbPart1.collection('data').doc(docData.id).update(element);
@@ -55,27 +55,27 @@ exports.UpdatePart1 = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            console.log(id);
+            //console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
             status: true
         });
     } catch (error) {
-        console.log(error + '');
+        //console.log(error + '');
         return res.status(500).send(error);
     }
 }
 async function deletePart1(IDTest, IDYear) {
     try {
         await admindbPart1.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(async data => {
-            console.log(data);
+            //console.log(data);
             data.forEach(docData => {
                 admindbPart1.collection('data').doc(docData.id).delete();
             })
         })
     } catch (error) {
-        console.log(error + '');
+        //console.log(error + '');
     }
 }
 
@@ -116,7 +116,7 @@ exports.UpdatePart2 = async(req, res) => {
 
         }));
         await Promise.all(arr.map(async id => {
-            console.log(id);
+            //console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -170,7 +170,7 @@ exports.UpdatePart3 = async(req, res) => {
             };
         }));
         await Promise.all(arr.map(async id => {
-            console.log(id);
+            //console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -226,7 +226,7 @@ exports.UpdatePart4 = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            console.log(id);
+            //console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -269,7 +269,7 @@ exports.UpdatePart5 = async(req, res) => {
         })
         await Promise.all(object.map(async(element) => {
             admindbPart5.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
-                console.log(data);
+                //console.log(data);
                 data.forEach(docData => {
                     admindbPart5.collection('data').doc(docData.id).update(element);
                 })
@@ -281,7 +281,7 @@ exports.UpdatePart5 = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            console.log(id);
+            //console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -294,7 +294,7 @@ exports.UpdatePart5 = async(req, res) => {
 async function deletePart5(IDTest, IDYear) {
     try {
         admindbPart5.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(data => {
-            console.log(data);
+            //console.log(data);
             data.forEach(docData => {
                 admindbPart5.collection('data').doc(docData.id).delete();
             })
@@ -338,7 +338,7 @@ exports.UpdatePart6 = async(req, res) => {
 
         }));
         await Promise.all(arr.map(async id => {
-            console.log(id);
+            //console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         returnres.json({
@@ -394,7 +394,7 @@ exports.UpdatePart7 = async(req, res) => {
 
         }));
         await Promise.all(arr.map(async id => {
-            console.log(id);
+            //console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -451,7 +451,7 @@ exports.UpdatePart3Detail = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            console.log(id);
+            //console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -506,7 +506,7 @@ exports.UpdatePart4Detail = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            console.log(id);
+            //console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -561,7 +561,7 @@ exports.UpdatePart6Detail = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            console.log(id);
+            //console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -615,7 +615,7 @@ exports.UpdatePart7Detail = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            console.log(id);
+            //console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -648,7 +648,7 @@ async function deletePart7dt(IDTest, IDYear) {
 //                 IDTest: element.IDTest,
 //                 IDYear: element.IDYear
 //             }
-//             console.log(item);
+//             //console.log(item);
 //             await Promise.all(arr.map(async id => {
 //                 await admindb.doc(id).collection('array').add(item)
 //             }))
@@ -657,7 +657,7 @@ async function deletePart7dt(IDTest, IDYear) {
 //             status: true
 //         });
 //     } catch (error) {
-//         console.log(error + '');
+//         //console.log(error + '');
 //         res.status(500).send(error);
 //     }
 
@@ -699,13 +699,13 @@ exports.AddTest = async(req, res) => {
 
         admin.messaging().sendAll(messages)
             .then((response) => {
-                console.log(response.successCount + ' messages were sent successfully');
+                //console.log(response.successCount + ' messages were sent successfully');
             });
         return res.status(200).json({
             status: true
         });
     } catch (error) {
-        console.log(error + '');
+        //console.log(error + '');
         return res.status(500).json({
             status: false,
             message: error + ''
@@ -714,7 +714,7 @@ exports.AddTest = async(req, res) => {
 
 }
 exports.UpdateTest = async(req, res) => {
-    console.log('vao');
+    //console.log('vao');
     var object = req.body;
     const arr = []
     const user = await admindb.get();
@@ -722,7 +722,7 @@ exports.UpdateTest = async(req, res) => {
         arr.push(elementuser.id)
     })
     try {
-        console.log('vao try');
+        //console.log('vao try');
         await Promise.all(object.map(async element => {
             await admindbTest.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(async data => {
                 data.forEach(async docTest => {
@@ -755,20 +755,20 @@ exports.UpdateTest = async(req, res) => {
 
         admin.messaging().sendAll(messages)
             .then((response) => {
-                console.log(response.successCount + ' messages were sent successfully');
+                //console.log(response.successCount + ' messages were sent successfully');
             });
         return res.status(200).json({
             status: true
         });
     } catch (error) {
-        console.log('loi', error + '');
+        //console.log('loi', error + '');
         res.status(500).send(error);
     }
 }
 exports.DeleteTest = async(req, res) => {
     const IDTest = parseInt(req.query.IDTest);
     const IDYear = parseInt(req.query.IDYear);
-    console.log(typeof IDTest + '   ' + IDYear)
+    //console.log(typeof IDTest + '   ' + IDYear)
     deletePart1(IDTest, IDYear);
     deletePart2(IDTest, IDYear);
     deletePart3(IDTest, IDYear);
@@ -780,14 +780,14 @@ exports.DeleteTest = async(req, res) => {
     deletePart4dt(IDTest, IDYear);
     deletePart6dt(IDTest, IDYear);
     deletePart7dt(IDTest, IDYear);
-    console.log('vao');
+    //console.log('vao');
     const arr = []
     const user = await admindb.get();
     user.forEach(elementuser => {
         arr.push(elementuser.id)
     })
     try {
-        console.log('vao try');
+        //console.log('vao try');
 
         await admindbTest.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(async data => {
             data.forEach(async docTest => {
@@ -823,13 +823,13 @@ exports.DeleteTest = async(req, res) => {
 
         admin.messaging().sendAll(messages)
             .then((response) => {
-                console.log(response.successCount + ' messages were sent successfully');
+                //console.log(response.successCount + ' messages were sent successfully');
             });
         return res.status(200).json({
             status: true
         });
     } catch (error) {
-        console.log('loi', error + '');
+        //console.log('loi', error + '');
         res.status(500).send(error);
     }
 }
@@ -914,7 +914,7 @@ exports.GetDataPart1ByUid = async(req, res) => {
         }))
         res.send(arrResult);
     } catch (error) {
-        console.log(error + '')
+        //console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -952,7 +952,7 @@ exports.GetDataPart2ByUid = async(req, res) => {
         }))
         res.send(arrResult);
     } catch (error) {
-        console.log(error + '')
+        //console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -989,7 +989,7 @@ exports.GetDataPart3ByUid = async(req, res) => {
         }))
         res.send(arrResult);
     } catch (error) {
-        console.log(error + '')
+        //console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -1026,7 +1026,7 @@ exports.GetDataPart4ByUid = async(req, res) => {
         }))
         res.send(arrResult);
     } catch (error) {
-        console.log(error + '')
+        //console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -1063,7 +1063,7 @@ exports.GetDataPart5ByUid = async(req, res) => {
         }))
         res.send(arrResult);
     } catch (error) {
-        console.log(error + '')
+        //console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -1100,7 +1100,7 @@ exports.GetDataPart6ByUid = async(req, res) => {
         }))
         res.send(arrResult);
     } catch (error) {
-        console.log(error + '')
+        //console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -1137,7 +1137,7 @@ exports.GetDataPart7ByUid = async(req, res) => {
         }))
         res.send(arrResult);
     } catch (error) {
-        console.log(error + '')
+        //console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -1175,7 +1175,7 @@ exports.GetDataPart3DetailByUid = async(req, res) => {
         }))
         res.send(arrResult);
     } catch (error) {
-        console.log(error + '')
+        //console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -1212,7 +1212,7 @@ exports.GetDataPart4DetailByUid = async(req, res) => {
         }))
         res.send(arrResult);
     } catch (error) {
-        console.log(error + '')
+        //console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -1249,7 +1249,7 @@ exports.GetDataPart6DetailByUid = async(req, res) => {
         }))
         res.send(arrResult);
     } catch (error) {
-        console.log(error + '')
+        //console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -1286,7 +1286,7 @@ exports.GetDataPart7DetailByUid = async(req, res) => {
         }))
         res.send(arrResult);
     } catch (error) {
-        console.log(error + '')
+        //console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -1337,7 +1337,7 @@ exports.GetDataTestByUid = async(req, res) => {
         }))
         res.send(arrResult);
     } catch (error) {
-        console.log(error + '')
+        //console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -1368,7 +1368,7 @@ exports.AddVocabulary = async(req, res) => {
 
         admin.messaging().sendAll(messages)
             .then((response) => {
-                console.log(response.successCount + ' messages were sent successfully');
+                //console.log(response.successCount + ' messages were sent successfully');
             });
         return res.status(200).json({
             status: true,
@@ -1395,7 +1395,7 @@ exports.GetDataVocabularyByUid = async(req, res) => {
     try {
         const user = await admindb.doc(req.params.uid).get();
         const number = user._fieldsProto.ValueVoca.integerValue;
-        console.log(number);
+        //console.log(number);
         var arr = [];
         await admindbVocabulary.collection('data').where('ID', '>', parseInt(number)).get().then(dataget => {
             dataget.forEach(element => {
@@ -1404,7 +1404,7 @@ exports.GetDataVocabularyByUid = async(req, res) => {
         });
         res.send(arr);
     } catch (error) {
-        console.log(error + '')
+        //console.log(error + '')
         res.status(500).send(error);
     }
 }
@@ -1428,8 +1428,8 @@ exports.DeleteAll = async(req, res) => {
 
 // exports.DeleteOne = (req, res) => {
 //     try {
-//         console.log('vao');
-//         console.log(req.params.one);
+//         //console.log('vao');
+//         //console.log(req.params.one);
 //         var batch = admin.firestore().batch()
 //         admin.firestore().collection('DataBase').doc(req.params.one).collection('data').listDocuments().then(val => {
 //             val.map((val) => {
@@ -1440,7 +1440,7 @@ exports.DeleteAll = async(req, res) => {
 //             });
 //         })
 //     } catch (error) {
-//         console.log('vaoloi');
+//         //console.log('vaoloi');
 //         res.status(500).send(error + '');
 //     }
 // }
