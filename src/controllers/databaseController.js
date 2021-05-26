@@ -32,10 +32,17 @@ exports.AddPart1 = (req, res) => {
     }
 }
 exports.UpdatePart1 = async(req, res) => {
+    console.log("vao");
     var object = req.body;
     try {
-        const Item = {};
+        var Item = {};
+        const arr = []
+        const user = await admindb.get();
+        user.forEach(elementuser => {
+            arr.push(elementuser.id)
+        })
         await Promise.all(object.map(async element => {
+            console.log(element.IDYear);
             await admindbPart1.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(async data => {
                 data.forEach(docData => {
                     admindbPart1.collection('data').doc(docData.id).update(element);
@@ -46,10 +53,11 @@ exports.UpdatePart1 = async(req, res) => {
                 IDYear: element.IDYear,
                 TypeUpdate: 0
             }
+            await Promise.all(arr.map(async id => {
+                console.log(id);
+                await admindb.doc(id).collection('array').add(Item);
+            }))
         }));
-        await Promise.all(arr.map(async id => {
-            await admindb.doc(id).collection('array').add(Item);
-        }))
         return res.json({
             status: true
         });
@@ -87,8 +95,13 @@ exports.AddPart2 = (req, res) => {
 exports.UpdatePart2 = async(req, res) => {
     var object = req.body;
     try {
-        const Item = {};
-        await Promise.all(object.map(element => {
+        var Item = {};
+        const arr = []
+        const user = await admindb.get();
+        user.forEach(elementuser => {
+            arr.push(elementuser.id)
+        })
+        await Promise.all(object.map(async(element) => {
             admindbPart2.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
                 data.forEach(docData => {
                     admindbPart2.collection('data').doc(docData.id).update(element);
@@ -96,15 +109,17 @@ exports.UpdatePart2 = async(req, res) => {
 
             });
             Item = {
-                IDTest: docTest.data().IDTest,
-                IDYear: docTest.data().IDYear,
+                IDTest: element.IDTest,
+                IDYear: element.IDYear,
                 TypeUpdate: 0
             }
 
+            await Promise.all(arr.map(async id => {
+                console.log(id);
+                await admindb.doc(id).collection('array').add(Item);
+            }))
+
         }));
-        await Promise.all(arr.map(async id => {
-            await admindb.doc(id).collection('array').add(Item);
-        }))
         return res.json({
             status: true
         });
@@ -137,12 +152,28 @@ exports.AddPart3 = (req, res) => {
 exports.UpdatePart3 = async(req, res) => {
     var object = req.body;
     try {
-        await Promise.all(object.map(element => {
+        var Item = {};
+        const arr = []
+        const user = await admindb.get();
+        user.forEach(elementuser => {
+            arr.push(elementuser.id)
+        })
+        await Promise.all(object.map(async(element) => {
             admindbPart3.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDAudio', '==', element.IDAudio).get().then(data => {
                 data.forEach(docData => {
                     admindbPart3.collection('data').doc(docData.id).update(element);
                 })
-            })
+            });
+            Item = {
+                IDTest: element.IDTest,
+                IDYear: element.IDYear,
+                TypeUpdate: 0
+            };
+
+            await Promise.all(arr.map(async id => {
+                console.log(id);
+                await admindb.doc(id).collection('array').add(Item);
+            }))
         }));
         return res.json({
             status: true
@@ -177,12 +208,29 @@ exports.AddPart4 = (req, res) => {
 exports.UpdatePart4 = async(req, res) => {
     var object = req.body;
     try {
-        await Promise.all(object.map(element => {
+        var Item = {};
+        const arr = []
+        const user = await admindb.get();
+        user.forEach(elementuser => {
+            arr.push(elementuser.id)
+        })
+        await Promise.all(object.map(async(element) => {
             admindbPart4.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDAudio', '==', element.IDAudio).get().then(data => {
                 data.forEach(docData => {
                     admindbPart4.collection('data').doc(docData.id).update(element);
                 })
             })
+
+            Item = {
+                IDTest: element.IDTest,
+                IDYear: element.IDYear,
+                TypeUpdate: 0
+            }
+
+            await Promise.all(arr.map(async id => {
+                console.log(id);
+                await admindb.doc(id).collection('array').add(Item);
+            }))
         }));
         return res.json({
             status: true
@@ -216,13 +264,29 @@ exports.AddPart5 = (req, res) => {
 exports.UpdatePart5 = async(req, res) => {
     var object = req.body;
     try {
-        await Promise.all(object.map(element => {
+        var Item = {};
+        const arr = []
+        const user = await admindb.get();
+        user.forEach(elementuser => {
+            arr.push(elementuser.id)
+        })
+        await Promise.all(object.map(async(element) => {
             admindbPart5.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
                 console.log(data);
                 data.forEach(docData => {
                     admindbPart5.collection('data').doc(docData.id).update(element);
                 })
             })
+            Item = {
+                IDTest: element.IDTest,
+                IDYear: element.IDYear,
+                TypeUpdate: 0
+            }
+
+            await Promise.all(arr.map(async id => {
+                console.log(id);
+                await admindb.doc(id).collection('array').add(Item);
+            }))
         }));
         return res.json({
             status: true
@@ -257,12 +321,30 @@ exports.AddPart6 = (req, res) => {
 exports.UpdatePart6 = async(req, res) => {
     var object = req.body;
     try {
-        await Promise.all(object.map(element => {
+        var Item = {};
+        const arr = []
+        const user = await admindb.get();
+        user.forEach(elementuser => {
+            arr.push(elementuser.id)
+        })
+        await Promise.all(object.map(async(element) => {
             admindbPart6.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDReading', '==', element.IDReading).get().then(data => {
                 data.forEach(docData => {
                     admindbPart6.collection('data').doc(docData.id).update(element);
                 })
             })
+
+            Item = {
+                IDTest: element.IDTest,
+                IDYear: element.IDYear,
+                TypeUpdate: 0
+            }
+
+
+            await Promise.all(arr.map(async id => {
+                console.log(id);
+                await admindb.doc(id).collection('array').add(Item);
+            }))
         }));
         returnres.json({
             status: true
@@ -296,12 +378,29 @@ exports.AddPart7 = (req, res) => {
 exports.UpdatePart7 = async(req, res) => {
     var object = req.body;
     try {
-        await Promise.all(object.map(element => {
+        var Item = {};
+        const arr = []
+        const user = await admindb.get();
+        user.forEach(elementuser => {
+            arr.push(elementuser.id)
+        })
+        await Promise.all(object.map(async(element) => {
             admindbPart7.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDReading', '==', element.IDReading).get().then(data => {
                 data.forEach(docData => {
                     admindbPart7.collection('data').doc(docData.id).update(element);
                 })
             })
+
+            Item = {
+                IDTest: element.IDTest,
+                IDYear: element.IDYear,
+                TypeUpdate: 0
+            }
+
+            await Promise.all(arr.map(async id => {
+                console.log(id);
+                await admindb.doc(id).collection('array').add(Item);
+            }))
         }));
         return res.json({
             status: true
@@ -337,12 +436,29 @@ exports.AddPart3Detail = (req, res) => {
 exports.UpdatePart3Detail = async(req, res) => {
     var object = req.body;
     try {
-        await Promise.all(object.map(element => {
+        var Item = {};
+        const arr = []
+        const user = await admindb.get();
+        user.forEach(elementuser => {
+            arr.push(elementuser.id)
+        })
+        await Promise.all(object.map(async(element) => {
             admindbPart3Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
                 data.forEach(docData => {
                     admindbPart3Detail.collection('data').doc(docData.id).update(element);
                 })
             })
+
+            Item = {
+                IDTest: element.IDTest,
+                IDYear: element.IDYear,
+                TypeUpdate: 0
+            }
+
+            await Promise.all(arr.map(async id => {
+                console.log(id);
+                await admindb.doc(id).collection('array').add(Item);
+            }))
         }));
         return res.json({
             status: true
@@ -377,12 +493,29 @@ exports.AddPart4Detail = (req, res) => {
 exports.UpdatePart4Detail = async(req, res) => {
     var object = req.body;
     try {
-        await Promise.all(object.map(element => {
+        var Item = {};
+        const arr = []
+        const user = await admindb.get();
+        user.forEach(elementuser => {
+            arr.push(elementuser.id)
+        })
+        await Promise.all(object.map(async element => {
             admindbPart4Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
                 data.forEach(docData => {
                     admindbPart4Detail.collection('data').doc(docData.id).update(element);
                 })
             })
+            Item = {
+                IDTest: element.IDTest,
+                IDYear: element.IDYear,
+                TypeUpdate: 0
+            }
+
+
+            await Promise.all(arr.map(async id => {
+                console.log(id);
+                await admindb.doc(id).collection('array').add(Item);
+            }))
         }));
         return res.json({
             status: true
@@ -416,12 +549,30 @@ exports.AddPart6Detail = (req, res) => {
 exports.UpdatePart6Detail = async(req, res) => {
     var object = req.body;
     try {
-        await Promise.all(object.map(element => {
+        var Item = {};
+        const arr = []
+        const user = await admindb.get();
+        user.forEach(elementuser => {
+            arr.push(elementuser.id)
+        })
+        await Promise.all(object.map(async element => {
             admindbPart6Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
                 data.forEach(docData => {
                     admindbPart6Detail.collection('data').doc(docData.id).update(element);
                 })
             })
+
+            Item = {
+                IDTest: element.IDTest,
+                IDYear: element.IDYear,
+                TypeUpdate: 0
+            }
+
+
+            await Promise.all(arr.map(async id => {
+                console.log(id);
+                await admindb.doc(id).collection('array').add(Item);
+            }))
         }));
         return res.json({
             status: true
@@ -455,12 +606,29 @@ exports.AddPart7Detail = (req, res) => {
 exports.UpdatePart7Detail = async(req, res) => {
     var object = req.body;
     try {
-        await Promise.all(object.map(element => {
+        var Item = {};
+        const arr = []
+        const user = await admindb.get();
+        user.forEach(elementuser => {
+            arr.push(elementuser.id)
+        })
+        await Promise.all(object.map(async element => {
             admindbPart7Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
                 data.forEach(docData => {
                     admindbPart7Detail.collection('data').doc(docData.id).update(element);;
                 })
             })
+            Item = {
+                IDTest: element.IDTest,
+                IDYear: element.IDYear,
+                TypeUpdate: 0
+            }
+
+
+            await Promise.all(arr.map(async id => {
+                console.log(id);
+                await admindb.doc(id).collection('array').add(Item);
+            }))
         }));
         return res.json({
             status: true
