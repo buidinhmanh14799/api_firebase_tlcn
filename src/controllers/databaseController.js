@@ -87,6 +87,7 @@ exports.AddPart2 = (req, res) => {
 exports.UpdatePart2 = async(req, res) => {
     var object = req.body;
     try {
+        const Item = {};
         await Promise.all(object.map(element => {
             admindbPart2.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
                 data.forEach(docData => {
@@ -94,16 +95,16 @@ exports.UpdatePart2 = async(req, res) => {
                 })
 
             });
-            const Item = {
+            Item = {
                 IDTest: docTest.data().IDTest,
                 IDYear: docTest.data().IDYear,
                 TypeUpdate: 0
             }
 
-            await Promise.all(arr.map(async id => {
-                await admindb.doc(id).collection('array').add(Item);
-            }))
         }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).collection('array').add(Item);
+        }))
         return res.json({
             status: true
         });
