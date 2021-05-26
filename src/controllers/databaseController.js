@@ -34,22 +34,22 @@ exports.AddPart1 = (req, res) => {
 exports.UpdatePart1 = async(req, res) => {
     var object = req.body;
     try {
+        const Item = {};
         await Promise.all(object.map(async element => {
             await admindbPart1.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(async data => {
                 data.forEach(docData => {
                     admindbPart1.collection('data').doc(docData.id).update(element);
                 })
-                const Item = {
-                    IDTest: docTest.data().IDTest,
-                    IDYear: docTest.data().IDYear,
-                    TypeUpdate: 2
-                }
-
-                await Promise.all(arr.map(async id => {
-                    await admindb.doc(id).collection('array').add(Item);
-                }))
-            })
+            });
+            Item = {
+                IDTest: element.IDTest,
+                IDYear: element.IDYear,
+                TypeUpdate: 0
+            }
         }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).collection('array').add(Item);
+        }))
         return res.json({
             status: true
         });
@@ -92,7 +92,17 @@ exports.UpdatePart2 = async(req, res) => {
                 data.forEach(docData => {
                     admindbPart2.collection('data').doc(docData.id).update(element);
                 })
-            })
+
+            });
+            const Item = {
+                IDTest: docTest.data().IDTest,
+                IDYear: docTest.data().IDYear,
+                TypeUpdate: 0
+            }
+
+            await Promise.all(arr.map(async id => {
+                await admindb.doc(id).collection('array').add(Item);
+            }))
         }));
         return res.json({
             status: true
@@ -510,7 +520,7 @@ exports.AddTest = async(req, res) => {
             const Item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear,
-                TypeUpdate: 1
+                TypeUpdate: 2
             }
 
             await Promise.all(arr.map(async id => {
