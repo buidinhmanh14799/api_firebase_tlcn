@@ -53,11 +53,11 @@ exports.UpdatePart1 = async(req, res) => {
                 IDYear: element.IDYear,
                 TypeUpdate: 0
             }
-            await Promise.all(arr.map(async id => {
-                console.log(id);
-                await admindb.doc(id).collection('array').add(Item);
-            }))
         }));
+        await Promise.all(arr.map(async id => {
+            console.log(id);
+            await admindb.doc(id).collection('array').add(Item);
+        }))
         return res.json({
             status: true
         });
@@ -114,12 +114,11 @@ exports.UpdatePart2 = async(req, res) => {
                 TypeUpdate: 0
             }
 
-            await Promise.all(arr.map(async id => {
-                console.log(id);
-                await admindb.doc(id).collection('array').add(Item);
-            }))
-
         }));
+        await Promise.all(arr.map(async id => {
+            console.log(id);
+            await admindb.doc(id).collection('array').add(Item);
+        }))
         return res.json({
             status: true
         });
@@ -169,12 +168,11 @@ exports.UpdatePart3 = async(req, res) => {
                 IDYear: element.IDYear,
                 TypeUpdate: 0
             };
-
-            await Promise.all(arr.map(async id => {
-                console.log(id);
-                await admindb.doc(id).collection('array').add(Item);
-            }))
         }));
+        await Promise.all(arr.map(async id => {
+            console.log(id);
+            await admindb.doc(id).collection('array').add(Item);
+        }))
         return res.json({
             status: true
         });
@@ -226,12 +224,11 @@ exports.UpdatePart4 = async(req, res) => {
                 IDYear: element.IDYear,
                 TypeUpdate: 0
             }
-
-            await Promise.all(arr.map(async id => {
-                console.log(id);
-                await admindb.doc(id).collection('array').add(Item);
-            }))
         }));
+        await Promise.all(arr.map(async id => {
+            console.log(id);
+            await admindb.doc(id).collection('array').add(Item);
+        }))
         return res.json({
             status: true
         });
@@ -282,12 +279,11 @@ exports.UpdatePart5 = async(req, res) => {
                 IDYear: element.IDYear,
                 TypeUpdate: 0
             }
-
-            await Promise.all(arr.map(async id => {
-                console.log(id);
-                await admindb.doc(id).collection('array').add(Item);
-            }))
         }));
+        await Promise.all(arr.map(async id => {
+            console.log(id);
+            await admindb.doc(id).collection('array').add(Item);
+        }))
         return res.json({
             status: true
         });
@@ -340,12 +336,11 @@ exports.UpdatePart6 = async(req, res) => {
                 TypeUpdate: 0
             }
 
-
-            await Promise.all(arr.map(async id => {
-                console.log(id);
-                await admindb.doc(id).collection('array').add(Item);
-            }))
         }));
+        await Promise.all(arr.map(async id => {
+            console.log(id);
+            await admindb.doc(id).collection('array').add(Item);
+        }))
         returnres.json({
             status: true
         });
@@ -397,11 +392,11 @@ exports.UpdatePart7 = async(req, res) => {
                 TypeUpdate: 0
             }
 
-            await Promise.all(arr.map(async id => {
-                console.log(id);
-                await admindb.doc(id).collection('array').add(Item);
-            }))
         }));
+        await Promise.all(arr.map(async id => {
+            console.log(id);
+            await admindb.doc(id).collection('array').add(Item);
+        }))
         return res.json({
             status: true
         });
@@ -454,12 +449,11 @@ exports.UpdatePart3Detail = async(req, res) => {
                 IDYear: element.IDYear,
                 TypeUpdate: 0
             }
-
-            await Promise.all(arr.map(async id => {
-                console.log(id);
-                await admindb.doc(id).collection('array').add(Item);
-            }))
         }));
+        await Promise.all(arr.map(async id => {
+            console.log(id);
+            await admindb.doc(id).collection('array').add(Item);
+        }))
         return res.json({
             status: true
         });
@@ -510,13 +504,11 @@ exports.UpdatePart4Detail = async(req, res) => {
                 IDYear: element.IDYear,
                 TypeUpdate: 0
             }
-
-
-            await Promise.all(arr.map(async id => {
-                console.log(id);
-                await admindb.doc(id).collection('array').add(Item);
-            }))
         }));
+        await Promise.all(arr.map(async id => {
+            console.log(id);
+            await admindb.doc(id).collection('array').add(Item);
+        }))
         return res.json({
             status: true
         });
@@ -567,13 +559,11 @@ exports.UpdatePart6Detail = async(req, res) => {
                 IDYear: element.IDYear,
                 TypeUpdate: 0
             }
-
-
-            await Promise.all(arr.map(async id => {
-                console.log(id);
-                await admindb.doc(id).collection('array').add(Item);
-            }))
         }));
+        await Promise.all(arr.map(async id => {
+            console.log(id);
+            await admindb.doc(id).collection('array').add(Item);
+        }))
         return res.json({
             status: true
         });
@@ -623,13 +613,11 @@ exports.UpdatePart7Detail = async(req, res) => {
                 IDYear: element.IDYear,
                 TypeUpdate: 0
             }
-
-
-            await Promise.all(arr.map(async id => {
-                console.log(id);
-                await admindb.doc(id).collection('array').add(Item);
-            }))
         }));
+        await Promise.all(arr.map(async id => {
+            console.log(id);
+            await admindb.doc(id).collection('array').add(Item);
+        }))
         return res.json({
             status: true
         });
