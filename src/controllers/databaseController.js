@@ -67,6 +67,7 @@ exports.UpdatePart1 = async(req, res) => {
     }
 }
 async function deletePart1(IDTest, IDYear) {
+    console.log("Vao");
     try {
         await admindbPart1.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(async data => {
             //console.log(data);
