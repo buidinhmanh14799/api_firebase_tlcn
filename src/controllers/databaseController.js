@@ -678,7 +678,7 @@ exports.AddTest = async(req, res) => {
             const Item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear,
-                TypeUpdate: 2
+                TypeUpdate: 0
             }
 
             await Promise.all(arr.map(async id => {
