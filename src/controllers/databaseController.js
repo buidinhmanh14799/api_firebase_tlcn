@@ -51,7 +51,7 @@ exports.UpdatePart1 = async(req, res) => {
             Item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear,
-                TypeUpdate: 0
+                TypeUpdate: 2
             }
         }));
         await Promise.all(arr.map(async id => {
@@ -112,7 +112,7 @@ exports.UpdatePart2 = async(req, res) => {
             Item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear,
-                TypeUpdate: 0
+                TypeUpdate: 2
             }
 
         }));
@@ -167,7 +167,7 @@ exports.UpdatePart3 = async(req, res) => {
             Item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear,
-                TypeUpdate: 0
+                TypeUpdate: 2
             };
         }));
         await Promise.all(arr.map(async id => {
@@ -223,7 +223,7 @@ exports.UpdatePart4 = async(req, res) => {
             Item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear,
-                TypeUpdate: 0
+                TypeUpdate: 2
             }
         }));
         await Promise.all(arr.map(async id => {
@@ -278,7 +278,7 @@ exports.UpdatePart5 = async(req, res) => {
             Item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear,
-                TypeUpdate: 0
+                TypeUpdate: 2
             }
         }));
         await Promise.all(arr.map(async id => {
@@ -334,7 +334,7 @@ exports.UpdatePart6 = async(req, res) => {
             Item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear,
-                TypeUpdate: 0
+                TypeUpdate: 2
             }
 
         }));
@@ -390,7 +390,7 @@ exports.UpdatePart7 = async(req, res) => {
             Item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear,
-                TypeUpdate: 0
+                TypeUpdate: 2
             }
 
         }));
@@ -448,7 +448,7 @@ exports.UpdatePart3Detail = async(req, res) => {
             Item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear,
-                TypeUpdate: 0
+                TypeUpdate: 2
             }
         }));
         await Promise.all(arr.map(async id => {
@@ -503,7 +503,7 @@ exports.UpdatePart4Detail = async(req, res) => {
             Item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear,
-                TypeUpdate: 0
+                TypeUpdate: 2
             }
         }));
         await Promise.all(arr.map(async id => {
@@ -558,7 +558,7 @@ exports.UpdatePart6Detail = async(req, res) => {
             Item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear,
-                TypeUpdate: 0
+                TypeUpdate: 2
             }
         }));
         await Promise.all(arr.map(async id => {
@@ -612,7 +612,7 @@ exports.UpdatePart7Detail = async(req, res) => {
             Item = {
                 IDTest: element.IDTest,
                 IDYear: element.IDYear,
-                TypeUpdate: 0
+                TypeUpdate: 2
             }
         }));
         await Promise.all(arr.map(async id => {
