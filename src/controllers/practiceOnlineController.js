@@ -7,9 +7,9 @@ exports.GetDataPractice = async (req, res) => {
     if (req.headers.authorization != undefined) {
         var idToken = req.headers.authorization;
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
-            console.log('ID Token correctly decoded', decodedIdToken);
+            // console.log('ID Token correctly decoded', decodedIdToken);
             admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                console.log(userRecord);
+                // console.log(userRecord);
 
                 var practice = adminPractice.doc(req.params.id);
                 var object = {};
@@ -32,7 +32,7 @@ exports.GetDataPractice = async (req, res) => {
                         data.push(objectT);
                     });
                     // await Promise.all(dataPart1.map(element=>{
-                    //     console.log("???");
+                    //     // console.log("???");
                     //     arrPart1.push(element.data())
                     // }))
 
@@ -219,7 +219,7 @@ exports.GetDataPractice = async (req, res) => {
                         object
                     );
                 } catch (error) {
-                    console.log(error);
+                    // console.log(error);
                     return res.status(500).send(error);
                 }
 
@@ -239,7 +239,7 @@ exports.GetDataPractice = async (req, res) => {
 }
 
 exports.AddPractice = (req, res) => {
-    console.log("Vao");
+    // console.log("Vao");
     var object = req.body;
     var practice = adminPractice.doc(object.id);
     practice.set({
@@ -266,13 +266,13 @@ exports.AddPractice = (req, res) => {
             status: true
         });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(500).send(error);
     }
 }
 
 const AddPart1 = async (part1, practice) => {
-    console.log(typeof (part1));
+    // console.log(typeof (part1));
     try {
         await Promise.all(part1.map(async (element) => {
             await practice.collection('part1').add(element);
@@ -287,7 +287,7 @@ const AddPart2 = async (part2, practice) => {
             await practice.collection('part2').add(element);
         }))
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 const AddPart3 = async (part3, practice) => {
@@ -296,7 +296,7 @@ const AddPart3 = async (part3, practice) => {
             await practice.collection('part3').add(element);
         }))
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 const AddPart4 = async (part4, practice) => {
@@ -305,7 +305,7 @@ const AddPart4 = async (part4, practice) => {
             await practice.collection('part4').add(element);
         }))
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 const AddPart5 = async (part5, practice) => {
@@ -314,7 +314,7 @@ const AddPart5 = async (part5, practice) => {
             await practice.collection('part5').add(element);
         }))
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 const AddPart6 = async (part6, practice) => {
@@ -323,7 +323,7 @@ const AddPart6 = async (part6, practice) => {
             await practice.collection('part6').add(element);
         }))
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 const AddPart7 = async (part7, practice) => {
@@ -332,7 +332,7 @@ const AddPart7 = async (part7, practice) => {
             await practice.collection('part7').add(element);
         }))
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 const AddPart3Detail = async (part3Detail, practice) => {
@@ -341,7 +341,7 @@ const AddPart3Detail = async (part3Detail, practice) => {
             await practice.collection('part3Detail').add(element);
         }))
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 const AddPart4Detail = async (part4Detail, practice) => {
@@ -350,7 +350,7 @@ const AddPart4Detail = async (part4Detail, practice) => {
             await practice.collection('part4Detail').add(element);
         }))
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 const AddPart6Detail = async (part6Detail, practice) => {
@@ -359,7 +359,7 @@ const AddPart6Detail = async (part6Detail, practice) => {
             await practice.collection('part6Detail').add(element);
         }))
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 const AddPart7Detail = async (part7Detail, practice) => {
@@ -368,7 +368,7 @@ const AddPart7Detail = async (part7Detail, practice) => {
             await practice.collection('part7Detail').add(element);
         }))
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 
@@ -397,7 +397,7 @@ const getListUpcommingElement = () => {
             }))
             resolve(listReturn);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             reject([])
         }
 
@@ -409,9 +409,9 @@ exports.GetListPractice = async (req, res) => {
     if(req.headers.authorization!=undefined){
         var idToken = req.headers.authorization;
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
-            console.log('ID Token correctly decoded', decodedIdToken);
+            // console.log('ID Token correctly decoded', decodedIdToken);
             admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                console.log(userRecord);
+                // console.log(userRecord);
     
                 try {
                     const listPractce = await adminPractice.listDocuments();
@@ -459,9 +459,9 @@ exports.GetListPracticeHistory = async (req, res) => {
     if(req.headers.authorization!=undefined){
         var idToken = req.headers.authorization;
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
-            console.log('ID Token correctly decoded', decodedIdToken);
+            // console.log('ID Token correctly decoded', decodedIdToken);
             admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                console.log(userRecord);
+                // console.log(userRecord);
     
                 try {
                     const listPractce = await adminPractice.listDocuments();
@@ -502,7 +502,7 @@ exports.GetListPracticeHistory = async (req, res) => {
                         listReturn
                     );
                 } catch (error) {
-                    console.log(error);
+                    // console.log(error);
                     return res.status(500).send(error);
                 }
     
@@ -526,9 +526,9 @@ exports.GetListPracticeComming = async (req, res) => {
     if(req.headers.authorization!=undefined){
         var idToken = req.headers.authorization;
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
-            console.log('ID Token correctly decoded', decodedIdToken);
+            // console.log('ID Token correctly decoded', decodedIdToken);
             admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                console.log(userRecord);
+                // console.log(userRecord);
                 try {
                     var listReturn = await getListUpcommingElement();
                     return res.json(
@@ -557,17 +557,22 @@ exports.Result = (req, res) => {
     if(req.headers.authorization!=undefined){
         var idToken = req.headers.authorization;
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
-            console.log('ID Token correctly decoded', decodedIdToken);
+            // // console.log('ID Token correctly decoded', decodedIdToken);
             admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                console.log(userRecord);
+                // // console.log(userRecord);
     
                 try {
                     const object = req.body;
+                    object.uid = userRecord.uid;
+                    object.photoURL = userRecord.photoURL;
+                    object.name = userRecord.displayName;
                     const idPractice = object.idData;
             
                     const docPractice = adminPractice.doc(idPractice);
                     const collectionPractice = docPractice.collection('listResult');
                     collectionPractice.add(object)
+
+                    // console.log(userRecord);
             
                     return res.json({
                         data: object
@@ -593,12 +598,12 @@ exports.GetResult = async (req, res) => {
     if (req.headers.authorization != undefined) {
         var idToken = req.headers.authorization;
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
-            console.log('ID Token correctly decoded', decodedIdToken);
+            // // console.log('ID Token correctly decoded', decodedIdToken);
             admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                console.log(userRecord);
+                // console.log(userRecord.uid);
 
                 try {
-                    console.log(req.params.id);
+                    // console.log(req.params.id);
                     const collectionPractice = await adminPractice.doc(req.params.id).collection('listResult').orderBy('amountCorrect', 'desc').limit(15).get();
                     const listResult = [];
                     collectionPractice.forEach(element => {
