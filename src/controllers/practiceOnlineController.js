@@ -406,13 +406,13 @@ const getListUpcommingElement = () => {
 
 exports.GetListPractice = async (req, res) => {
 
-    if(req.headers.authorization!=undefined){
+    if (req.headers.authorization != undefined) {
         var idToken = req.headers.authorization;
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
             // console.log('ID Token correctly decoded', decodedIdToken);
             admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
                 // console.log(userRecord);
-    
+
                 try {
                     const listPractce = await adminPractice.listDocuments();
                     const listReturn = [];
@@ -429,7 +429,7 @@ exports.GetListPractice = async (req, res) => {
                             object.studentCount =
                                 listReturn.push(object);
                         })
-            
+
                     }))
                     return res.json(
                         listReturn
@@ -437,7 +437,7 @@ exports.GetListPractice = async (req, res) => {
                 } catch (error) {
                     return res.status(500).send(error);
                 }
-    
+
             }).catch(error => {
                 console.error('Error while getting Firebase User record:', error);
                 res.status(403).json({ error: 'Unauthorized' });
@@ -446,23 +446,23 @@ exports.GetListPractice = async (req, res) => {
             console.error('Error while verifying Firebase ID token:', error);
             res.status(403).json({ error: 'Unauthorized' });
         });
-    }else{
+    } else {
         res.status(500).json({ error: 'Tính hack à???' });
     }
-    
+
 
 }
 
 
 
 exports.GetListPracticeHistory = async (req, res) => {
-    if(req.headers.authorization!=undefined){
+    if (req.headers.authorization != undefined) {
         var idToken = req.headers.authorization;
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
             // console.log('ID Token correctly decoded', decodedIdToken);
             admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
                 // console.log(userRecord);
-    
+
                 try {
                     const listPractce = await adminPractice.listDocuments();
                     const listReturn = [];
@@ -486,9 +486,9 @@ exports.GetListPracticeHistory = async (req, res) => {
                                 listReturn.push(object);
                             }
                         })
-            
+
                     }))
-            
+
                     var listcomming = await getListUpcommingElement();
                     listcomming.sort((a, b) => {
                         return a.time - b.time;
@@ -505,7 +505,7 @@ exports.GetListPracticeHistory = async (req, res) => {
                     // console.log(error);
                     return res.status(500).send(error);
                 }
-    
+
             }).catch(error => {
                 console.error('Error while getting Firebase User record:', error);
                 res.status(403).json({ error: 'Unauthorized' });
@@ -514,16 +514,16 @@ exports.GetListPracticeHistory = async (req, res) => {
             console.error('Error while verifying Firebase ID token:', error);
             res.status(403).json({ error: 'Unauthorized' });
         });
-    }else{
+    } else {
         res.status(500).json({ error: 'Tính hack à???' });
     }
-    
+
 
 }
 
 exports.GetListPracticeComming = async (req, res) => {
 
-    if(req.headers.authorization!=undefined){
+    if (req.headers.authorization != undefined) {
         var idToken = req.headers.authorization;
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
             // console.log('ID Token correctly decoded', decodedIdToken);
@@ -537,7 +537,7 @@ exports.GetListPracticeComming = async (req, res) => {
                 } catch (error) {
                     return res.status(500).send(error);
                 }
-    
+
             }).catch(error => {
                 console.error('Error while getting Firebase User record:', error);
                 res.status(403).json({ error: 'Unauthorized' });
@@ -546,41 +546,41 @@ exports.GetListPracticeComming = async (req, res) => {
             console.error('Error while verifying Firebase ID token:', error);
             res.status(403).json({ error: 'Unauthorized' });
         });
-    }else{
+    } else {
         res.status(500).json({ error: 'Tính hack à???' });
     }
-    
+
 
 }
 
 exports.Result = (req, res) => {
-    if(req.headers.authorization!=undefined){
+    if (req.headers.authorization != undefined) {
         var idToken = req.headers.authorization;
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
             // // console.log('ID Token correctly decoded', decodedIdToken);
             admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
                 // // console.log(userRecord);
-    
+
                 try {
                     const object = req.body;
                     object.uid = userRecord.uid;
                     object.photoURL = userRecord.photoURL;
                     object.name = userRecord.displayName;
                     const idPractice = object.idData;
-            
+
                     const docPractice = adminPractice.doc(idPractice);
                     const collectionPractice = docPractice.collection('listResult');
                     collectionPractice.add(object)
 
-                    // console.log(userRecord);
-            
+                    // console.log(object);
+
                     return res.json({
                         data: object
                     });
                 } catch (error) {
                     return res.status(500).send(error);
                 }
-    
+
             }).catch(error => {
                 console.error('Error while getting Firebase User record:', error);
                 res.status(403).json({ error: 'Unauthorized' });
@@ -589,10 +589,10 @@ exports.Result = (req, res) => {
             console.error('Error while verifying Firebase ID token:', error);
             res.status(403).json({ error: 'Unauthorized' });
         });
-    }else{
+    } else {
         res.status(500).json({ error: 'Tính hack à???' });
     }
-    
+
 }
 exports.GetResult = async (req, res) => {
     if (req.headers.authorization != undefined) {

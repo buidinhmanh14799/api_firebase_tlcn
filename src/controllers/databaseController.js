@@ -31,8 +31,8 @@ exports.AddPart1 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart1 = async(req, res) => {
-    //console.log("vao");
+exports.UpdatePart1 = async (req, res) => {
+    // console.log("vao");
     var object = req.body;
     try {
         var Item = {};
@@ -42,7 +42,7 @@ exports.UpdatePart1 = async(req, res) => {
             arr.push(elementuser.id)
         })
         await Promise.all(object.map(async element => {
-            //console.log(element.IDYear);
+            // console.log(element.IDYear);
             await admindbPart1.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(async data => {
                 data.forEach(docData => {
                     admindbPart1.collection('data').doc(docData.id).update(element);
@@ -55,28 +55,28 @@ exports.UpdatePart1 = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            //console.log(id);
+            // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
             status: true
         });
     } catch (error) {
-        //console.log(error + '');
+        // console.log(error + '');
         return res.status(500).send(error);
     }
 }
 async function deletePart1(IDTest, IDYear) {
-    console.log("Vao");
+    // console.log("Vao");
     try {
         await admindbPart1.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(async data => {
-            //console.log(data);
+            // console.log(data);
             data.forEach(docData => {
                 admindbPart1.collection('data').doc(docData.id).delete();
             })
         })
     } catch (error) {
-        //console.log(error + '');
+        // console.log(error + '');
     }
 }
 
@@ -93,7 +93,7 @@ exports.AddPart2 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart2 = async(req, res) => {
+exports.UpdatePart2 = async (req, res) => {
     var object = req.body;
     try {
         var Item = {};
@@ -102,7 +102,7 @@ exports.UpdatePart2 = async(req, res) => {
         user.forEach(elementuser => {
             arr.push(elementuser.id)
         })
-        await Promise.all(object.map(async(element) => {
+        await Promise.all(object.map(async (element) => {
             admindbPart2.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
                 data.forEach(docData => {
                     admindbPart2.collection('data').doc(docData.id).update(element);
@@ -117,7 +117,7 @@ exports.UpdatePart2 = async(req, res) => {
 
         }));
         await Promise.all(arr.map(async id => {
-            //console.log(id);
+            // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -134,7 +134,7 @@ async function deletePart2(IDTest, IDYear) {
                 admindbPart2.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {}
+    } catch (error) { }
 }
 exports.AddPart3 = (req, res) => {
     var object = req.body;
@@ -149,7 +149,7 @@ exports.AddPart3 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart3 = async(req, res) => {
+exports.UpdatePart3 = async (req, res) => {
     var object = req.body;
     try {
         var Item = {};
@@ -158,7 +158,7 @@ exports.UpdatePart3 = async(req, res) => {
         user.forEach(elementuser => {
             arr.push(elementuser.id)
         })
-        await Promise.all(object.map(async(element) => {
+        await Promise.all(object.map(async (element) => {
             admindbPart3.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDAudio', '==', element.IDAudio).get().then(data => {
                 data.forEach(docData => {
                     admindbPart3.collection('data').doc(docData.id).update(element);
@@ -171,7 +171,7 @@ exports.UpdatePart3 = async(req, res) => {
             };
         }));
         await Promise.all(arr.map(async id => {
-            //console.log(id);
+            // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -188,7 +188,7 @@ async function deletePart3(IDTest, IDYear) {
                 admindbPart3.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {}
+    } catch (error) { }
 }
 
 exports.AddPart4 = (req, res) => {
@@ -204,7 +204,7 @@ exports.AddPart4 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart4 = async(req, res) => {
+exports.UpdatePart4 = async (req, res) => {
     var object = req.body;
     try {
         var Item = {};
@@ -213,7 +213,7 @@ exports.UpdatePart4 = async(req, res) => {
         user.forEach(elementuser => {
             arr.push(elementuser.id)
         })
-        await Promise.all(object.map(async(element) => {
+        await Promise.all(object.map(async (element) => {
             admindbPart4.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDAudio', '==', element.IDAudio).get().then(data => {
                 data.forEach(docData => {
                     admindbPart4.collection('data').doc(docData.id).update(element);
@@ -227,7 +227,7 @@ exports.UpdatePart4 = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            //console.log(id);
+            // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -244,7 +244,7 @@ async function deletePart4(IDTest, IDYear) {
                 admindbPart4.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {}
+    } catch (error) { }
 }
 exports.AddPart5 = (req, res) => {
     var object = req.body;
@@ -259,7 +259,7 @@ exports.AddPart5 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart5 = async(req, res) => {
+exports.UpdatePart5 = async (req, res) => {
     var object = req.body;
     try {
         var Item = {};
@@ -268,9 +268,9 @@ exports.UpdatePart5 = async(req, res) => {
         user.forEach(elementuser => {
             arr.push(elementuser.id)
         })
-        await Promise.all(object.map(async(element) => {
+        await Promise.all(object.map(async (element) => {
             admindbPart5.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
-                //console.log(data);
+                // console.log(data);
                 data.forEach(docData => {
                     admindbPart5.collection('data').doc(docData.id).update(element);
                 })
@@ -282,7 +282,7 @@ exports.UpdatePart5 = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            //console.log(id);
+            // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -295,12 +295,12 @@ exports.UpdatePart5 = async(req, res) => {
 async function deletePart5(IDTest, IDYear) {
     try {
         admindbPart5.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(data => {
-            //console.log(data);
+            // console.log(data);
             data.forEach(docData => {
                 admindbPart5.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {}
+    } catch (error) { }
 }
 exports.AddPart6 = (req, res) => {
     var object = req.body;
@@ -315,7 +315,7 @@ exports.AddPart6 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart6 = async(req, res) => {
+exports.UpdatePart6 = async (req, res) => {
     var object = req.body;
     try {
         var Item = {};
@@ -324,7 +324,7 @@ exports.UpdatePart6 = async(req, res) => {
         user.forEach(elementuser => {
             arr.push(elementuser.id)
         })
-        await Promise.all(object.map(async(element) => {
+        await Promise.all(object.map(async (element) => {
             admindbPart6.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDReading', '==', element.IDReading).get().then(data => {
                 data.forEach(docData => {
                     admindbPart6.collection('data').doc(docData.id).update(element);
@@ -339,7 +339,7 @@ exports.UpdatePart6 = async(req, res) => {
 
         }));
         await Promise.all(arr.map(async id => {
-            //console.log(id);
+            // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         returnres.json({
@@ -356,7 +356,7 @@ async function deletePart6(IDTest, IDYear) {
                 admindbPart6.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {}
+    } catch (error) { }
 }
 exports.AddPart7 = (req, res) => {
     var object = req.body;
@@ -371,7 +371,7 @@ exports.AddPart7 = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart7 = async(req, res) => {
+exports.UpdatePart7 = async (req, res) => {
     var object = req.body;
     try {
         var Item = {};
@@ -380,7 +380,7 @@ exports.UpdatePart7 = async(req, res) => {
         user.forEach(elementuser => {
             arr.push(elementuser.id)
         })
-        await Promise.all(object.map(async(element) => {
+        await Promise.all(object.map(async (element) => {
             admindbPart7.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDReading', '==', element.IDReading).get().then(data => {
                 data.forEach(docData => {
                     admindbPart7.collection('data').doc(docData.id).update(element);
@@ -395,7 +395,7 @@ exports.UpdatePart7 = async(req, res) => {
 
         }));
         await Promise.all(arr.map(async id => {
-            //console.log(id);
+            // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -412,7 +412,7 @@ async function deletePart7(IDTest, IDYear) {
                 admindbPart7.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {}
+    } catch (error) { }
 }
 
 
@@ -429,7 +429,7 @@ exports.AddPart3Detail = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart3Detail = async(req, res) => {
+exports.UpdatePart3Detail = async (req, res) => {
     var object = req.body;
     try {
         var Item = {};
@@ -438,7 +438,7 @@ exports.UpdatePart3Detail = async(req, res) => {
         user.forEach(elementuser => {
             arr.push(elementuser.id)
         })
-        await Promise.all(object.map(async(element) => {
+        await Promise.all(object.map(async (element) => {
             admindbPart3Detail.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).where('IDQuestion', '==', element.IDQuestion).get().then(data => {
                 data.forEach(docData => {
                     admindbPart3Detail.collection('data').doc(docData.id).update(element);
@@ -452,7 +452,7 @@ exports.UpdatePart3Detail = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            //console.log(id);
+            // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -469,7 +469,7 @@ async function deletePart3dt(IDTest, IDYear) {
                 admindbPart3Detail.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {}
+    } catch (error) { }
 }
 
 exports.AddPart4Detail = (req, res) => {
@@ -485,7 +485,7 @@ exports.AddPart4Detail = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart4Detail = async(req, res) => {
+exports.UpdatePart4Detail = async (req, res) => {
     var object = req.body;
     try {
         var Item = {};
@@ -507,7 +507,7 @@ exports.UpdatePart4Detail = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            //console.log(id);
+            // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -524,7 +524,7 @@ async function deletePart4dt(IDTest, IDYear) {
                 admindbPart4Detail.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {}
+    } catch (error) { }
 }
 exports.AddPart6Detail = (req, res) => {
     var object = req.body;
@@ -539,7 +539,7 @@ exports.AddPart6Detail = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart6Detail = async(req, res) => {
+exports.UpdatePart6Detail = async (req, res) => {
     var object = req.body;
     try {
         var Item = {};
@@ -562,7 +562,7 @@ exports.UpdatePart6Detail = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            //console.log(id);
+            // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -579,7 +579,7 @@ async function deletePart6dt(IDTest, IDYear) {
                 admindbPart6Detail.collection('data').doc(docData.id).delete();
             })
         })
-    } catch (error) {}
+    } catch (error) { }
 }
 exports.AddPart7Detail = (req, res) => {
     var object = req.body;
@@ -594,7 +594,7 @@ exports.AddPart7Detail = (req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.UpdatePart7Detail = async(req, res) => {
+exports.UpdatePart7Detail = async (req, res) => {
     var object = req.body;
     try {
         var Item = {};
@@ -616,7 +616,7 @@ exports.UpdatePart7Detail = async(req, res) => {
             }
         }));
         await Promise.all(arr.map(async id => {
-            //console.log(id);
+            // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
         return res.json({
@@ -633,7 +633,7 @@ async function deletePart7dt(IDTest, IDYear) {
                 admindbPart7Detail.collection('data').doc(docData.id).delete();;
             })
         })
-    } catch (error) {}
+    } catch (error) { }
 }
 // exports.AddTest = async (req, res) => {
 //     var object = req.body;
@@ -649,7 +649,7 @@ async function deletePart7dt(IDTest, IDYear) {
 //                 IDTest: element.IDTest,
 //                 IDYear: element.IDYear
 //             }
-//             //console.log(item);
+//             // console.log(item);
 //             await Promise.all(arr.map(async id => {
 //                 await admindb.doc(id).collection('array').add(item)
 //             }))
@@ -658,12 +658,12 @@ async function deletePart7dt(IDTest, IDYear) {
 //             status: true
 //         });
 //     } catch (error) {
-//         //console.log(error + '');
+//         // console.log(error + '');
 //         res.status(500).send(error);
 //     }
 
 // }
-exports.AddTest = async(req, res) => {
+exports.AddTest = async (req, res) => {
 
     var object = req.body;
     const arr = []
@@ -672,7 +672,7 @@ exports.AddTest = async(req, res) => {
         arr.push(elementuser.id)
     })
     try {
-        await Promise.all(object.map(async(element) => {
+        await Promise.all(object.map(async (element) => {
             admindbTest.collection('data').add(element);
 
             const Item = {
@@ -700,13 +700,13 @@ exports.AddTest = async(req, res) => {
 
         admin.messaging().sendAll(messages)
             .then((response) => {
-                //console.log(response.successCount + ' messages were sent successfully');
+                // console.log(response.successCount + ' messages were sent successfully');
             });
         return res.status(200).json({
             status: true
         });
     } catch (error) {
-        //console.log(error + '');
+        // console.log(error + '');
         return res.status(500).json({
             status: false,
             message: error + ''
@@ -714,8 +714,8 @@ exports.AddTest = async(req, res) => {
     }
 
 }
-exports.UpdateTest = async(req, res) => {
-    //console.log('vao');
+exports.UpdateTest = async (req, res) => {
+    // console.log('vao');
     var object = req.body;
     const arr = []
     const user = await admindb.get();
@@ -723,7 +723,7 @@ exports.UpdateTest = async(req, res) => {
         arr.push(elementuser.id)
     })
     try {
-        //console.log('vao try');
+        // console.log('vao try');
         await Promise.all(object.map(async element => {
             await admindbTest.collection('data').where('IDYear', '==', element.IDYear).where('IDTest', '==', element.IDTest).get().then(async data => {
                 data.forEach(async docTest => {
@@ -756,20 +756,20 @@ exports.UpdateTest = async(req, res) => {
 
         admin.messaging().sendAll(messages)
             .then((response) => {
-                //console.log(response.successCount + ' messages were sent successfully');
+                // console.log(response.successCount + ' messages were sent successfully');
             });
         return res.status(200).json({
             status: true
         });
     } catch (error) {
-        //console.log('loi', error + '');
+        // console.log('loi', error + '');
         res.status(500).send(error);
     }
 }
-exports.DeleteTest = async(req, res) => {
+exports.DeleteTest = async (req, res) => {
     const IDTest = parseInt(req.query.IDTest);
     const IDYear = parseInt(req.query.IDYear);
-    //console.log(typeof IDTest + '   ' + IDYear)
+    // console.log(typeof IDTest + '   ' + IDYear)
     deletePart1(IDTest, IDYear);
     deletePart2(IDTest, IDYear);
     deletePart3(IDTest, IDYear);
@@ -781,14 +781,14 @@ exports.DeleteTest = async(req, res) => {
     deletePart4dt(IDTest, IDYear);
     deletePart6dt(IDTest, IDYear);
     deletePart7dt(IDTest, IDYear);
-    //console.log('vao');
+    // console.log('vao');
     const arr = []
     const user = await admindb.get();
     user.forEach(elementuser => {
         arr.push(elementuser.id)
     })
     try {
-        //console.log('vao try');
+        // console.log('vao try');
 
         await admindbTest.collection('data').where('IDYear', '==', IDYear).where('IDTest', '==', IDTest).get().then(async data => {
             data.forEach(async docTest => {
@@ -824,13 +824,13 @@ exports.DeleteTest = async(req, res) => {
 
         admin.messaging().sendAll(messages)
             .then((response) => {
-                //console.log(response.successCount + ' messages were sent successfully');
+                // console.log(response.successCount + ' messages were sent successfully');
             });
         return res.status(200).json({
             status: true
         });
     } catch (error) {
-        //console.log('loi', error + '');
+        // console.log('loi', error + '');
         res.status(500).send(error);
     }
 }
@@ -848,7 +848,7 @@ exports.AddYear = (req, res) => {
     }
 }
 
-exports.UpdateYear = async(req, res) => {
+exports.UpdateYear = async (req, res) => {
     var object = req.body;
     try {
         await Promise.all(object.map(element => {
@@ -865,7 +865,7 @@ exports.UpdateYear = async(req, res) => {
         return res.status(500).send(error);
     }
 }
-exports.DeleteYear = async(req, res) => {
+exports.DeleteYear = async (req, res) => {
     const IDYear = parseInt(req.query.IDYear);
     try {
         admindbYear.collection('data').where('IDYear', '==', IDYear).get().then(data => {
@@ -894,30 +894,51 @@ exports.GetDataPart1 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart1ByUid = async(req, res) => {
-    try {
-        const arrListGet = []
-        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
-        arrListGettam.forEach(element => {
-            if (element.data().TypeUpdate != 1) {
-                arrListGet.push(element.data());
-            }
-        });
-        var arrResult = [];
-        await Promise.all(arrListGet.map(async(element) => {
-            const data = await admindbPart1.collection('data')
-                .where('IDTest', '==', element.IDTest)
-                .where('IDYear', '==', element.IDYear)
-                .get();
-            data.forEach(element2 => {
-                arrResult.push(element2.data());
+exports.GetDataPart1ByUid = async (req, res) => {
+
+    if (req.headers.authorization != undefined) {
+        var idToken = req.headers.authorization;
+        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+            // console.log('ID Token correctly decoded', decodedIdToken);
+            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+                // console.log(userRecord);
+
+                try {
+                    const arrListGet = []
+                    const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+                    arrListGettam.forEach(element => {
+                        if (element.data().TypeUpdate != 1) {
+                            arrListGet.push(element.data());
+                        }
+                    });
+                    var arrResult = [];
+                    await Promise.all(arrListGet.map(async (element) => {
+                        const data = await admindbPart1.collection('data')
+                            .where('IDTest', '==', element.IDTest)
+                            .where('IDYear', '==', element.IDYear)
+                            .get();
+                        data.forEach(element2 => {
+                            arrResult.push(element2.data());
+                        });
+                    }))
+                    res.send(arrResult);
+                } catch (error) {
+                    // console.log(error + '')
+                    res.status(500).send(error);
+                }
+
+            }).catch(error => {
+                console.error('Error while getting Firebase User record:', error);
+                res.status(403).json({ error: 'Unauthorized' });
             });
-        }))
-        res.send(arrResult);
-    } catch (error) {
-        //console.log(error + '')
-        res.status(500).send(error);
+        }).catch(error => {
+            console.error('Error while verifying Firebase ID token:', error);
+            res.status(403).json({ error: 'Unauthorized' });
+        });
+    } else {
+        res.status(500).json({ error: 'Tính hack à???' });
     }
+
 }
 
 exports.GetDataPart2 = (req, res) => {
@@ -934,28 +955,48 @@ exports.GetDataPart2 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart2ByUid = async(req, res) => {
-    try {
-        const arrListGet = []
-        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
-        arrListGettam.forEach(element => {
-            arrListGet.push(element.data());
-        });
-        var arrResult = [];
-        await Promise.all(arrListGet.map(async(element) => {
-            const data = await admindbPart2.collection('data')
-                .where('IDTest', '==', element.IDTest)
-                .where('IDYear', '==', element.IDYear)
-                .get();
-            data.forEach(element2 => {
-                arrResult.push(element2.data());
+exports.GetDataPart2ByUid = async (req, res) => {
+    if(req.headers.authorization!=undefined){
+        var idToken = req.headers.authorization;
+        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+            // console.log('ID Token correctly decoded', decodedIdToken);
+            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+                // console.log(userRecord);
+    
+                try {
+                    const arrListGet = []
+                    const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+                    arrListGettam.forEach(element => {
+                        arrListGet.push(element.data());
+                    });
+                    var arrResult = [];
+                    await Promise.all(arrListGet.map(async (element) => {
+                        const data = await admindbPart2.collection('data')
+                            .where('IDTest', '==', element.IDTest)
+                            .where('IDYear', '==', element.IDYear)
+                            .get();
+                        data.forEach(element2 => {
+                            arrResult.push(element2.data());
+                        });
+                    }))
+                    res.send(arrResult);
+                } catch (error) {
+                    // console.log(error + '')
+                    res.status(500).send(error);
+                }
+    
+            }).catch(error => {
+                console.error('Error while getting Firebase User record:', error);
+                res.status(403).json({ error: 'Unauthorized' });
             });
-        }))
-        res.send(arrResult);
-    } catch (error) {
-        //console.log(error + '')
-        res.status(500).send(error);
+        }).catch(error => {
+            console.error('Error while verifying Firebase ID token:', error);
+            res.status(403).json({ error: 'Unauthorized' });
+        });
+    }else{
+        res.status(500).json({ error: 'Tính hack à???' });
     }
+    
 }
 exports.GetDataPart3 = (req, res) => {
     try {
@@ -971,28 +1012,48 @@ exports.GetDataPart3 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart3ByUid = async(req, res) => {
-    try {
-        const arrListGet = []
-        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
-        arrListGettam.forEach(element => {
-            arrListGet.push(element.data());
-        });
-        var arrResult = [];
-        await Promise.all(arrListGet.map(async(element) => {
-            const data = await admindbPart3.collection('data')
-                .where('IDTest', '==', element.IDTest)
-                .where('IDYear', '==', element.IDYear)
-                .get();
-            data.forEach(element2 => {
-                arrResult.push(element2.data());
+exports.GetDataPart3ByUid = async (req, res) => {
+    if(req.headers.authorization!=undefined){
+        var idToken = req.headers.authorization;
+        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+            // console.log('ID Token correctly decoded', decodedIdToken);
+            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+                // console.log(userRecord);
+    
+                try {
+                    const arrListGet = []
+                    const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+                    arrListGettam.forEach(element => {
+                        arrListGet.push(element.data());
+                    });
+                    var arrResult = [];
+                    await Promise.all(arrListGet.map(async (element) => {
+                        const data = await admindbPart3.collection('data')
+                            .where('IDTest', '==', element.IDTest)
+                            .where('IDYear', '==', element.IDYear)
+                            .get();
+                        data.forEach(element2 => {
+                            arrResult.push(element2.data());
+                        });
+                    }))
+                    res.send(arrResult);
+                } catch (error) {
+                    // console.log(error + '')
+                    res.status(500).send(error);
+                }
+    
+            }).catch(error => {
+                console.error('Error while getting Firebase User record:', error);
+                res.status(403).json({ error: 'Unauthorized' });
             });
-        }))
-        res.send(arrResult);
-    } catch (error) {
-        //console.log(error + '')
-        res.status(500).send(error);
+        }).catch(error => {
+            console.error('Error while verifying Firebase ID token:', error);
+            res.status(403).json({ error: 'Unauthorized' });
+        });
+    }else{
+        res.status(500).json({ error: 'Tính hack à???' });
     }
+    
 }
 exports.GetDataPart4 = (req, res) => {
     try {
@@ -1008,28 +1069,49 @@ exports.GetDataPart4 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart4ByUid = async(req, res) => {
-    try {
-        const arrListGet = []
-        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
-        arrListGettam.forEach(element => {
-            arrListGet.push(element.data());
-        });
-        var arrResult = [];
-        await Promise.all(arrListGet.map(async(element) => {
-            const data = await admindbPart4.collection('data')
-                .where('IDTest', '==', element.IDTest)
-                .where('IDYear', '==', element.IDYear)
-                .get();
-            data.forEach(element2 => {
-                arrResult.push(element2.data());
+exports.GetDataPart4ByUid = async (req, res) => {
+
+    if(req.headers.authorization!=undefined){
+        var idToken = req.headers.authorization;
+        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+            // console.log('ID Token correctly decoded', decodedIdToken);
+            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+                // console.log(userRecord);
+    
+                try {
+                    const arrListGet = []
+                    const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+                    arrListGettam.forEach(element => {
+                        arrListGet.push(element.data());
+                    });
+                    var arrResult = [];
+                    await Promise.all(arrListGet.map(async (element) => {
+                        const data = await admindbPart4.collection('data')
+                            .where('IDTest', '==', element.IDTest)
+                            .where('IDYear', '==', element.IDYear)
+                            .get();
+                        data.forEach(element2 => {
+                            arrResult.push(element2.data());
+                        });
+                    }))
+                    res.send(arrResult);
+                } catch (error) {
+                    // console.log(error + '')
+                    res.status(500).send(error);
+                }
+    
+            }).catch(error => {
+                console.error('Error while getting Firebase User record:', error);
+                res.status(403).json({ error: 'Unauthorized' });
             });
-        }))
-        res.send(arrResult);
-    } catch (error) {
-        //console.log(error + '')
-        res.status(500).send(error);
+        }).catch(error => {
+            console.error('Error while verifying Firebase ID token:', error);
+            res.status(403).json({ error: 'Unauthorized' });
+        });
+    }else{
+        res.status(500).json({ error: 'Tính hack à???' });
     }
+    
 }
 exports.GetDataPart5 = (req, res) => {
     try {
@@ -1045,28 +1127,48 @@ exports.GetDataPart5 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart5ByUid = async(req, res) => {
-    try {
-        const arrListGet = []
-        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
-        arrListGettam.forEach(element => {
-            arrListGet.push(element.data());
-        });
-        var arrResult = [];
-        await Promise.all(arrListGet.map(async(element) => {
-            const data = await admindbPart5.collection('data')
-                .where('IDTest', '==', element.IDTest)
-                .where('IDYear', '==', element.IDYear)
-                .get();
-            data.forEach(element2 => {
-                arrResult.push(element2.data());
+exports.GetDataPart5ByUid = async (req, res) => {
+    if(req.headers.authorization!=undefined){
+        var idToken = req.headers.authorization;
+        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+            // console.log('ID Token correctly decoded', decodedIdToken);
+            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+                // console.log(userRecord);
+    
+                try {
+                    const arrListGet = []
+                    const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+                    arrListGettam.forEach(element => {
+                        arrListGet.push(element.data());
+                    });
+                    var arrResult = [];
+                    await Promise.all(arrListGet.map(async (element) => {
+                        const data = await admindbPart5.collection('data')
+                            .where('IDTest', '==', element.IDTest)
+                            .where('IDYear', '==', element.IDYear)
+                            .get();
+                        data.forEach(element2 => {
+                            arrResult.push(element2.data());
+                        });
+                    }))
+                    res.send(arrResult);
+                } catch (error) {
+                    // console.log(error + '')
+                    res.status(500).send(error);
+                }
+    
+            }).catch(error => {
+                console.error('Error while getting Firebase User record:', error);
+                res.status(403).json({ error: 'Unauthorized' });
             });
-        }))
-        res.send(arrResult);
-    } catch (error) {
-        //console.log(error + '')
-        res.status(500).send(error);
+        }).catch(error => {
+            console.error('Error while verifying Firebase ID token:', error);
+            res.status(403).json({ error: 'Unauthorized' });
+        });
+    }else{
+        res.status(500).json({ error: 'Tính hack à???' });
     }
+    
 }
 exports.GetDataPart6 = (req, res) => {
     try {
@@ -1082,28 +1184,49 @@ exports.GetDataPart6 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart6ByUid = async(req, res) => {
-    try {
-        const arrListGet = []
-        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
-        arrListGettam.forEach(element => {
-            arrListGet.push(element.data());
-        });
-        var arrResult = [];
-        await Promise.all(arrListGet.map(async(element) => {
-            const data = await admindbPart6.collection('data')
-                .where('IDTest', '==', element.IDTest)
-                .where('IDYear', '==', element.IDYear)
-                .get();
-            data.forEach(element2 => {
-                arrResult.push(element2.data());
+exports.GetDataPart6ByUid = async (req, res) => {
+
+    if(req.headers.authorization!=undefined){
+        var idToken = req.headers.authorization;
+        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+            // console.log('ID Token correctly decoded', decodedIdToken);
+            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+                // console.log(userRecord);
+    
+                try {
+                    const arrListGet = []
+                    const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+                    arrListGettam.forEach(element => {
+                        arrListGet.push(element.data());
+                    });
+                    var arrResult = [];
+                    await Promise.all(arrListGet.map(async (element) => {
+                        const data = await admindbPart6.collection('data')
+                            .where('IDTest', '==', element.IDTest)
+                            .where('IDYear', '==', element.IDYear)
+                            .get();
+                        data.forEach(element2 => {
+                            arrResult.push(element2.data());
+                        });
+                    }))
+                    res.send(arrResult);
+                } catch (error) {
+                    // console.log(error + '')
+                    res.status(500).send(error);
+                }
+    
+            }).catch(error => {
+                console.error('Error while getting Firebase User record:', error);
+                res.status(403).json({ error: 'Unauthorized' });
             });
-        }))
-        res.send(arrResult);
-    } catch (error) {
-        //console.log(error + '')
-        res.status(500).send(error);
+        }).catch(error => {
+            console.error('Error while verifying Firebase ID token:', error);
+            res.status(403).json({ error: 'Unauthorized' });
+        });
+    }else{
+        res.status(500).json({ error: 'Tính hack à???' });
     }
+    
 }
 exports.GetDataPart7 = (req, res) => {
     try {
@@ -1119,28 +1242,49 @@ exports.GetDataPart7 = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart7ByUid = async(req, res) => {
-    try {
-        const arrListGet = []
-        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
-        arrListGettam.forEach(element => {
-            arrListGet.push(element.data());
-        });
-        var arrResult = [];
-        await Promise.all(arrListGet.map(async(element) => {
-            const data = await admindbPart7.collection('data')
-                .where('IDTest', '==', element.IDTest)
-                .where('IDYear', '==', element.IDYear)
-                .get();
-            data.forEach(element2 => {
-                arrResult.push(element2.data());
+exports.GetDataPart7ByUid = async (req, res) => {
+
+    if(req.headers.authorization!=undefined){
+        var idToken = req.headers.authorization;
+        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+            // console.log('ID Token correctly decoded', decodedIdToken);
+            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+                // console.log(userRecord);
+    
+                try {
+                    const arrListGet = []
+                    const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+                    arrListGettam.forEach(element => {
+                        arrListGet.push(element.data());
+                    });
+                    var arrResult = [];
+                    await Promise.all(arrListGet.map(async (element) => {
+                        const data = await admindbPart7.collection('data')
+                            .where('IDTest', '==', element.IDTest)
+                            .where('IDYear', '==', element.IDYear)
+                            .get();
+                        data.forEach(element2 => {
+                            arrResult.push(element2.data());
+                        });
+                    }))
+                    res.send(arrResult);
+                } catch (error) {
+                    // console.log(error + '')
+                    res.status(500).send(error);
+                }
+    
+            }).catch(error => {
+                console.error('Error while getting Firebase User record:', error);
+                res.status(403).json({ error: 'Unauthorized' });
             });
-        }))
-        res.send(arrResult);
-    } catch (error) {
-        //console.log(error + '')
-        res.status(500).send(error);
+        }).catch(error => {
+            console.error('Error while verifying Firebase ID token:', error);
+            res.status(403).json({ error: 'Unauthorized' });
+        });
+    }else{
+        res.status(500).json({ error: 'Tính hack à???' });
     }
+    
 }
 
 exports.GetDataPart3Detail = (req, res) => {
@@ -1157,28 +1301,49 @@ exports.GetDataPart3Detail = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart3DetailByUid = async(req, res) => {
-    try {
-        const arrListGet = []
-        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
-        arrListGettam.forEach(element => {
-            arrListGet.push(element.data());
-        });
-        var arrResult = [];
-        await Promise.all(arrListGet.map(async(element) => {
-            const data = await admindbPart3Detail.collection('data')
-                .where('IDTest', '==', element.IDTest)
-                .where('IDYear', '==', element.IDYear)
-                .get();
-            data.forEach(element2 => {
-                arrResult.push(element2.data());
+exports.GetDataPart3DetailByUid = async (req, res) => {
+
+    if(req.headers.authorization!=undefined){
+        var idToken = req.headers.authorization;
+        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+            // console.log('ID Token correctly decoded', decodedIdToken);
+            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+                // console.log(userRecord);
+    
+                try {
+                    const arrListGet = []
+                    const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+                    arrListGettam.forEach(element => {
+                        arrListGet.push(element.data());
+                    });
+                    var arrResult = [];
+                    await Promise.all(arrListGet.map(async (element) => {
+                        const data = await admindbPart3Detail.collection('data')
+                            .where('IDTest', '==', element.IDTest)
+                            .where('IDYear', '==', element.IDYear)
+                            .get();
+                        data.forEach(element2 => {
+                            arrResult.push(element2.data());
+                        });
+                    }))
+                    res.send(arrResult);
+                } catch (error) {
+                    // console.log(error + '')
+                    res.status(500).send(error);
+                }
+    
+            }).catch(error => {
+                console.error('Error while getting Firebase User record:', error);
+                res.status(403).json({ error: 'Unauthorized' });
             });
-        }))
-        res.send(arrResult);
-    } catch (error) {
-        //console.log(error + '')
-        res.status(500).send(error);
+        }).catch(error => {
+            console.error('Error while verifying Firebase ID token:', error);
+            res.status(403).json({ error: 'Unauthorized' });
+        });
+    }else{
+        res.status(500).json({ error: 'Tính hack à???' });
     }
+    
 }
 exports.GetDataPart4Detail = (req, res) => {
     try {
@@ -1194,28 +1359,49 @@ exports.GetDataPart4Detail = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart4DetailByUid = async(req, res) => {
-    try {
-        const arrListGet = []
-        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
-        arrListGettam.forEach(element => {
-            arrListGet.push(element.data());
-        });
-        var arrResult = [];
-        await Promise.all(arrListGet.map(async(element) => {
-            const data = await admindbPart4Detail.collection('data')
-                .where('IDTest', '==', element.IDTest)
-                .where('IDYear', '==', element.IDYear)
-                .get();
-            data.forEach(element2 => {
-                arrResult.push(element2.data());
+exports.GetDataPart4DetailByUid = async (req, res) => {
+
+    if(req.headers.authorization!=undefined){
+        var idToken = req.headers.authorization;
+        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+            // console.log('ID Token correctly decoded', decodedIdToken);
+            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+                // console.log(userRecord);
+    
+                try {
+                    const arrListGet = []
+                    const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+                    arrListGettam.forEach(element => {
+                        arrListGet.push(element.data());
+                    });
+                    var arrResult = [];
+                    await Promise.all(arrListGet.map(async (element) => {
+                        const data = await admindbPart4Detail.collection('data')
+                            .where('IDTest', '==', element.IDTest)
+                            .where('IDYear', '==', element.IDYear)
+                            .get();
+                        data.forEach(element2 => {
+                            arrResult.push(element2.data());
+                        });
+                    }))
+                    res.send(arrResult);
+                } catch (error) {
+                    // console.log(error + '')
+                    res.status(500).send(error);
+                }
+    
+            }).catch(error => {
+                console.error('Error while getting Firebase User record:', error);
+                res.status(403).json({ error: 'Unauthorized' });
             });
-        }))
-        res.send(arrResult);
-    } catch (error) {
-        //console.log(error + '')
-        res.status(500).send(error);
+        }).catch(error => {
+            console.error('Error while verifying Firebase ID token:', error);
+            res.status(403).json({ error: 'Unauthorized' });
+        });
+    }else{
+        res.status(500).json({ error: 'Tính hack à???' });
     }
+    
 }
 exports.GetDataPart6Detail = (req, res) => {
     try {
@@ -1231,28 +1417,48 @@ exports.GetDataPart6Detail = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart6DetailByUid = async(req, res) => {
-    try {
-        const arrListGet = []
-        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
-        arrListGettam.forEach(element => {
-            arrListGet.push(element.data());
-        });
-        var arrResult = [];
-        await Promise.all(arrListGet.map(async(element) => {
-            const data = await admindbPart6Detail.collection('data')
-                .where('IDTest', '==', element.IDTest)
-                .where('IDYear', '==', element.IDYear)
-                .get();
-            data.forEach(element2 => {
-                arrResult.push(element2.data());
+exports.GetDataPart6DetailByUid = async (req, res) => {
+    if(req.headers.authorization!=undefined){
+        var idToken = req.headers.authorization;
+        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+            // console.log('ID Token correctly decoded', decodedIdToken);
+            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+                // console.log(userRecord);
+    
+                try {
+                    const arrListGet = []
+                    const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+                    arrListGettam.forEach(element => {
+                        arrListGet.push(element.data());
+                    });
+                    var arrResult = [];
+                    await Promise.all(arrListGet.map(async (element) => {
+                        const data = await admindbPart6Detail.collection('data')
+                            .where('IDTest', '==', element.IDTest)
+                            .where('IDYear', '==', element.IDYear)
+                            .get();
+                        data.forEach(element2 => {
+                            arrResult.push(element2.data());
+                        });
+                    }))
+                    res.send(arrResult);
+                } catch (error) {
+                    // console.log(error + '')
+                    res.status(500).send(error);
+                }
+    
+            }).catch(error => {
+                console.error('Error while getting Firebase User record:', error);
+                res.status(403).json({ error: 'Unauthorized' });
             });
-        }))
-        res.send(arrResult);
-    } catch (error) {
-        //console.log(error + '')
-        res.status(500).send(error);
+        }).catch(error => {
+            console.error('Error while verifying Firebase ID token:', error);
+            res.status(403).json({ error: 'Unauthorized' });
+        });
+    }else{
+        res.status(500).json({ error: 'Tính hack à???' });
     }
+    
 }
 exports.GetDataPart7Detail = (req, res) => {
     try {
@@ -1268,28 +1474,48 @@ exports.GetDataPart7Detail = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataPart7DetailByUid = async(req, res) => {
-    try {
-        const arrListGet = []
-        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
-        arrListGettam.forEach(element => {
-            arrListGet.push(element.data());
-        });
-        var arrResult = [];
-        await Promise.all(arrListGet.map(async(element) => {
-            const data = await admindbPart7Detail.collection('data')
-                .where('IDTest', '==', element.IDTest)
-                .where('IDYear', '==', element.IDYear)
-                .get();
-            data.forEach(element2 => {
-                arrResult.push(element2.data());
+exports.GetDataPart7DetailByUid = async (req, res) => {
+    if(req.headers.authorization!=undefined){
+        var idToken = req.headers.authorization;
+        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+            // console.log('ID Token correctly decoded', decodedIdToken);
+            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+                // console.log(userRecord);
+    
+                try {
+                    const arrListGet = []
+                    const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+                    arrListGettam.forEach(element => {
+                        arrListGet.push(element.data());
+                    });
+                    var arrResult = [];
+                    await Promise.all(arrListGet.map(async (element) => {
+                        const data = await admindbPart7Detail.collection('data')
+                            .where('IDTest', '==', element.IDTest)
+                            .where('IDYear', '==', element.IDYear)
+                            .get();
+                        data.forEach(element2 => {
+                            arrResult.push(element2.data());
+                        });
+                    }))
+                    res.send(arrResult);
+                } catch (error) {
+                    // console.log(error + '')
+                    res.status(500).send(error);
+                }
+    
+            }).catch(error => {
+                console.error('Error while getting Firebase User record:', error);
+                res.status(403).json({ error: 'Unauthorized' });
             });
-        }))
-        res.send(arrResult);
-    } catch (error) {
-        //console.log(error + '')
-        res.status(500).send(error);
+        }).catch(error => {
+            console.error('Error while verifying Firebase ID token:', error);
+            res.status(403).json({ error: 'Unauthorized' });
+        });
+    }else{
+        res.status(500).json({ error: 'Tính hack à???' });
     }
+    
 }
 exports.GetDataYear = (req, res) => {
     try {
@@ -1319,30 +1545,50 @@ exports.GetDataTest = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataTestByUid = async(req, res) => {
-    try {
-        const arrListGet = []
-        const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
-        arrListGettam.forEach(element => {
-            arrListGet.push(element.data());
-        });
-        var arrResult = [];
-        await Promise.all(arrListGet.map(async(element) => {
-            const data = await admindbTest.collection('data')
-                .where('IDTest', '==', element.IDTest)
-                .where('IDYear', '==', element.IDYear)
-                .get();
-            data.forEach(element2 => {
-                arrResult.push(element2.data());
+exports.GetDataTestByUid = async (req, res) => {
+    if(req.headers.authorization!=undefined){
+        var idToken = req.headers.authorization;
+        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+            // console.log('ID Token correctly decoded', decodedIdToken);
+            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+                // console.log(userRecord);
+    
+                try {
+                    const arrListGet = []
+                    const arrListGettam = await admindb.doc(req.params.uid).collection('array').get();
+                    arrListGettam.forEach(element => {
+                        arrListGet.push(element.data());
+                    });
+                    var arrResult = [];
+                    await Promise.all(arrListGet.map(async (element) => {
+                        const data = await admindbTest.collection('data')
+                            .where('IDTest', '==', element.IDTest)
+                            .where('IDYear', '==', element.IDYear)
+                            .get();
+                        data.forEach(element2 => {
+                            arrResult.push(element2.data());
+                        });
+                    }))
+                    res.send(arrResult);
+                } catch (error) {
+                    // console.log(error + '')
+                    res.status(500).send(error);
+                }
+    
+            }).catch(error => {
+                console.error('Error while getting Firebase User record:', error);
+                res.status(403).json({ error: 'Unauthorized' });
             });
-        }))
-        res.send(arrResult);
-    } catch (error) {
-        //console.log(error + '')
-        res.status(500).send(error);
+        }).catch(error => {
+            console.error('Error while verifying Firebase ID token:', error);
+            res.status(403).json({ error: 'Unauthorized' });
+        });
+    }else{
+        res.status(500).json({ error: 'Tính hack à???' });
     }
+    
 }
-exports.AddVocabulary = async(req, res) => {
+exports.AddVocabulary = async (req, res) => {
     var object = req.body;
     const arr = []
     const user = await admindb.get();
@@ -1369,7 +1615,7 @@ exports.AddVocabulary = async(req, res) => {
 
         admin.messaging().sendAll(messages)
             .then((response) => {
-                //console.log(response.successCount + ' messages were sent successfully');
+                // console.log(response.successCount + ' messages were sent successfully');
             });
         return res.status(200).json({
             status: true,
@@ -1392,25 +1638,45 @@ exports.GetDataVocabulary = (req, res) => {
         res.status(500).send(error);
     }
 }
-exports.GetDataVocabularyByUid = async(req, res) => {
-    try {
-        const user = await admindb.doc(req.params.uid).get();
-        const number = user._fieldsProto.ValueVoca.integerValue;
-        //console.log(number);
-        var arr = [];
-        await admindbVocabulary.collection('data').where('ID', '>', parseInt(number)).get().then(dataget => {
-            dataget.forEach(element => {
-                arr.push(element.data())
-            })
+exports.GetDataVocabularyByUid = async (req, res) => {
+    if(req.headers.authorization!=undefined){
+        var idToken = req.headers.authorization;
+        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+            // console.log('ID Token correctly decoded', decodedIdToken);
+            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+                // console.log(userRecord);
+    
+                try {
+                    const user = await admindb.doc(req.params.uid).get();
+                    const number = user._fieldsProto.ValueVoca.integerValue;
+                    // console.log(number);
+                    var arr = [];
+                    await admindbVocabulary.collection('data').where('ID', '>', parseInt(number)).get().then(dataget => {
+                        dataget.forEach(element => {
+                            arr.push(element.data())
+                        })
+                    });
+                    res.send(arr);
+                } catch (error) {
+                    // console.log(error + '')
+                    res.status(500).send(error);
+                }
+    
+            }).catch(error => {
+                console.error('Error while getting Firebase User record:', error);
+                res.status(403).json({ error: 'Unauthorized' });
+            });
+        }).catch(error => {
+            console.error('Error while verifying Firebase ID token:', error);
+            res.status(403).json({ error: 'Unauthorized' });
         });
-        res.send(arr);
-    } catch (error) {
-        //console.log(error + '')
-        res.status(500).send(error);
+    }else{
+        res.status(500).json({ error: 'Tính hack à???' });
     }
+    
 }
 
-exports.DeleteAll = async(req, res) => {
+exports.DeleteAll = async (req, res) => {
     DeleteCustom('Part1');
     DeleteCustom('Part2');
     DeleteCustom('Part3');
@@ -1429,8 +1695,8 @@ exports.DeleteAll = async(req, res) => {
 
 // exports.DeleteOne = (req, res) => {
 //     try {
-//         //console.log('vao');
-//         //console.log(req.params.one);
+//         // console.log('vao');
+//         // console.log(req.params.one);
 //         var batch = admin.firestore().batch()
 //         admin.firestore().collection('DataBase').doc(req.params.one).collection('data').listDocuments().then(val => {
 //             val.map((val) => {
@@ -1441,7 +1707,7 @@ exports.DeleteAll = async(req, res) => {
 //             });
 //         })
 //     } catch (error) {
-//         //console.log('vaoloi');
+//         // console.log('vaoloi');
 //         res.status(500).send(error + '');
 //     }
 // }
@@ -1464,7 +1730,7 @@ async function DeleteCustom(nameTable) {
                 operationCounter = 0;
             }
         });
-        await Promise.all(batchArray.map(async(batch) => {
+        await Promise.all(batchArray.map(async (batch) => {
             await batch.commit();
         }))
         res.send('ok');
@@ -1473,7 +1739,7 @@ async function DeleteCustom(nameTable) {
     }
 }
 
-exports.DeleteOne = async(req, res) => {
+exports.DeleteOne = async (req, res) => {
     try {
         const batchArray = [];
         batchArray.push(admin.firestore().batch());
@@ -1492,7 +1758,7 @@ exports.DeleteOne = async(req, res) => {
                 operationCounter = 0;
             }
         });
-        await Promise.all(batchArray.map(async(batch) => {
+        await Promise.all(batchArray.map(async (batch) => {
             await batch.commit();
         }))
         res.send('ok');
