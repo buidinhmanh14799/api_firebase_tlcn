@@ -81,18 +81,18 @@ exports.listAllUserAuthen = async (req, res) => {
                 const usertam = { ...userRecord };
                 console.log(usertam.uid)
                 const user = await admindb.doc(usertam.uid).get();
-                const package = user._fieldsProto.package.stringValue;
-                const date = user._fieldsProto.expirationDate.timestampValue.seconds;
-                var datecurrent = new Date();
-                if ((date * 1000 - datecurrent.getTime()) > 0) {
-                    var dateTam = new Date(date * 1000 - datecurrent.getTime())
-                    var result = dateTam.getDate();
-                    usertam.expirationDate = result;
-                } else {
-                    usertam.expirationDate = -1;
-                }
-                usertam.package = package;
-                console.log(usertam.expirationDate);
+                // const package = user._fieldsProto.package.stringValue;
+                // const date = user._fieldsProto.expirationDate.timestampValue.seconds;
+                // var datecurrent = new Date();
+                // if ((date * 1000 - datecurrent.getTime()) > 0) {
+                //     var dateTam = new Date(date * 1000 - datecurrent.getTime())
+                //     var result = dateTam.getDate();
+                //     usertam.expirationDate = result;
+                // } else {
+                //     usertam.expirationDate = -1;
+                // }
+                // usertam.package = package;
+                // console.log(usertam.expirationDate);
                 arr.push(usertam)
 
             }));
