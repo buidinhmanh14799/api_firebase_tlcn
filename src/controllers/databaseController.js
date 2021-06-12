@@ -1648,8 +1648,8 @@ exports.GetDataVocabularyByUid = async (req, res) => {
     
                 try {
                     const user = await admindb.doc(req.params.uid).get();
-                    const number = user._fieldsProto.ValueVoca.integerValue;
-                    // console.log(number);
+                    const number = user.data().valueVoca;
+                    console.log(number);
                     var arr = [];
                     await admindbVocabulary.collection('data').where('ID', '>', parseInt(number)).get().then(dataget => {
                         dataget.forEach(element => {
@@ -1658,7 +1658,7 @@ exports.GetDataVocabularyByUid = async (req, res) => {
                     });
                     res.send(arr);
                 } catch (error) {
-                    // console.log(error + '')
+                    console.log(error + '')
                     res.status(500).send(error);
                 }
     
