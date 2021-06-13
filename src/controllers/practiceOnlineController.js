@@ -482,17 +482,21 @@ exports.GetListPracticeHistory = async (req, res) => {
                     const listPractce = await adminPractice.listDocuments();
                     const listReturn = [];
                     var d = new Date();
-                    var n = d.getTime() + 7200000;
+                    var n = d.getTime();
                     await Promise.all(listPractce.map(async (element) => {
                         await adminPractice.doc(element.id).get().then(async (snapshot) => {
-                            if (snapshot.get('time') <= n) {
+                            if (snapshot.get('time') <= n+ 7200000) {
                                 var object = {
-                                    status: false,
                                     title: snapshot.get('title'),
                                     idData: snapshot.get('idData'),
                                     decription: snapshot.get('decription'),
                                     time: snapshot.get('time'),
                                 };
+                                if(snapshot.get('time')-n+7200000>=0){
+                                    object.status = true
+                                }else{
+                                    object.status = false
+                                }
                                 var listCount = 0;
                                 await element.collection("listResult").get().then(snap => {
                                     listCount = snap.size;
