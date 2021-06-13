@@ -467,7 +467,7 @@ exports.GetListPracticeHistory = async (req, res) => {
                     const listPractce = await adminPractice.listDocuments();
                     const listReturn = [];
                     var d = new Date();
-                    var n = d.getTime();
+                    var n = d.getTime() +7200000;
                     await Promise.all(listPractce.map(async (element) => {
                         await adminPractice.doc(element.id).get().then(async (snapshot) => {
                             if (snapshot.get('time') <= n) {
@@ -531,6 +531,10 @@ exports.GetListPracticeComming = async (req, res) => {
                 // console.log(userRecord);
                 try {
                     var listReturn = await getListUpcommingElement();
+
+                    listReturn.sort((a, b) => {
+                        return a.time - b.time;
+                    })
                     return res.json(
                         listReturn
                     );
