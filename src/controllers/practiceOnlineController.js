@@ -262,6 +262,21 @@ exports.AddPractice = (req, res) => {
         AddPart4Detail(object.dataPart4Detail, practice);
         AddPart6Detail(object.dataPart6Detail, practice);
         AddPart7Detail(object.dataPart7Detail, practice);
+
+        var date = new Date(object.time);
+        const messages = [];
+        messages.push({
+            notification: {
+                title: 'Lịch thi online mới',
+                body: 'Lịch thi mới vào ngày  ' + date
+            },
+            topic: 'PracticeOnline',
+        });
+
+        admin.messaging().sendAll(messages)
+            .then((response) => {
+                // console.log(response.successCount + ' messages were sent successfully');
+            });
         return res.json({
             status: true
         });
@@ -467,7 +482,7 @@ exports.GetListPracticeHistory = async (req, res) => {
                     const listPractce = await adminPractice.listDocuments();
                     const listReturn = [];
                     var d = new Date();
-                    var n = d.getTime() +7200000;
+                    var n = d.getTime() + 7200000;
                     await Promise.all(listPractce.map(async (element) => {
                         await adminPractice.doc(element.id).get().then(async (snapshot) => {
                             if (snapshot.get('time') <= n) {
