@@ -241,7 +241,7 @@ exports.GetDataPractice = async (req, res) => {
 exports.AddPractice = (req, res) => {
     // console.log("Vao");
     var object = req.body;
-    var idTest = adminPracticetore().collection("tmp").doc().id;
+    var idTest = adminPractice.doc().id;
     var practice = adminPractice.doc(idTest);
     practice.set({
         "idData": idTest,
