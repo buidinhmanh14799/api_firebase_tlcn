@@ -241,13 +241,14 @@ exports.GetDataPractice = async (req, res) => {
 exports.AddPractice = (req, res) => {
     // console.log("Vao");
     var object = req.body;
-    var practice = adminPractice.doc(object.id);
+    var idTest = adminPracticetore().collection("tmp").doc().id;
+    var practice = adminPractice.doc(idTest);
     practice.set({
-        "idData": object.id,
+        "idData": idTest,
         "time": object.time,
         "title": object.title,
         "decription": object.decription,
-        "status": object.status,
+        "status": true,
         "countStudent": 0
     })
     try {
