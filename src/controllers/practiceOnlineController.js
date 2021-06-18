@@ -288,6 +288,17 @@ exports.AddPractice = (req, res) => {
         return res.status(500).send(error);
     }
 }
+exports.DeletePracticeOnline = (req, res) => {
+    adminPractice.doc(req.query.IDData).delete().then(()=>{
+        return res.json({
+            status: true
+        });
+    }).catch(error=>{
+        return res.json({
+            status: false
+        });
+    })
+}
 
 const AddPart1 = async (part1, practice) => {
     // console.log(typeof (part1));
