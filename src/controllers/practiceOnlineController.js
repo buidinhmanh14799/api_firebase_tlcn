@@ -243,7 +243,7 @@ exports.AddPractice = (req, res) => {
     var object = req.body;
     var idTest = adminPractice.doc().id;
     var practice = adminPractice.doc(idTest);
-    console.log("==>",object);
+    console.log("==>", object);
     practice.set({
         "idData": idTest,
         "time": object.time,
@@ -284,7 +284,7 @@ exports.AddPractice = (req, res) => {
             status: true
         });
     } catch (error) {
-        console.log(error+"");
+        console.log(error + "");
         return res.status(500).send(error);
     }
 }
@@ -428,6 +428,10 @@ exports.GetListPractice = async (req, res) => {
         const listPractce = await adminPractice.listDocuments();
         const listReturn = [];
         await Promise.all(listPractce.map(async (element) => {
+            var listCount = 0;
+            await element.collection("listResult").get().then(snap => {
+                listCount = snap.size;
+            })
             await adminPractice.doc(element.id).get().then(snapshot => {
                 var object = {
                     status: snapshot.get('status'),
@@ -435,13 +439,15 @@ exports.GetListPractice = async (req, res) => {
                     idData: snapshot.get('idData'),
                     decription: snapshot.get('decription'),
                     time: snapshot.get('time'),
-                    userCount: 0
+                    userCount: listCount
                 };
-                object.studentCount =
-                    listReturn.push(object);
+                listReturn.push(object);
             })
 
         }))
+        listReturn.sort((a, b) => {
+            return b.time - a.time;
+        })
         return res.json(
             listReturn
         );
@@ -469,16 +475,16 @@ exports.GetListPracticeHistory = async (req, res) => {
                     var n = d.getTime();
                     await Promise.all(listPractce.map(async (element) => {
                         await adminPractice.doc(element.id).get().then(async (snapshot) => {
-                            if (snapshot.get('time') <= n+ 7200000) {
+                            if (snapshot.get('time') <= n + 7200000) {
                                 var object = {
                                     title: snapshot.get('title'),
                                     idData: snapshot.get('idData'),
                                     decription: snapshot.get('decription'),
                                     time: snapshot.get('time'),
                                 };
-                                if(snapshot.get('time')-n+7200000>=0){
+                                if (snapshot.get('time') - n + 7200000 >= 0) {
                                     object.status = true
-                                }else{
+                                } else {
                                     object.status = false
                                 }
                                 var listCount = 0;
