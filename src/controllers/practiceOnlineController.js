@@ -239,10 +239,11 @@ exports.GetDataPractice = async (req, res) => {
 }
 
 exports.AddPractice = (req, res) => {
-    // console.log("Vao");
+    console.log("Vao");
     var object = req.body;
     var idTest = adminPractice.doc().id;
     var practice = adminPractice.doc(idTest);
+    console.log("==>",object);
     practice.set({
         "idData": idTest,
         "time": object.time,
@@ -251,18 +252,19 @@ exports.AddPractice = (req, res) => {
         "status": true,
         "countStudent": 0
     })
+    console.log(idTest);
     try {
-        AddPart1(object.dataPart1, practice);
-        AddPart2(object.dataPart2, practice);
-        AddPart3(object.dataPart3, practice);
-        AddPart4(object.dataPart4, practice);
-        AddPart5(object.dataPart5, practice);
-        AddPart6(object.dataPart6, practice);
-        AddPart7(object.dataPart7, practice);
-        AddPart3Detail(object.dataPart3Detail, practice);
-        AddPart4Detail(object.dataPart4Detail, practice);
-        AddPart6Detail(object.dataPart6Detail, practice);
-        AddPart7Detail(object.dataPart7Detail, practice);
+        AddPart1(JSON.parse(object.dataPart1), practice);
+        AddPart2(JSON.parse(object.dataPart2), practice);
+        AddPart3(JSON.parse(object.dataPart3), practice);
+        AddPart4(JSON.parse(object.dataPart4), practice);
+        AddPart5(JSON.parse(object.dataPart5), practice);
+        AddPart6(JSON.parse(object.dataPart6), practice);
+        AddPart7(JSON.parse(object.dataPart7), practice);
+        AddPart3Detail(JSON.parse(object.dataPart3Detail), practice);
+        AddPart4Detail(JSON.parse(object.dataPart4Detail), practice);
+        AddPart6Detail(JSON.parse(object.dataPart6Detail), practice);
+        AddPart7Detail(JSON.parse(object.dataPart7Detail), practice);
 
         var date = new Date(object.time);
         const messages = [];
@@ -282,7 +284,7 @@ exports.AddPractice = (req, res) => {
             status: true
         });
     } catch (error) {
-        // console.log(error);
+        console.log(error+"");
         return res.status(500).send(error);
     }
 }
@@ -294,7 +296,7 @@ const AddPart1 = async (part1, practice) => {
             await practice.collection('part1').add(element);
         }))
     } catch (error) {
-        return res.status(500).send(error);
+        console.log(error);
     }
 }
 const AddPart2 = async (part2, practice) => {
@@ -422,48 +424,29 @@ const getListUpcommingElement = () => {
 
 exports.GetListPractice = async (req, res) => {
 
-    if (req.headers.authorization != undefined) {
-        var idToken = req.headers.authorization;
-        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
-            // console.log('ID Token correctly decoded', decodedIdToken);
-            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                // console.log(userRecord);
+    try {
+        const listPractce = await adminPractice.listDocuments();
+        const listReturn = [];
+        await Promise.all(listPractce.map(async (element) => {
+            await adminPractice.doc(element.id).get().then(snapshot => {
+                var object = {
+                    status: snapshot.get('status'),
+                    title: snapshot.get('title'),
+                    idData: snapshot.get('idData'),
+                    decription: snapshot.get('decription'),
+                    time: snapshot.get('time'),
+                    userCount: 0
+                };
+                object.studentCount =
+                    listReturn.push(object);
+            })
 
-                try {
-                    const listPractce = await adminPractice.listDocuments();
-                    const listReturn = [];
-                    await Promise.all(listPractce.map(async (element) => {
-                        await adminPractice.doc(element.id).get().then(snapshot => {
-                            var object = {
-                                status: snapshot.get('status'),
-                                title: snapshot.get('title'),
-                                idData: snapshot.get('idData'),
-                                decription: snapshot.get('decription'),
-                                time: snapshot.get('time'),
-                                userCount: 0
-                            };
-                            object.studentCount =
-                                listReturn.push(object);
-                        })
-
-                    }))
-                    return res.json(
-                        listReturn
-                    );
-                } catch (error) {
-                    return res.status(500).send(error);
-                }
-
-            }).catch(error => {
-                console.error('Error while getting Firebase User record:', error);
-                res.status(403).json({ error: 'Unauthorized' });
-            });
-        }).catch(error => {
-            console.error('Error while verifying Firebase ID token:', error);
-            res.status(403).json({ error: 'Unauthorized' });
-        });
-    } else {
-        res.status(500).json({ error: 'Tính hack à???' });
+        }))
+        return res.json(
+            listReturn
+        );
+    } catch (error) {
+        return res.status(500).send(error);
     }
 
 
