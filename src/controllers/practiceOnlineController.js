@@ -20,9 +20,9 @@ exports.GetDataPractice = async (req, res) => {
                         var object = part1.data();
                         object.results = "";
                         var objectT = {
-                            id: part1._fieldsProto.idQuestion.integerValue,
-                            audio: part1._fieldsProto.audio.stringValue,
-                            image: part1._fieldsProto.image.stringValue,
+                            id: object.IDQuestion,
+                            audio: object.Audio,
+                            image: object.Image,
                             questions: [
                                 object
                             ],
@@ -42,8 +42,8 @@ exports.GetDataPractice = async (req, res) => {
                         var object = part2.data();
                         object.results = "";
                         var objectT = {
-                            id: part2._fieldsProto.idQuestion.integerValue,
-                            audio: part2._fieldsProto.audio.stringValue,
+                            id: object.IDQuestion,
+                            audio: object.Audio,
                             image: null,
                             questions: [
                                 object
@@ -219,7 +219,7 @@ exports.GetDataPractice = async (req, res) => {
                         object
                     );
                 } catch (error) {
-                    // console.log(error);
+                    console.log(error);
                     return res.status(500).send(error);
                 }
 
