@@ -243,7 +243,6 @@ exports.AddPractice = (req, res) => {
     var object = req.body;
     var idTest = adminPractice.doc().id;
     var practice = adminPractice.doc(idTest);
-    console.log("==>", object);
     practice.set({
         "idData": idTest,
         "time": object.time,
@@ -252,7 +251,6 @@ exports.AddPractice = (req, res) => {
         "status": true,
         "countStudent": 0
     })
-    console.log(idTest);
     try {
         AddPart1(JSON.parse(object.dataPart1), practice);
         AddPart2(JSON.parse(object.dataPart2), practice);
@@ -266,7 +264,7 @@ exports.AddPractice = (req, res) => {
         AddPart6Detail(JSON.parse(object.dataPart6Detail), practice);
         AddPart7Detail(JSON.parse(object.dataPart7Detail), practice);
 
-        var date = new Date(object.time);
+        var date = new Date(object.time).toLocaleString();
         const messages = [];
         messages.push({
             notification: {
@@ -289,11 +287,11 @@ exports.AddPractice = (req, res) => {
     }
 }
 exports.DeletePracticeOnline = (req, res) => {
-    adminPractice.doc(req.query.IDData).delete().then(()=>{
+    adminPractice.doc(req.query.IDData).delete().then(() => {
         return res.json({
             status: true
         });
-    }).catch(error=>{
+    }).catch(error => {
         return res.json({
             status: false
         });
