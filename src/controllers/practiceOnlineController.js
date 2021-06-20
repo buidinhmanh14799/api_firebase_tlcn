@@ -287,6 +287,17 @@ exports.AddPractice = (req, res) => {
     }
 }
 exports.DeletePracticeOnline = (req, res) => {
+    DeleteCustom(req.query.IDData, 'part1');
+    DeleteCustom(req.query.IDData, 'part2');
+    DeleteCustom(req.query.IDData, 'part3');
+    DeleteCustom(req.query.IDData, 'part4');
+    DeleteCustom(req.query.IDData, 'part5');
+    DeleteCustom(req.query.IDData, 'part6');
+    DeleteCustom(req.query.IDData, 'part7');
+    DeleteCustom(req.query.IDData, 'part3Detail');
+    DeleteCustom(req.query.IDData, 'part4Detail');
+    DeleteCustom(req.query.IDData, 'part6Detail');
+    DeleteCustom(req.query.IDData, 'part7Detail');
     adminPractice.doc(req.query.IDData).delete().then(() => {
         return res.json({
             status: true
@@ -296,6 +307,33 @@ exports.DeletePracticeOnline = (req, res) => {
             status: false
         });
     })
+}
+
+async function DeleteCustom(docname, nameTable) {
+    console.log("vao");
+    try {
+        const batchArray = [];
+        batchArray.push(admin.firestore().batch());
+        let operationCounter = 0;
+        let batchIndex = 0;
+
+        const documentSnapshotArray = await adminPractice.doc(docname).collection(nameTable).get();
+        documentSnapshotArray.forEach(documentSnapshot => {
+            batchArray[batchIndex].delete(documentSnapshot.ref);
+            operationCounter++;
+
+            if (operationCounter === 499) {
+                batchArray.push(admin.firestore().batch());
+                batchIndex++;
+                operationCounter = 0;
+            }
+        });
+        await Promise.all(batchArray.map(async (batch) => {
+            await batch.commit();
+        }))
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const AddPart1 = async (part1, practice) => {
