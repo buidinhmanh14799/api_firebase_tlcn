@@ -113,7 +113,7 @@ exports.GetDataPractice = async (req, res) => {
                     arrPart3.forEach(part3 => {
                         var objectT = {
                             id: null,
-                            idQuestion = idP3,
+                            idQuestion: idP3,
                             audio: part3.audio,
                             image: null,
                             showQuestion: true,
@@ -135,7 +135,7 @@ exports.GetDataPractice = async (req, res) => {
                     arrPart4.forEach(part4 => {
                         var objectT = {
                             id: null,
-                            idQuestion = idP4,
+                            idQuestion: idP4,
                             audio: part4.audio,
                             image: null,
                             showQuestion: true,
@@ -169,7 +169,7 @@ exports.GetDataPractice = async (req, res) => {
                     let idP6 = 0;
                     arrPart6.forEach(part6 => {
                         var objectT = {
-                            id = null,
+                            id : null,
                             idQuestion: idP6,
                             audio: '',
                             image: part6.image,
