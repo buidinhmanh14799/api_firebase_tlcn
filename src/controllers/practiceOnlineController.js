@@ -49,7 +49,7 @@ exports.GetDataPractice = async (req, res) => {
                                 object
                             ],
                             showQuestion: false,
-                            showDA: false,
+                            showDA: true,
                         };
                         data.push(objectT);
                     });
@@ -109,9 +109,11 @@ exports.GetDataPractice = async (req, res) => {
                     });
                     // id: part2._fieldsProto.idQuestion.integerValue,
                     // audio: part2._fieldsProto.audio.stringValue,
+                    let idP3 = 0;
                     arrPart3.forEach(part3 => {
                         var objectT = {
-                            id: 1,
+                            id: null,
+                            idQuestion = idP3,
                             audio: part3.audio,
                             image: null,
                             showQuestion: true,
@@ -127,11 +129,13 @@ exports.GetDataPractice = async (req, res) => {
                         })
                         objectT.questions = lstQuestionPart3;
                         data.push(objectT);
+                        idP3 = idP3 + 1;
                     })
-
+                    let idP4 = 0;
                     arrPart4.forEach(part4 => {
                         var objectT = {
-                            id: 1,
+                            id: null,
+                            idQuestion = idP4,
                             audio: part4.audio,
                             image: null,
                             showQuestion: true,
@@ -146,6 +150,7 @@ exports.GetDataPractice = async (req, res) => {
                         })
                         objectT.questions = lstQuestionPart4;
                         data.push(objectT);
+                        idP4 = idP4 + 1;
                     })
                     dataPart5.forEach(part5 => {
                         part5.showQuestion = true;
@@ -161,9 +166,11 @@ exports.GetDataPractice = async (req, res) => {
                         };
                         data.push(objectT);
                     });
+                    let idP6 = 0;
                     arrPart6.forEach(part6 => {
                         var objectT = {
-                            id: part6.idQuestion,
+                            id = null,
+                            idQuestion: idP6,
                             audio: '',
                             image: part6.image,
                             showQuestion: true,
@@ -178,10 +185,13 @@ exports.GetDataPractice = async (req, res) => {
                         })
                         objectT.questions = lstQuestionPart6;
                         data.push(objectT);
+                        idP6 = idP6 + 1;
                     })
+                    let idP7 = 0;
                     arrPart7.forEach(part7 => {
                         var objectT = {
-                            id: part7.idQuestion,
+                            id: null,
+                            idQuestion: idP7,
                             audio: '',
                             image: part7.image,
                             showQuestion: true,
@@ -196,6 +206,7 @@ exports.GetDataPractice = async (req, res) => {
                         })
                         objectT.questions = lstQuestionPart7;
                         data.push(objectT);
+                        idP7 = idP7 + 1;
                     })
                     let idQs = 1;
                     for (let i = 0; i < data.length; i++) {

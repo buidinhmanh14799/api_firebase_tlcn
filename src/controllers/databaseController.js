@@ -1639,12 +1639,12 @@ exports.GetDataVocabulary = (req, res) => {
     }
 }
 exports.GetDataVocabularyByUid = async (req, res) => {
-    if(req.headers.authorization!=undefined){
-        var idToken = req.headers.authorization;
-        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
-            // console.log('ID Token correctly decoded', decodedIdToken);
-            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                // console.log(userRecord);
+    // if(req.headers.authorization!=undefined){
+    //     var idToken = req.headers.authorization;
+    //     admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
+    //         // console.log('ID Token correctly decoded', decodedIdToken);
+    //         admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
+    //             // console.log(userRecord);
     
                 try {
                     const user = await admindb.doc(req.params.uid).get();
@@ -1662,17 +1662,17 @@ exports.GetDataVocabularyByUid = async (req, res) => {
                     res.status(500).send(error);
                 }
     
-            }).catch(error => {
-                console.error('Error while getting Firebase User record:', error);
-                res.status(403).json({ error: 'Unauthorized' });
-            });
-        }).catch(error => {
-            console.error('Error while verifying Firebase ID token:', error);
-            res.status(403).json({ error: 'Unauthorized' });
-        });
-    }else{
-        res.status(500).json({ error: 'Tính hack à???' });
-    }
+    //         }).catch(error => {
+    //             console.error('Error while getting Firebase User record:', error);
+    //             res.status(403).json({ error: 'Unauthorized' });
+    //         });
+    //     }).catch(error => {
+    //         console.error('Error while verifying Firebase ID token:', error);
+    //         res.status(403).json({ error: 'Unauthorized' });
+    //     });
+    // }else{
+    //     res.status(500).json({ error: 'Tính hack à???' });
+    // }
     
 }
 
