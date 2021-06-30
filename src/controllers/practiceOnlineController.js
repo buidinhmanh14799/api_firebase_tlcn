@@ -9,7 +9,7 @@ exports.GetDataPractice = async (req, res) => {
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
             // console.log('ID Token correctly decoded', decodedIdToken);
             admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                // console.log(userRecord);
+                console.log(userRecord);
 
                 var practice = adminPractice.doc(req.params.id);
                 var object = {};
@@ -123,8 +123,9 @@ exports.GetDataPractice = async (req, res) => {
                         arrPart3Detail.forEach(part3Detail => {
 
                             if (part3Detail.idAudio === part3.idAudio) {
-                                part3Detail.results = "",
-                                    lstQuestionPart3.push(part3Detail);
+                                part3Detail.results = "";
+                                part3Detail.explain = "";
+                                lstQuestionPart3.push(part3Detail);
                             }
                         })
                         objectT.questions = lstQuestionPart3;
@@ -144,8 +145,9 @@ exports.GetDataPractice = async (req, res) => {
                         var lstQuestionPart4 = [];
                         arrPart4Detail.forEach(part4Detail => {
                             if (part4Detail.idAudio === part4.idAudio) {
-                                part4Detail.results = "",
-                                    lstQuestionPart4.push(part4Detail);
+                                part4Detail.results = "";
+                                part4Detail.explain = "";
+                                lstQuestionPart4.push(part4Detail);
                             }
                         })
                         objectT.questions = lstQuestionPart4;
@@ -169,7 +171,7 @@ exports.GetDataPractice = async (req, res) => {
                     let idP6 = 0;
                     arrPart6.forEach(part6 => {
                         var objectT = {
-                            id : null,
+                            id: null,
                             idQuestion: idP6,
                             audio: '',
                             image: part6.image,
