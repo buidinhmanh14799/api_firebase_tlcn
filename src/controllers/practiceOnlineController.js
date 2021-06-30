@@ -9,232 +9,232 @@ exports.GetDataPractice = async (req, res) => {
         admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
             // console.log('ID Token correctly decoded', decodedIdToken);
             admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                console.log(userRecord);
+    console.log(userRecord);
 
-                var practice = adminPractice.doc(req.params.id);
-                var object = {};
-                var data = [];
-                try {
-                    dataPart1 = await practice.collection('part1').get();
-                    dataPart1.forEach(part1 => {
-                        var object = part1.data();
-                        object.results = "";
-                        var objectT = {
-                            id: object.IDQuestion,
-                            audio: object.Audio,
-                            image: object.Image,
-                            questions: [
-                                object
-                            ],
-                            showQuestion: false,
-                            showDA: true,
-                        };
-                        data.push(objectT);
-                    });
-                    // await Promise.all(dataPart1.map(element=>{
-                    //     // console.log("???");
-                    //     arrPart1.push(element.data())
-                    // }))
+    var practice = adminPractice.doc(req.params.id);
+    var object = {};
+    var data = [];
+    try {
+        dataPart1 = await practice.collection('part1').get();
+        dataPart1.forEach(part1 => {
+            var object = part1.data();
+            var objectT = {
+                id: object.IDQuestion,
+                audio: object.audio,
+                image: object.image,
+                questions: [
+                    object
+                ],
+                showQuestion: false,
+                showDA: true,
+                results:"",
+            };
+            data.push(objectT);
+        });
+        // await Promise.all(dataPart1.map(element=>{
+        //     // console.log("???");
+        //     arrPart1.push(element.data())
+        // }))
 
 
-                    dataPart2 = await practice.collection('part2').get();
-                    dataPart2.forEach(part2 => {
-                        var object = part2.data();
-                        object.results = "";
-                        var objectT = {
-                            id: object.IDQuestion,
-                            audio: object.Audio,
-                            image: null,
-                            questions: [
-                                object
-                            ],
-                            showQuestion: false,
-                            showDA: true,
-                        };
-                        data.push(objectT);
-                    });
+        dataPart2 = await practice.collection('part2').get();
+        dataPart2.forEach(part2 => {
+            var object = part2.data();
+            object.results = "";
+            var objectT = {
+                id: object.IDQuestion,
+                audio: object.Audio,
+                image: null,
+                questions: [
+                    object
+                ],
+                showQuestion: false,
+                showDA: true,
+            };
+            data.push(objectT);
+        });
 
-                    dataPart3 = await practice.collection('part3').get();
-                    const arrPart3 = []
-                    dataPart3.forEach(element => {
-                        arrPart3.push(element.data());
-                    });
+        dataPart3 = await practice.collection('part3').get();
+        const arrPart3 = []
+        dataPart3.forEach(element => {
+            arrPart3.push(element.data());
+        });
 
-                    dataPart4 = await practice.collection('part4').get();
-                    const arrPart4 = []
-                    dataPart4.forEach(element => {
-                        arrPart4.push(element.data());
-                    });
+        dataPart4 = await practice.collection('part4').get();
+        const arrPart4 = []
+        dataPart4.forEach(element => {
+            arrPart4.push(element.data());
+        });
 
-                    dataPart5 = await practice.collection('part5').get();
+        dataPart5 = await practice.collection('part5').get();
 
-                    dataPart6 = await practice.collection('part6').get();
-                    const arrPart6 = []
-                    dataPart6.forEach(element => {
-                        arrPart6.push(element.data());
-                    });
+        dataPart6 = await practice.collection('part6').get();
+        const arrPart6 = []
+        dataPart6.forEach(element => {
+            arrPart6.push(element.data());
+        });
 
-                    dataPart7 = await practice.collection('part7').get();
-                    const arrPart7 = []
-                    dataPart7.forEach(element => {
-                        arrPart7.push(element.data());
-                    });
+        dataPart7 = await practice.collection('part7').get();
+        const arrPart7 = []
+        dataPart7.forEach(element => {
+            arrPart7.push(element.data());
+        });
 
-                    dataPart3Detail = await practice.collection('part3Detail').get();
-                    const arrPart3Detail = []
-                    dataPart3Detail.forEach(element => {
-                        arrPart3Detail.push(element.data());
-                    });
-                    dataPart4Detail = await practice.collection('part4Detail').get();
-                    const arrPart4Detail = []
-                    dataPart4Detail.forEach(element => {
-                        arrPart4Detail.push(element.data());
-                    });
-                    dataPart6Detail = await practice.collection('part6Detail').get();
-                    const arrPart6Detail = []
-                    dataPart6Detail.forEach(element => {
-                        arrPart6Detail.push(element.data());
-                    });
-                    dataPart7Detail = await practice.collection('part7Detail').get();
-                    const arrPart7Detail = []
-                    dataPart7Detail.forEach(element => {
-                        arrPart7Detail.push(element.data());
-                    });
+        dataPart3Detail = await practice.collection('part3Detail').get();
+        const arrPart3Detail = []
+        dataPart3Detail.forEach(element => {
+            arrPart3Detail.push(element.data());
+        });
+        dataPart4Detail = await practice.collection('part4Detail').get();
+        const arrPart4Detail = []
+        dataPart4Detail.forEach(element => {
+            arrPart4Detail.push(element.data());
+        });
+        dataPart6Detail = await practice.collection('part6Detail').get();
+        const arrPart6Detail = []
+        dataPart6Detail.forEach(element => {
+            arrPart6Detail.push(element.data());
+        });
+        dataPart7Detail = await practice.collection('part7Detail').get();
+        const arrPart7Detail = []
+        dataPart7Detail.forEach(element => {
+            arrPart7Detail.push(element.data());
+        });
 
-                    await practice.get().then(data => {
-                        object.time = data._fieldsProto.time.integerValue;
-                        object.title = data._fieldsProto.title.stringValue;
-                        object.decription = data._fieldsProto.decription.stringValue;
-                        object.status = data._fieldsProto.status.booleanValue
-                    });
-                    // id: part2._fieldsProto.idQuestion.integerValue,
-                    // audio: part2._fieldsProto.audio.stringValue,
-                    let idP3 = 0;
-                    arrPart3.forEach(part3 => {
-                        var objectT = {
-                            id: null,
-                            idQuestion: idP3,
-                            audio: part3.audio,
-                            image: null,
-                            showQuestion: true,
-                            showDA: true,
-                        };
-                        var lstQuestionPart3 = [];
-                        arrPart3Detail.forEach(part3Detail => {
+        await practice.get().then(data => {
+            object.time = data._fieldsProto.time.integerValue;
+            object.title = data._fieldsProto.title.stringValue;
+            object.decription = data._fieldsProto.decription.stringValue;
+            object.status = data._fieldsProto.status.booleanValue
+        });
+        // id: part2._fieldsProto.idQuestion.integerValue,
+        // audio: part2._fieldsProto.audio.stringValue,
+        let idP3 = 0;
+        arrPart3.forEach(part3 => {
+            var objectT = {
+                id: null,
+                idQuestion: idP3,
+                audio: part3.audio,
+                image: null,
+                showQuestion: true,
+                showDA: true,
+            };
+            var lstQuestionPart3 = [];
+            arrPart3Detail.forEach(part3Detail => {
 
-                            if (part3Detail.idAudio === part3.idAudio) {
-                                part3Detail.results = "";
-                                part3Detail.explain = "";
-                                lstQuestionPart3.push(part3Detail);
-                            }
-                        })
-                        objectT.questions = lstQuestionPart3;
-                        data.push(objectT);
-                        idP3 = idP3 + 1;
-                    })
-                    let idP4 = 0;
-                    arrPart4.forEach(part4 => {
-                        var objectT = {
-                            id: null,
-                            idQuestion: idP4,
-                            audio: part4.audio,
-                            image: null,
-                            showQuestion: true,
-                            showDA: true,
-                        };
-                        var lstQuestionPart4 = [];
-                        arrPart4Detail.forEach(part4Detail => {
-                            if (part4Detail.idAudio === part4.idAudio) {
-                                part4Detail.results = "";
-                                part4Detail.explain = "";
-                                lstQuestionPart4.push(part4Detail);
-                            }
-                        })
-                        objectT.questions = lstQuestionPart4;
-                        data.push(objectT);
-                        idP4 = idP4 + 1;
-                    })
-                    dataPart5.forEach(part5 => {
-                        part5.showQuestion = true;
-                        part5.showDA = true;
-                        var object = part5.data();
-                        object.results = "";
-                        var objectT = {
-                            audio: '',
-                            image: null,
-                            questions: [
-                                object
-                            ]
-                        };
-                        data.push(objectT);
-                    });
-                    let idP6 = 0;
-                    arrPart6.forEach(part6 => {
-                        var objectT = {
-                            id: null,
-                            idQuestion: idP6,
-                            audio: '',
-                            image: part6.image,
-                            showQuestion: true,
-                            showDA: true,
-                        };
-                        var lstQuestionPart6 = [];
-                        arrPart6Detail.forEach(part6Detail => {
-                            if (part6Detail.idReading === part6.idReading) {
-                                part6Detail.results = "",
-                                    lstQuestionPart6.push(part6Detail);
-                            }
-                        })
-                        objectT.questions = lstQuestionPart6;
-                        data.push(objectT);
-                        idP6 = idP6 + 1;
-                    })
-                    let idP7 = 0;
-                    arrPart7.forEach(part7 => {
-                        var objectT = {
-                            id: null,
-                            idQuestion: idP7,
-                            audio: '',
-                            image: part7.image,
-                            showQuestion: true,
-                            showDA: true,
-                        };
-                        var lstQuestionPart7 = [];
-                        arrPart7Detail.forEach(part7Detail => {
-                            if (part7Detail.idReading === part7.idReading) {
-                                part7Detail.results = "",
-                                    lstQuestionPart7.push(part7Detail);
-                            }
-                        })
-                        objectT.questions = lstQuestionPart7;
-                        data.push(objectT);
-                        idP7 = idP7 + 1;
-                    })
-                    let idQs = 1;
-                    for (let i = 0; i < data.length; i++) {
-                        data[i].id = i;
-                        for (let j = 0; j < data[i].questions.length; j++) {
-
-                            data[i].questions[j].idQuestion = idQs;
-                            idQs++;
-                        }
-                    }
-                    data.sort((a, b) => {
-                        return a.id - b.id;
-                    })
-                    data.forEach(question => {
-                        question.questions.sort((a, b) => {
-                            return a.idQuestion - b.idQuestion;
-                        })
-                    })
-                    object.listQuestions = data;
-                    return res.json(
-                        object
-                    );
-                } catch (error) {
-                    console.log(error);
-                    return res.status(500).send(error);
+                if (part3Detail.idAudio === part3.idAudio) {
+                    part3Detail.results = "";
+                    part3Detail.explain = "";
+                    lstQuestionPart3.push(part3Detail);
                 }
+            })
+            objectT.questions = lstQuestionPart3;
+            data.push(objectT);
+            idP3 = idP3 + 1;
+        })
+        let idP4 = 0;
+        arrPart4.forEach(part4 => {
+            var objectT = {
+                id: null,
+                idQuestion: idP4,
+                audio: part4.audio,
+                image: null,
+                showQuestion: true,
+                showDA: true,
+            };
+            var lstQuestionPart4 = [];
+            arrPart4Detail.forEach(part4Detail => {
+                if (part4Detail.idAudio === part4.idAudio) {
+                    part4Detail.results = "";
+                    part4Detail.explain = "";
+                    lstQuestionPart4.push(part4Detail);
+                }
+            })
+            objectT.questions = lstQuestionPart4;
+            data.push(objectT);
+            idP4 = idP4 + 1;
+        })
+        dataPart5.forEach(part5 => {
+            part5.showQuestion = true;
+            part5.showDA = true;
+            var object = part5.data();
+            object.results = "";
+            var objectT = {
+                audio: '',
+                image: null,
+                questions: [
+                    object
+                ]
+            };
+            data.push(objectT);
+        });
+        let idP6 = 0;
+        arrPart6.forEach(part6 => {
+            var objectT = {
+                id: null,
+                idQuestion: idP6,
+                audio: '',
+                image: part6.image,
+                showQuestion: true,
+                showDA: true,
+            };
+            var lstQuestionPart6 = [];
+            arrPart6Detail.forEach(part6Detail => {
+                if (part6Detail.idReading === part6.idReading) {
+                    part6Detail.results = "",
+                        lstQuestionPart6.push(part6Detail);
+                }
+            })
+            objectT.questions = lstQuestionPart6;
+            data.push(objectT);
+            idP6 = idP6 + 1;
+        })
+        let idP7 = 0;
+        arrPart7.forEach(part7 => {
+            var objectT = {
+                id: null,
+                idQuestion: idP7,
+                audio: '',
+                image: part7.image,
+                showQuestion: true,
+                showDA: true,
+            };
+            var lstQuestionPart7 = [];
+            arrPart7Detail.forEach(part7Detail => {
+                if (part7Detail.idReading === part7.idReading) {
+                    part7Detail.results = "",
+                        lstQuestionPart7.push(part7Detail);
+                }
+            })
+            objectT.questions = lstQuestionPart7;
+            data.push(objectT);
+            idP7 = idP7 + 1;
+        })
+        let idQs = 1;
+        for (let i = 0; i < data.length; i++) {
+            data[i].id = i;
+            for (let j = 0; j < data[i].questions.length; j++) {
+
+                data[i].questions[j].idQuestion = idQs;
+                idQs++;
+            }
+        }
+        data.sort((a, b) => {
+            return a.id - b.id;
+        })
+        data.forEach(question => {
+            question.questions.sort((a, b) => {
+                return a.idQuestion - b.idQuestion;
+            })
+        })
+        object.listQuestions = data;
+        return res.json(
+            object
+        );
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send(error);
+    }
 
             }).catch(error => {
                 console.error('Error while getting Firebase User record:', error);
