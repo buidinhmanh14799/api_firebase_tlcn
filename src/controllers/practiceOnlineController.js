@@ -152,7 +152,7 @@ exports.GetDataPractice = async (req, res) => {
                     })
                     arrPart4.forEach(part4 => {
                         var objectT = {
-                            audio: part4.audio,
+                            audio: part4.Audio,
                             image: null,
                             showQuestion: true,
                             showDA: true,
