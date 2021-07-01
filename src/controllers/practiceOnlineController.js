@@ -177,11 +177,11 @@ exports.GetDataPractice = async (req, res) => {
                         data.push(objectT);
                     })
                     dataPart5.forEach(part5 => {
-                        part5.showQuestion = true;
-                        part5.showDA = true;
                         var object = part5.data();
                         object.results = "";
                         var objectT = {
+                            showQuestion :true,
+                            showDA:true,
                             audio: '',
                             image: null,
                             questions: [
