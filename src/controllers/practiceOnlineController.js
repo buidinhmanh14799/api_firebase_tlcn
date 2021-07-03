@@ -127,6 +127,7 @@ exports.GetDataPractice = async (req, res) => {
                             id: null,
                             audio: part3.Audio,
                             image: null,
+                            explain: part3.Explain,
                             showQuestion: true,
                             showDA: true,
                         };
@@ -136,7 +137,7 @@ exports.GetDataPractice = async (req, res) => {
                             if (part3Detail.IDAudio === part3.IDAudio) {
                                 var part3DetailTam = {
                                     results: "",
-                                    explain: "",
+                                    explain:"",
                                     question: part3Detail.Question,
                                     A: part3Detail.A,
                                     B: part3Detail.B,
@@ -153,6 +154,7 @@ exports.GetDataPractice = async (req, res) => {
                     arrPart4.forEach(part4 => {
                         var objectT = {
                             audio: part4.Audio,
+                            explain: part4.Explain,
                             image: null,
                             showQuestion: true,
                             showDA: true,
@@ -162,7 +164,7 @@ exports.GetDataPractice = async (req, res) => {
                             if (part4Detail.IDAudio === part4.IDAudio) {
                                 var part4DetailTam = {
                                     results: "",
-                                    explain: "",
+                                    explain:"",
                                     question: part4Detail.Question,
                                     A: part4Detail.A,
                                     B: part4Detail.B,
