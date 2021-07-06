@@ -1,4 +1,4 @@
-const { admin, admindb } = require('../firebase/firebase-confix');
+const { admin, admindb, admindbRoleAdmin } = require('../firebase/firebase-confix');
 
 
 
@@ -101,6 +101,20 @@ exports.listAllUserAuthen = async (req, res) => {
         .catch(err => {
             res.status(500).send(err);
         })
+}
+exports.listAllUserAuthenRoleAdmin = async (req, res) => {
+    
+    try {
+        var arr = [];
+        admindbRoleAdmin.get().then(data => {
+            data.forEach(element => {
+                arr.push(element.data());
+            });
+            res.send(arr);
+        });
+    } catch (error) {
+        res.status(500).send(error);
+    }
 }
 exports.checkEmail = async (req, res) => {
     var arr = [];

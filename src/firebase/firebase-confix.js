@@ -9,6 +9,7 @@ admin.initializeApp({
 
 exports.admin = admin;
 exports.admindb = admin.firestore().collection('users');
+exports.admindbRoleAdmin = admin.firestore().collection('admin');
 exports.admindbPart1 = admin.firestore().collection('DataBase').doc('Part1');
 exports.admindbPart2 = admin.firestore().collection('DataBase').doc('Part2');
 exports.admindbPart3 = admin.firestore().collection('DataBase').doc('Part3');

@@ -4,294 +4,274 @@ const {
 } = require('../firebase/firebase-confix');
 exports.GetDataPractice = async (req, res) => {
 
-    if (req.headers.authorization != undefined) {
-        var idToken = req.headers.authorization;
-        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
-            // console.log('ID Token correctly decoded', decodedIdToken);
-            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                console.log(userRecord);
 
-                var practice = adminPractice.doc(req.params.id);
-                var object = {};
-                var data = [];
-                try {
-                    dataPart1 = await practice.collection('part1').get();
-                    dataPart1.forEach(part1 => {
-                        var object = part1.data();
-                        var objectT = {
-                            audio: object.Audio,
-                            image: object.Image,
-                            questions: [{
-                                question: object.Questions,
-                                A: object.A,
-                                B: object.B,
-                                C: object.C,
-                                D: object.D,
-                                correct: object.Correct,
-                                results: '',
-                            }
-                            ],
-                            showQuestion: false,
-                            showDA: true,
-                        };
-                        data.push(objectT);
-                    });
-                    // await Promise.all(dataPart1.map(element=>{
-                    //     // console.log("???");
-                    //     arrPart1.push(element.data())
-                    // }))
-
-
-                    dataPart2 = await practice.collection('part2').get();
-                    dataPart2.forEach(part2 => {
-                        var object = part2.data();
-                        object.results = "";
-                        var objectT = {
-                            audio: object.Audio,
-                            image: null,
-                            questions: [
-                                {
-                                    question: object.Questions,
-                                    A: object.A,
-                                    B: object.B,
-                                    C: object.C,
-                                    D: object.D,
-                                    correct: object.Correct,
-                                    results: '',
-                                    explain: object.Explain,
-                                }
-                            ],
-                            showQuestion: false,
-                            showDA: true,
-                        };
-                        data.push(objectT);
-                    });
-
-                    dataPart3 = await practice.collection('part3').get();
-                    const arrPart3 = []
-                    dataPart3.forEach(element => {
-                        arrPart3.push(element.data());
-                    });
-
-                    dataPart4 = await practice.collection('part4').get();
-                    const arrPart4 = []
-                    dataPart4.forEach(element => {
-                        arrPart4.push(element.data());
-                    });
-
-                    dataPart5 = await practice.collection('part5').get();
-
-                    dataPart6 = await practice.collection('part6').get();
-                    const arrPart6 = []
-                    dataPart6.forEach(element => {
-                        arrPart6.push(element.data());
-                    });
-
-                    dataPart7 = await practice.collection('part7').get();
-                    const arrPart7 = []
-                    dataPart7.forEach(element => {
-                        arrPart7.push(element.data());
-                    });
-
-                    dataPart3Detail = await practice.collection('part3Detail').get();
-                    const arrPart3Detail = []
-                    dataPart3Detail.forEach(element => {
-                        arrPart3Detail.push(element.data());
-                    });
-                    dataPart4Detail = await practice.collection('part4Detail').get();
-                    const arrPart4Detail = []
-                    dataPart4Detail.forEach(element => {
-                        arrPart4Detail.push(element.data());
-                    });
-                    dataPart6Detail = await practice.collection('part6Detail').get();
-                    const arrPart6Detail = []
-                    dataPart6Detail.forEach(element => {
-                        arrPart6Detail.push(element.data());
-                    });
-                    dataPart7Detail = await practice.collection('part7Detail').get();
-                    const arrPart7Detail = []
-                    dataPart7Detail.forEach(element => {
-                        arrPart7Detail.push(element.data());
-                    });
-
-                    await practice.get().then(data => {
-                        object.time = data._fieldsProto.time.integerValue;
-                        object.title = data._fieldsProto.title.stringValue;
-                        object.decription = data._fieldsProto.decription.stringValue;
-                        object.status = data._fieldsProto.status.booleanValue
-                    });
-                    // id: part2._fieldsProto.idQuestion.integerValue,
-                    // audio: part2._fieldsProto.audio.stringValue,
-                    arrPart3.forEach(part3 => {
-                        var objectT = {
-                            id: null,
-                            audio: part3.Audio,
-                            image: null,
-                            explain: part3.Explain,
-                            showQuestion: true,
-                            showDA: true,
-                        };
-                        var lstQuestionPart3 = [];
-                        arrPart3Detail.forEach(part3Detail => {
-
-                            if (part3Detail.IDAudio === part3.IDAudio) {
-                                var part3DetailTam = {
-                                    results: "",
-                                    explain:"",
-                                    question: part3Detail.Question,
-                                    A: part3Detail.A,
-                                    B: part3Detail.B,
-                                    C: part3Detail.C,
-                                    D: part3Detail.D,
-                                    correct: part3Detail.Correct,
-                                }
-                                lstQuestionPart3.push(part3DetailTam);
-                            }
-                        })
-                        objectT.questions = lstQuestionPart3;
-                        data.push(objectT);
-                    })
-                    arrPart4.forEach(part4 => {
-                        var objectT = {
-                            audio: part4.Audio,
-                            explain: part4.Explain,
-                            image: null,
-                            showQuestion: true,
-                            showDA: true,
-                        };
-                        var lstQuestionPart4 = [];
-                        arrPart4Detail.forEach(part4Detail => {
-                            if (part4Detail.IDAudio === part4.IDAudio) {
-                                var part4DetailTam = {
-                                    results: "",
-                                    explain:"",
-                                    question: part4Detail.Question,
-                                    A: part4Detail.A,
-                                    B: part4Detail.B,
-                                    C: part4Detail.C,
-                                    D: part4Detail.D,
-                                    correct: part4Detail.Correct,
-                                }
-                                lstQuestionPart4.push(part4DetailTam);
-                            }
-                        })
-                        objectT.questions = lstQuestionPart4;
-                        data.push(objectT);
-                    })
-                    dataPart5.forEach(part5 => {
-                        var object = part5.data();
-                        object.results = "";
-                        var objectT = {
-                            showQuestion :true,
-                            showDA:true,
-                            audio: '',
-                            image: null,
-                            questions: [
-                                {
-                                    question: object.Question,
-                                    A: object.A,
-                                    B: object.B,
-                                    C: object.C,
-                                    D: object.D,
-                                    correct: object.Correct,
-                                    results: '',
-                                    explain: object.Explain,
-                                }
-                            ]
-                        };
-                        data.push(objectT);
-                    });
-                    arrPart6.forEach(part6 => {
-                        var objectT = {
-                            audio: '',
-                            image: part6.image,
-                            showQuestion: true,
-                            showDA: true,
-                        };
-                        var lstQuestionPart6 = [];
-                        arrPart6Detail.forEach(part6Detail => {
-                            if (part6Detail.IDReading === part6.IDReading) {
-                                var part6DetailTam = {
-                                    results: "",
-                                    explain: part6Detail.Explain,
-                                    question: part6Detail.Question,
-                                    A: part6Detail.A,
-                                    B: part6Detail.B,
-                                    C: part6Detail.C,
-                                    D: part6Detail.D,
-                                    correct: part6Detail.Correct,
-                                }
-                                lstQuestionPart6.push(part6DetailTam);
-                            }
-                        })
-                        objectT.questions = lstQuestionPart6;
-                        data.push(objectT);
-                    })
-                    arrPart7.forEach(part7 => {
-                        var objectT = {
-                            audio: '',
-                            image: part7.image,
-                            showQuestion: true,
-                            showDA: true,
-                        };
-                        var lstQuestionPart7 = [];
-                        arrPart7Detail.forEach(part7Detail => {
-                            if (part7Detail.IDReading === part7.IDReading) {
-                                var part7DetailTam = {
-                                    question: part7Detail.Question,
-                                    A: part7Detail.A,
-                                    B: part7Detail.B,
-                                    C: part7Detail.C,
-                                    D: part7Detail.D,
-                                    correct: part7Detail.Correct,
-                                    results: '',
-                                    explain: part7Detail.Explain,
-                                }
-                                lstQuestionPart7.push(part7DetailTam);
-                            }
-                        })
-                        objectT.questions = lstQuestionPart7;
-                        data.push(objectT);
-                    })
-                    let idQs = 1;
-                    for (let i = 0; i < data.length; i++) {
-                        data[i].id = i;
-                        for (let j = 0; j < data[i].questions.length; j++) {
-
-                            data[i].questions[j].idQuestion = idQs;
-                            idQs++;
-                        }
-                    }
-                    data.sort((a, b) => {
-                        return a.id - b.id;
-                    })
-                    data.forEach(question => {
-                        question.questions.sort((a, b) => {
-                            return a.idQuestion - b.idQuestion;
-                        })
-                    })
-                    object.listQuestions = data;
-                    return res.json(
-                        object
-                    );
-                } catch (error) {
-                    console.log(error);
-                    return res.status(500).send(error);
+    var practice = adminPractice.doc(req.params.id);
+    var object = {};
+    var data = [];
+    try {
+        dataPart1 = await practice.collection('part1').get();
+        dataPart1.forEach(part1 => {
+            var object = part1.data();
+            var objectT = {
+                audio: object.Audio,
+                image: object.Image,
+                questions: [{
+                    question: object.Questions,
+                    A: object.A,
+                    B: object.B,
+                    C: object.C,
+                    D: object.D,
+                    correct: object.Correct,
+                    results: '',
                 }
-
-            }).catch(error => {
-                console.error('Error while getting Firebase User record:', error);
-                res.status(403).json({ error: 'Unauthorized' });
-            });
-        }).catch(error => {
-            console.error('Error while verifying Firebase ID token:', error);
-            res.status(403).json({ error: 'Unauthorized' });
+                ],
+                showQuestion: false,
+                showDA: true,
+            };
+            data.push(objectT);
         });
-    } else {
-        res.status(500).json({ error: 'Tính hack à???' });
+        // await Promise.all(dataPart1.map(element=>{
+        //     // console.log("???");
+        //     arrPart1.push(element.data())
+        // }))
+
+
+        dataPart2 = await practice.collection('part2').get();
+        dataPart2.forEach(part2 => {
+            var object = part2.data();
+            object.results = "";
+            var objectT = {
+                audio: object.Audio,
+                image: null,
+                questions: [
+                    {
+                        question: object.Questions,
+                        A: object.A,
+                        B: object.B,
+                        C: object.C,
+                        D: object.D,
+                        correct: object.Correct,
+                        results: '',
+                        explain: object.Explain,
+                    }
+                ],
+                showQuestion: false,
+                showDA: true,
+            };
+            data.push(objectT);
+        });
+
+        dataPart3 = await practice.collection('part3').get();
+        const arrPart3 = []
+        dataPart3.forEach(element => {
+            arrPart3.push(element.data());
+        });
+
+        dataPart4 = await practice.collection('part4').get();
+        const arrPart4 = []
+        dataPart4.forEach(element => {
+            arrPart4.push(element.data());
+        });
+
+        dataPart5 = await practice.collection('part5').get();
+
+        dataPart6 = await practice.collection('part6').get();
+        const arrPart6 = []
+        dataPart6.forEach(element => {
+            arrPart6.push(element.data());
+        });
+
+        dataPart7 = await practice.collection('part7').get();
+        const arrPart7 = []
+        dataPart7.forEach(element => {
+            arrPart7.push(element.data());
+        });
+
+        dataPart3Detail = await practice.collection('part3Detail').get();
+        const arrPart3Detail = []
+        dataPart3Detail.forEach(element => {
+            arrPart3Detail.push(element.data());
+        });
+        dataPart4Detail = await practice.collection('part4Detail').get();
+        const arrPart4Detail = []
+        dataPart4Detail.forEach(element => {
+            arrPart4Detail.push(element.data());
+        });
+        dataPart6Detail = await practice.collection('part6Detail').get();
+        const arrPart6Detail = []
+        dataPart6Detail.forEach(element => {
+            arrPart6Detail.push(element.data());
+        });
+        dataPart7Detail = await practice.collection('part7Detail').get();
+        const arrPart7Detail = []
+        dataPart7Detail.forEach(element => {
+            arrPart7Detail.push(element.data());
+        });
+
+        await practice.get().then(data => {
+            object.time = data._fieldsProto.time.integerValue;
+            object.title = data._fieldsProto.title.stringValue;
+            object.decription = data._fieldsProto.decription.stringValue;
+            object.status = data._fieldsProto.status.booleanValue
+        });
+        // id: part2._fieldsProto.idQuestion.integerValue,
+        // audio: part2._fieldsProto.audio.stringValue,
+        arrPart3.forEach(part3 => {
+            var objectT = {
+                id: null,
+                audio: part3.Audio,
+                image: null,
+                explain: part3.Explain,
+                showQuestion: true,
+                showDA: true,
+            };
+            var lstQuestionPart3 = [];
+            arrPart3Detail.forEach(part3Detail => {
+
+                if (part3Detail.IDAudio === part3.IDAudio) {
+                    var part3DetailTam = {
+                        results: "",
+                        explain: "",
+                        question: part3Detail.Question,
+                        A: part3Detail.A,
+                        B: part3Detail.B,
+                        C: part3Detail.C,
+                        D: part3Detail.D,
+                        correct: part3Detail.Correct,
+                    }
+                    lstQuestionPart3.push(part3DetailTam);
+                }
+            })
+            objectT.questions = lstQuestionPart3;
+            data.push(objectT);
+        })
+        arrPart4.forEach(part4 => {
+            var objectT = {
+                audio: part4.Audio,
+                explain: part4.Explain,
+                image: null,
+                showQuestion: true,
+                showDA: true,
+            };
+            var lstQuestionPart4 = [];
+            arrPart4Detail.forEach(part4Detail => {
+                if (part4Detail.IDAudio === part4.IDAudio) {
+                    var part4DetailTam = {
+                        results: "",
+                        explain: "",
+                        question: part4Detail.Question,
+                        A: part4Detail.A,
+                        B: part4Detail.B,
+                        C: part4Detail.C,
+                        D: part4Detail.D,
+                        correct: part4Detail.Correct,
+                    }
+                    lstQuestionPart4.push(part4DetailTam);
+                }
+            })
+            objectT.questions = lstQuestionPart4;
+            data.push(objectT);
+        })
+        dataPart5.forEach(part5 => {
+            var object = part5.data();
+            object.results = "";
+            var objectT = {
+                showQuestion: true,
+                showDA: true,
+                audio: '',
+                image: null,
+                questions: [
+                    {
+                        question: object.Question,
+                        A: object.A,
+                        B: object.B,
+                        C: object.C,
+                        D: object.D,
+                        correct: object.Correct,
+                        results: '',
+                        explain: object.Explain,
+                    }
+                ]
+            };
+            data.push(objectT);
+        });
+        arrPart6.forEach(part6 => {
+            var objectT = {
+                audio: '',
+                image: part6.image,
+                showQuestion: true,
+                showDA: true,
+            };
+            var lstQuestionPart6 = [];
+            arrPart6Detail.forEach(part6Detail => {
+                if (part6Detail.IDReading === part6.IDReading) {
+                    var part6DetailTam = {
+                        results: "",
+                        explain: part6Detail.Explain,
+                        question: part6Detail.Question,
+                        A: part6Detail.A,
+                        B: part6Detail.B,
+                        C: part6Detail.C,
+                        D: part6Detail.D,
+                        correct: part6Detail.Correct,
+                    }
+                    lstQuestionPart6.push(part6DetailTam);
+                }
+            })
+            objectT.questions = lstQuestionPart6;
+            data.push(objectT);
+        })
+        arrPart7.forEach(part7 => {
+            var objectT = {
+                audio: '',
+                image: part7.image,
+                showQuestion: true,
+                showDA: true,
+            };
+            var lstQuestionPart7 = [];
+            arrPart7Detail.forEach(part7Detail => {
+                if (part7Detail.IDReading === part7.IDReading) {
+                    var part7DetailTam = {
+                        question: part7Detail.Question,
+                        A: part7Detail.A,
+                        B: part7Detail.B,
+                        C: part7Detail.C,
+                        D: part7Detail.D,
+                        correct: part7Detail.Correct,
+                        results: '',
+                        explain: part7Detail.Explain,
+                    }
+                    lstQuestionPart7.push(part7DetailTam);
+                }
+            })
+            objectT.questions = lstQuestionPart7;
+            data.push(objectT);
+        })
+        let idQs = 1;
+        for (let i = 0; i < data.length; i++) {
+            data[i].id = i;
+            for (let j = 0; j < data[i].questions.length; j++) {
+
+                data[i].questions[j].idQuestion = idQs;
+                idQs++;
+            }
+        }
+        data.sort((a, b) => {
+            return a.id - b.id;
+        })
+        data.forEach(question => {
+            question.questions.sort((a, b) => {
+                return a.idQuestion - b.idQuestion;
+            })
+        })
+        object.listQuestions = data;
+        return res.json(
+            object
+        );
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send(error);
     }
-
-
 }
 
 exports.AddPractice = (req, res) => {
@@ -320,7 +300,7 @@ exports.AddPractice = (req, res) => {
         AddPart6Detail(JSON.parse(object.dataPart6Detail), practice);
         AddPart7Detail(JSON.parse(object.dataPart7Detail), practice);
 
-        var date = new Date(object.time+7*3600000).toLocaleString();
+        var date = new Date(object.time + 7 * 3600000).toLocaleString();
         const messages = [];
         messages.push({
             notification: {
@@ -564,185 +544,109 @@ exports.GetListPractice = async (req, res) => {
 
 
 exports.GetListPracticeHistory = async (req, res) => {
-    if (req.headers.authorization != undefined) {
-        var idToken = req.headers.authorization;
-        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
-            // console.log('ID Token correctly decoded', decodedIdToken);
-            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                // console.log(userRecord);
 
-                try {
-                    const listPractce = await adminPractice.listDocuments();
-                    const listReturn = [];
-                    var d = new Date();
-                    var n = d.getTime();
-                    await Promise.all(listPractce.map(async (element) => {
-                        await adminPractice.doc(element.id).get().then(async (snapshot) => {
-                            if (snapshot.get('time') <= n + 7200000) {
-                                var object = {
-                                    title: snapshot.get('title'),
-                                    idData: snapshot.get('idData'),
-                                    decription: snapshot.get('decription'),
-                                    time: snapshot.get('time'),
-                                };
-                                if (snapshot.get('time') - n + 7200000 >= 0) {
-                                    object.status = true
-                                } else {
-                                    object.status = false
-                                }
-                                var listCount = 0;
-                                await element.collection("listResult").get().then(snap => {
-                                    listCount = snap.size;
-                                })
-                                object.userCount = listCount;
-                                listReturn.push(object);
-                            }
-                        })
-
-                    }))
-
-                    var listcomming = await getListUpcommingElement();
-                    listcomming.sort((a, b) => {
-                        return a.time - b.time;
+    try {
+        const listPractce = await adminPractice.listDocuments();
+        const listReturn = [];
+        var d = new Date();
+        var n = d.getTime();
+        await Promise.all(listPractce.map(async (element) => {
+            await adminPractice.doc(element.id).get().then(async (snapshot) => {
+                if (snapshot.get('time') <= n + 7200000) {
+                    var object = {
+                        title: snapshot.get('title'),
+                        idData: snapshot.get('idData'),
+                        decription: snapshot.get('decription'),
+                        time: snapshot.get('time'),
+                    };
+                    if (snapshot.get('time') - n + 7200000 >= 0) {
+                        object.status = true
+                    } else {
+                        object.status = false
+                    }
+                    var listCount = 0;
+                    await element.collection("listResult").get().then(snap => {
+                        listCount = snap.size;
                     })
-                    listReturn.push(listcomming[0]);
-                    listReturn.sort((a, b) => {
-                        return b.time - a.time;
-                    })
-                    listReturn[0].status = true;
-                    return res.json(
-                        listReturn
-                    );
-                } catch (error) {
-                    // console.log(error);
-                    return res.status(500).send(error);
+                    object.userCount = listCount;
+                    listReturn.push(object);
                 }
+            })
 
-            }).catch(error => {
-                console.error('Error while getting Firebase User record:', error);
-                res.status(403).json({ error: 'Unauthorized' });
-            });
-        }).catch(error => {
-            console.error('Error while verifying Firebase ID token:', error);
-            res.status(403).json({ error: 'Unauthorized' });
-        });
-    } else {
-        res.status(500).json({ error: 'Tính hack à???' });
+        }))
+
+        var listcomming = await getListUpcommingElement();
+        listcomming.sort((a, b) => {
+            return a.time - b.time;
+        })
+        listReturn.push(listcomming[0]);
+        listReturn.sort((a, b) => {
+            return b.time - a.time;
+        })
+        listReturn[0].status = true;
+        return res.json(
+            listReturn
+        );
+    } catch (error) {
+        // console.log(error);
+        return res.status(500).send(error);
     }
-
-
 }
 
 exports.GetListPracticeComming = async (req, res) => {
+    try {
+        var listReturn = await getListUpcommingElement();
 
-    if (req.headers.authorization != undefined) {
-        var idToken = req.headers.authorization;
-        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
-            // console.log('ID Token correctly decoded', decodedIdToken);
-            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                // console.log(userRecord);
-                try {
-                    var listReturn = await getListUpcommingElement();
-
-                    listReturn.sort((a, b) => {
-                        return a.time - b.time;
-                    })
-                    return res.json(
-                        listReturn
-                    );
-                } catch (error) {
-                    return res.status(500).send(error);
-                }
-
-            }).catch(error => {
-                console.error('Error while getting Firebase User record:', error);
-                res.status(403).json({ error: 'Unauthorized' });
-            });
-        }).catch(error => {
-            console.error('Error while verifying Firebase ID token:', error);
-            res.status(403).json({ error: 'Unauthorized' });
-        });
-    } else {
-        res.status(500).json({ error: 'Tính hack à???' });
+        listReturn.sort((a, b) => {
+            return a.time - b.time;
+        })
+        return res.json(
+            listReturn
+        );
+    } catch (error) {
+        return res.status(500).send(error);
     }
-
 
 }
 
 exports.Result = (req, res) => {
-    if (req.headers.authorization != undefined) {
-        var idToken = req.headers.authorization;
-        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
-            // // console.log('ID Token correctly decoded', decodedIdToken);
-            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                // // console.log(userRecord);
 
-                try {
-                    const object = req.body;
-                    object.uid = userRecord.uid;
-                    object.photoURL = userRecord.photoURL;
-                    object.name = userRecord.displayName;
-                    const idPractice = object.idData;
 
-                    const docPractice = adminPractice.doc(idPractice);
-                    const collectionPractice = docPractice.collection('listResult');
-                    collectionPractice.add(object)
+    try {
+        const object = req.body;
+        object.uid = userRecord.uid;
+        object.photoURL = userRecord.photoURL;
+        object.name = userRecord.displayName;
+        const idPractice = object.idData;
 
-                    // console.log(object);
+        const docPractice = adminPractice.doc(idPractice);
+        const collectionPractice = docPractice.collection('listResult');
+        collectionPractice.add(object)
 
-                    return res.json({
-                        data: object
-                    });
-                } catch (error) {
-                    return res.status(500).send(error);
-                }
+        // console.log(object);
 
-            }).catch(error => {
-                console.error('Error while getting Firebase User record:', error);
-                res.status(403).json({ error: 'Unauthorized' });
-            });
-        }).catch(error => {
-            console.error('Error while verifying Firebase ID token:', error);
-            res.status(403).json({ error: 'Unauthorized' });
+        return res.json({
+            data: object
         });
-    } else {
-        res.status(500).json({ error: 'Tính hack à???' });
+    } catch (error) {
+        return res.status(500).send(error);
     }
 
 }
 exports.GetResult = async (req, res) => {
-    if (req.headers.authorization != undefined) {
-        var idToken = req.headers.authorization;
-        admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
-            // // console.log('ID Token correctly decoded', decodedIdToken);
-            admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-                // console.log(userRecord.uid);
 
-                try {
-                    // console.log(req.params.id);
-                    const collectionPractice = await adminPractice.doc(req.params.id).collection('listResult').orderBy('amountCorrect', 'desc').limit(15).get();
-                    const listResult = [];
-                    collectionPractice.forEach(element => {
-                        listResult.push(element.data());
-                    })
-                    return res.json(
-                        listResult
-                    );
-                } catch (error) {
-                    return res.status(500).send(error);
-                }
-
-            }).catch(error => {
-                console.error('Error while getting Firebase User record:', error);
-                res.status(403).json({ error: 'Unauthorized' });
-            });
-        }).catch(error => {
-            console.error('Error while verifying Firebase ID token:', error);
-            res.status(403).json({ error: 'Unauthorized' });
-        });
-    } else {
-        res.status(500).json({ error: 'Tính hack à???' });
+    try {
+        // console.log(req.params.id);
+        const collectionPractice = await adminPractice.doc(req.params.id).collection('listResult').orderBy('amountCorrect', 'desc').limit(15).get();
+        const listResult = [];
+        collectionPractice.forEach(element => {
+            listResult.push(element.data());
+        })
+        return res.json(
+            listResult
+        );
+    } catch (error) {
+        return res.status(500).send(error);
     }
-
 
 }

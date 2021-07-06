@@ -5,6 +5,7 @@ var userController =  require('../src/controllers/userController');
 
 
 router.get('/', userController.listAllUserAuthen);
+router.get('/admin', userController.listAllUserAuthenRoleAdmin);
 router.post('/create', userController.createUser);
 router.post('/update/:id', userController.updateUser);
 router.post('/disable/:id',userController.disableUser);
