@@ -14,7 +14,10 @@ router.get('/email/:id', userController.GetUserbyEmail);
 router.get('/phone/:id', userController.GetUserbyPhone);
 router.get('/uid/:id', userController.GetUserbyUid);
 
-router.post('/checkemail',userController.checkEmail)
+router.post('/checkemail',userController.checkEmail);
+router.post('/admin',userController.AddUserAuthenRoleAdmin);
+router.put('/admin_disable/:uid', userController.AdminDisabledUser);
+router.put('/admin_enable/:uid', userController.AdminEnableUser);
 
 router.get('/firestore/:uid', userController.GetUserFireStore);
 router.get('/expirationDate/:uid', userController.GetDateExpiration);

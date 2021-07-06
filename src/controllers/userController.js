@@ -73,37 +73,89 @@ exports.deleteUser = (req, res) => {
         })
 }
 
-exports.listAllUserAuthen = async (req, res) => {
-    var arr = [];
-    admin.auth().listUsers(1000)
-        .then(async (listUserResult) => {
-            await Promise.all(listUserResult.users.map(async (userRecord) => {
-                const usertam = { ...userRecord };
-                console.log(usertam.uid)
-                const user = await admindb.doc(usertam.uid).get();
-                // const package = user._fieldsProto.package.stringValue;
-                // const date = user._fieldsProto.expirationDate.timestampValue.seconds;
-                // var datecurrent = new Date();
-                // if ((date * 1000 - datecurrent.getTime()) > 0) {
-                //     var dateTam = new Date(date * 1000 - datecurrent.getTime())
-                //     var result = dateTam.getDate();
-                //     usertam.expirationDate = result;
-                // } else {
-                //     usertam.expirationDate = -1;
-                // }
-                // usertam.package = package;
-                // console.log(usertam.expirationDate);
-                arr.push(usertam)
+// exports.listAllUserAuthen = async (req, res) => {
+//     var arr = [];
+//     admin.auth().listUsers(1000)
+//         .then(async (listUserResult) => {
+//             await Promise.all(listUserResult.users.map(async (userRecord) => {
+//                 const usertam = { ...userRecord };
+//                 console.log(usertam.uid)
+//                 const user = await admindb.doc(usertam.uid).get();
+//                 // const package = user._fieldsProto.package.stringValue;
+//                 // const date = user._fieldsProto.expirationDate.timestampValue.seconds;
+//                 // var datecurrent = new Date();
+//                 // if ((date * 1000 - datecurrent.getTime()) > 0) {
+//                 //     var dateTam = new Date(date * 1000 - datecurrent.getTime())
+//                 //     var result = dateTam.getDate();
+//                 //     usertam.expirationDate = result;
+//                 // } else {
+//                 //     usertam.expirationDate = -1;
+//                 // }
+//                 // usertam.package = package;
+//                 // console.log(usertam.expirationDate);
+//                 arr.push(usertam)
 
-            }));
+//             }));
+//             res.send(arr);
+//         })
+//         .catch(err => {
+//             res.status(500).send(err);
+//         })
+// }
+
+exports.listAllUserAuthen = async (req, res) => {
+    try {
+        var arr = [];
+        admindb.get().then(data => {
+            data.forEach(element => {
+                arr.push(element.data());
+            });
             res.send(arr);
-        })
-        .catch(err => {
-            res.status(500).send(err);
-        })
+        });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+
+exports.AddUserAuthenRoleAdmin = async (req, res) => {
+    console.log('vao');
+    try {
+        admin
+            .auth()
+            .createUser({
+                email: req.body.email,
+                password: req.body.password,
+                displayName: req.body.username,
+                photoURL: 'https://firebasestorage.googleapis.com/v0/b/toeic-seb.appspot.com/o/image%2Fuser.png?alt=media&token=e5b3a63e-b683-49a3-b78c-0097b1dabd3c',
+                disabled: false,
+            })
+            .then((userRecord) => {
+                var user ={
+                    id:userRecord.uid,
+                    email: req.body.email,
+                    password: req.body.password,
+                    displayName: req.body.username,
+                    photoURL: 'https://firebasestorage.googleapis.com/v0/b/toeic-seb.appspot.com/o/image%2Fuser.png?alt=media&token=e5b3a63e-b683-49a3-b78c-0097b1dabd3c',
+                    status: true
+                }
+                admindbRoleAdmin.doc(userRecord.uid).set(user).then(()=>{
+                    res.send(
+                        {
+                            status: true,
+                            message: 'add Admin compelete'
+                        }
+                    );
+                });
+            })
+            .catch((error) => {
+                console.log('Error creating new user:', error);
+            });
+    } catch (error) {
+        res.status(500).send(error);
+    }
 }
 exports.listAllUserAuthenRoleAdmin = async (req, res) => {
-    
+    console.log('vao');
     try {
         var arr = [];
         admindbRoleAdmin.get().then(data => {
@@ -221,8 +273,37 @@ exports.DisabledUser = (req, res) => {
         .updateUser(req.params.uid, {
             disabled: true,
         })
-        .then((userRecord) => {
-            res.send(userRecord);
+        .then(() => {
+            admindb.doc(req.params.uid).update({
+                islogin: false
+            }).then(() => {
+                res.send({
+                    status: true,
+                    message: 'disable compelete!'
+                });
+            })
+
+        })
+        .catch((error) => {
+            res.status(500).send(error);
+        });
+}
+exports.AdminDisabledUser = (req, res) => {
+    admin
+        .auth()
+        .updateUser(req.params.uid, {
+            disabled: true,
+        })
+        .then(() => {
+            admindbRoleAdmin.doc(req.params.uid).update({
+                status: false
+            }).then(() => {
+                res.send({
+                    status: true,
+                    message: 'disable compelete!'
+                });
+            })
+
         })
         .catch((error) => {
             res.status(500).send(error);
@@ -235,7 +316,34 @@ exports.EnableUser = (req, res) => {
             disabled: false,
         })
         .then((userRecord) => {
-            res.send(userRecord);
+            admindb.doc(req.params.uid).update({
+                islogin: true
+            }).then(() => {
+                res.send({
+                    status: true,
+                    message: 'disable compelete!'
+                });
+            })
+        })
+        .catch((error) => {
+            res.status(500).send(error);
+        });
+}
+exports.AdminEnableUser = (req, res) => {
+    admin
+        .auth()
+        .updateUser(req.params.uid, {
+            disabled: false,
+        })
+        .then((userRecord) => {
+            admindbRoleAdmin.doc(req.params.uid).update({
+                status: true
+            }).then(() => {
+                res.send({
+                    status: true,
+                    message: 'disable compelete!'
+                });
+            })
         })
         .catch((error) => {
             res.status(500).send(error);

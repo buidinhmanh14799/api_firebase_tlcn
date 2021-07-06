@@ -300,7 +300,7 @@ exports.AddPractice = (req, res) => {
         AddPart6Detail(JSON.parse(object.dataPart6Detail), practice);
         AddPart7Detail(JSON.parse(object.dataPart7Detail), practice);
 
-        var date = new Date(object.time + 7 * 3600000).toLocaleString();
+        var date = new Date(object.time).toLocaleString();
         const messages = [];
         messages.push({
             notification: {

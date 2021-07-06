@@ -38,7 +38,7 @@ app.use('/sendmessage',requiresLogin, SendMessage);
 app.use('/practiceonline',requiresLogin, practiceonline);
 
 function requiresLogin(req, res, next) {
-  console.log('Vao');
+  console.log('Vao check');
   //var idToken = req.headers.authorization || req.body.token || req.query.token || req.headers['x-access-token']
 
   if (req.headers.authorization != undefined) {
@@ -46,7 +46,6 @@ function requiresLogin(req, res, next) {
     admin.auth().verifyIdToken(idToken).then(decodedIdToken => {
       // console.log('ID Token correctly decoded', decodedIdToken);
       admin.auth().getUser(decodedIdToken.uid).then(async (userRecord) => {
-        // console.log(userRecord);
         // req.accepted = decoded;
         next();
 
