@@ -57,7 +57,7 @@ function requiresLogin(req, res, next) {
       console.error('Error while verifying Firebase ID token:', error);
       res.status(403).json({
         success: false,
-        message: 'Unauthorized'
+        message: 'token has expired'
       });
     });
   } else {

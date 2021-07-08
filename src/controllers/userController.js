@@ -162,7 +162,11 @@ exports.listAllUserAuthenRoleAdmin = async (req, res) => {
             data.forEach(element => {
                 arr.push(element.data());
             });
-            res.send(arr);
+            res.status(200).json({
+                success: true,
+                message: 'get user success!',
+                data:arr
+              });
         });
     } catch (error) {
         res.status(500).send(error);
