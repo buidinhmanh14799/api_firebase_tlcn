@@ -4,6 +4,7 @@ const controller = require('../src/controllers/practiceOnlineController');
 
 router.get('/data/:id', controller.GetDataPractice);
 router.post('/data', controller.AddPractice);
+router.post('/data_json', controller.AddPracticeJson);
 
 router.get('/list', controller.GetListPractice); // list all
 

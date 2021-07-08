@@ -198,7 +198,7 @@ exports.GetDataPractice = async (req, res) => {
         arrPart6.forEach(part6 => {
             var objectT = {
                 audio: '',
-                image: part6.image,
+                image: part6.Image,
                 showQuestion: true,
                 showDA: true,
             };
@@ -224,7 +224,7 @@ exports.GetDataPractice = async (req, res) => {
         arrPart7.forEach(part7 => {
             var objectT = {
                 audio: '',
-                image: part7.image,
+                image: part7.Image,
                 showQuestion: true,
                 showDA: true,
             };
@@ -273,9 +273,56 @@ exports.GetDataPractice = async (req, res) => {
         return res.status(500).send(error);
     }
 }
+exports.AddPracticeJson = (req, res) => {
+    console.log("Vao 123");
+    var object = req.body;
+    var idTest = adminPractice.doc().id;
+    var practice = adminPractice.doc(idTest);
+    practice.set({
+        "idData": idTest,
+        "time": object.time,
+        "title": object.title,
+        "decription": object.decription,
+        "status": true,
+        "countStudent": 0
+    })
+    try {
+        AddPart1(object.dataPart1, practice);
+        AddPart2(object.dataPart2, practice);
+        AddPart3(object.dataPart3, practice);
+        AddPart4(object.dataPart4, practice);
+        AddPart5(object.dataPart5, practice);
+        AddPart6(object.dataPart6, practice);
+        AddPart7(object.dataPart7, practice);
+        AddPart3Detail(object.dataPart3Detail, practice);
+        AddPart4Detail(object.dataPart4Detail, practice);
+        AddPart6Detail(object.dataPart6Detail, practice);
+        AddPart7Detail(object.dataPart7Detail, practice);
 
+        var date = new Date(object.time).toLocaleString();
+        const messages = [];
+        messages.push({
+            notification: {
+                title: 'Lịch thi online mới',
+                body: 'Lịch thi mới vào ngày  ' + date
+            },
+            topic: 'PracticeOnline',
+        });
+
+        admin.messaging().sendAll(messages)
+            .then((response) => {
+                // console.log(response.successCount + ' messages were sent successfully');
+            });
+        return res.json({
+            status: true
+        });
+    } catch (error) {
+        console.log(error + "");
+        return res.status(500).send(error);
+    }
+}
 exports.AddPractice = (req, res) => {
-    console.log("Vao");
+    console.log("Vao 123");
     var object = req.body;
     var idTest = adminPractice.doc().id;
     var practice = adminPractice.doc(idTest);
