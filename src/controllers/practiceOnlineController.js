@@ -536,7 +536,7 @@ const getListUpcommingElement = () => {
                             idData: snapshot.get('idData'),
                             decription: snapshot.get('decription'),
                             time: snapshot.get('time'),
-                            userCount: 0
+                            userCount:snapshot.get('countStudent')
                         };
                         listReturn.push(object);
                     }
@@ -558,10 +558,6 @@ exports.GetListPractice = async (req, res) => {
         const listPractce = await adminPractice.listDocuments();
         const listReturn = [];
         await Promise.all(listPractce.map(async (element) => {
-            var listCount = 0;
-            await element.collection("listResult").get().then(snap => {
-                listCount = snap.size;
-            })
             await adminPractice.doc(element.id).get().then(snapshot => {
                 var object = {
                     status: snapshot.get('status'),
@@ -569,7 +565,7 @@ exports.GetListPractice = async (req, res) => {
                     idData: snapshot.get('idData'),
                     decription: snapshot.get('decription'),
                     time: snapshot.get('time'),
-                    userCount: listCount
+                    userCount:snapshot.get('countStudent')
                 };
                 listReturn.push(object);
             })
@@ -605,6 +601,7 @@ exports.GetListPracticeHistory = async (req, res) => {
                         idData: snapshot.get('idData'),
                         decription: snapshot.get('decription'),
                         time: snapshot.get('time'),
+                        userCount:snapshot.get('countStudent')
                     };
                     if (snapshot.get('time') - n + 7200000 >= 0) {
                         object.status = true
