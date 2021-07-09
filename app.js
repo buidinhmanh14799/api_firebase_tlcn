@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 
 app.use('/users',requiresLogin, usersRouter);
-app.use('/sendcode',requiresLogin, SendCode);
+app.use('/sendcode', SendCode);
 app.use('/database',requiresLogin, database);
 app.use('/sendmessage',requiresLogin, SendMessage);
 app.use('/practiceonline',requiresLogin, practiceonline);
