@@ -265,12 +265,20 @@ exports.GetDataPractice = async (req, res) => {
             })
         })
         object.listQuestions = data;
-        return res.json(
-            object
+        return res.json({
+            status: true,
+            data: object,
+            messages: 'Get data success!'
+        }
+
         );
     } catch (error) {
         console.log(error);
-        return res.status(500).send(error);
+        return res.status(500).send({
+            status: false,
+            data: null,
+            messages: error.messages
+        });
     }
 }
 exports.AddPracticeJson = (req, res) => {
@@ -314,11 +322,15 @@ exports.AddPracticeJson = (req, res) => {
                 // console.log(response.successCount + ' messages were sent successfully');
             });
         return res.json({
-            status: true
+            status: true,
+            messages: 'Add test success!'
         });
     } catch (error) {
         console.log(error + "");
-        return res.status(500).send(error);
+        return res.status(500).send({
+            status: false,
+            messages: error.messages
+        });
     }
 }
 exports.AddPractice = (req, res) => {
@@ -362,11 +374,15 @@ exports.AddPractice = (req, res) => {
                 // console.log(response.successCount + ' messages were sent successfully');
             });
         return res.json({
-            status: true
+            status: true,
+            messages: 'Add new test success!'
         });
     } catch (error) {
         console.log(error + "");
-        return res.status(500).send(error);
+        return res.status(500).send({
+            status: false,
+            messages: error.messages
+        });
     }
 }
 exports.DeletePracticeOnline = (req, res) => {
@@ -383,11 +399,13 @@ exports.DeletePracticeOnline = (req, res) => {
     DeleteCustom(req.query.IDData, 'part7Detail');
     adminPractice.doc(req.query.IDData).delete().then(() => {
         return res.json({
-            status: true
+            status: true,
+            messages:'Delete success!'
         });
     }).catch(error => {
         return res.json({
-            status: false
+            status: false,
+            messages: error.messages
         });
     })
 }
@@ -575,10 +593,19 @@ exports.GetListPractice = async (req, res) => {
             return b.time - a.time;
         })
         return res.json(
-            listReturn
+            {
+                status: true,
+                data: listReturn,
+                messages: 'Get data success!'
+            }
+
         );
     } catch (error) {
-        return res.status(500).send(error);
+        return res.status(500).send({
+            status: false,
+            data: null,
+            messages: error.messages
+        });
     }
 
 
@@ -628,12 +655,20 @@ exports.GetListPracticeHistory = async (req, res) => {
             return b.time - a.time;
         })
         listReturn[0].status = true;
-        return res.json(
-            listReturn
+        return res.json({
+            status: true,
+            messages: 'Get data succsess!',
+            data: listReturn
+        }
+
         );
     } catch (error) {
         // console.log(error);
-        return res.status(500).send(error);
+        return res.status(500).send({
+            status: false,
+            messages: error.messages,
+            data: null
+        });
     }
 }
 
@@ -644,11 +679,19 @@ exports.GetListPracticeComming = async (req, res) => {
         listReturn.sort((a, b) => {
             return a.time - b.time;
         })
-        return res.json(
-            listReturn
+        return res.json({
+            status: true,
+            messages: 'Get data success!',
+            data: listReturn
+        }
+
         );
     } catch (error) {
-        return res.status(500).send(error);
+        return res.status(500).send({
+            status: false,
+            messages: error.messages,
+            data: null
+        });
     }
 
 }
@@ -671,16 +714,22 @@ exports.Result = async (req, res) => {
             })
             docPractice.collection('listResult').add(object);
 
-            
+
         })
         return res.json({
-            success: true
+            status: true,
+            data: null,
+            messages: 'Add result sussess!'
         });
 
 
     } catch (error) {
         console.log(error);
-        return res.status(500).send(error);
+        return res.status(500).send({
+            status: false,
+            data: null,
+            messages: error.messages
+        });
     }
 
 }
@@ -693,11 +742,19 @@ exports.GetResult = async (req, res) => {
         collectionPractice.forEach(element => {
             listResult.push(element.data());
         })
-        return res.json(
-            listResult
+        return res.json({
+            status: true,
+            messages: 'Get Data success!',
+            data: listResult
+        }
+
         );
     } catch (error) {
-        return res.status(500).send(error);
+        return res.status(500).send({
+            status: false,
+            messages: error.messages,
+            data: null
+        });
     }
 
 }

@@ -163,7 +163,7 @@ exports.listAllUserAuthenRoleAdmin = async (req, res) => {
                 arr.push(element.data());
             });
             res.status(200).json({
-                success: true,
+                status: true,
                 message: 'get user success!',
                 data:arr
               });
@@ -192,11 +192,11 @@ exports.checkEmail = async (req, res) => {
             console.log(resultcheck)
             if (resultcheck === 1) {
                 res.status(200).json({
-                    success: true,
+                    status: true,
                 });
             } else {
                 res.status(500).json({
-                    success: false,
+                    status: false,
                 });
             }
 
