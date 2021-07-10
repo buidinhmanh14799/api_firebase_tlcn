@@ -277,7 +277,7 @@ exports.GetDataPractice = async (req, res) => {
         return res.status(500).send({
             status: false,
             data: null,
-            messages: error.messages
+            messages: error.message
         });
     }
 }
@@ -329,7 +329,7 @@ exports.AddPracticeJson = (req, res) => {
         console.log(error + "");
         return res.status(500).send({
             status: false,
-            messages: error.messages
+            messages: error.message
         });
     }
 }
@@ -381,7 +381,7 @@ exports.AddPractice = (req, res) => {
         console.log(error + "");
         return res.status(500).send({
             status: false,
-            messages: error.messages
+            messages: error.message
         });
     }
 }
@@ -405,7 +405,7 @@ exports.DeletePracticeOnline = (req, res) => {
     }).catch(error => {
         return res.json({
             status: false,
-            messages: error.messages
+            messages: error.message
         });
     })
 }
@@ -604,7 +604,7 @@ exports.GetListPractice = async (req, res) => {
         return res.status(500).send({
             status: false,
             data: null,
-            messages: error.messages
+            messages: error.message
         });
     }
 
@@ -666,7 +666,7 @@ exports.GetListPracticeHistory = async (req, res) => {
         // console.log(error);
         return res.status(500).send({
             status: false,
-            messages: error.messages,
+            messages: error.message,
             data: null
         });
     }
@@ -689,7 +689,7 @@ exports.GetListPracticeComming = async (req, res) => {
     } catch (error) {
         return res.status(500).send({
             status: false,
-            messages: error.messages,
+            messages: error.message,
             data: null
         });
     }
@@ -721,7 +721,7 @@ exports.Result = async (req, res) => {
         return res.status(500).send({
             status: false,
             data: null,
-            messages: error.messages
+            messages: error.message
         });
     }
 
@@ -730,7 +730,7 @@ exports.GetResult = async (req, res) => {
 
     try {
         // console.log(req.params.id);
-        const collectionPractice = await adminPractice.doc(req.params.id).collection('listResult').orderBy('amountCorrect', 'desc').orderBy('timePractice').limit(15).get();
+        const collectionPractice = await adminPractice.doc(req.params.id).collection('listResult').orderBy('amountCorrect', 'desc').limit(15).get();
         const listResult = [];
         collectionPractice.forEach(element => {
             listResult.push(element.data());
@@ -745,7 +745,7 @@ exports.GetResult = async (req, res) => {
     } catch (error) {
         return res.status(500).send({
             status: false,
-            messages: error.messages,
+            messages: error.message,
             data: null
         });
     }
