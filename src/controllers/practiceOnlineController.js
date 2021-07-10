@@ -334,7 +334,6 @@ exports.AddPracticeJson = (req, res) => {
     }
 }
 exports.AddPractice = (req, res) => {
-    console.log("Vao 123");
     var object = req.body;
     var idTest = adminPractice.doc().id;
     var practice = adminPractice.doc(idTest);
@@ -359,7 +358,7 @@ exports.AddPractice = (req, res) => {
         AddPart6Detail(JSON.parse(object.dataPart6Detail), practice);
         AddPart7Detail(JSON.parse(object.dataPart7Detail), practice);
 
-        var date = new Date(object.time).toLocaleString();
+        var date = new Date(object.time).customFormat("#DD#/#MM#/#YYYY# #hh#:#mm#:#ss#");
         const messages = [];
         messages.push({
             notification: {
@@ -734,6 +733,11 @@ exports.GetResult = async (req, res) => {
         const listResult = [];
         collectionPractice.forEach(element => {
             listResult.push(element.data());
+        })
+        listResult.sort((a, b) => {
+            if(a.amountCorrect == b.amountCorrect){
+                return a.timePractice - b.timePractice;
+            }      
         })
         return res.json({
             status: true,
