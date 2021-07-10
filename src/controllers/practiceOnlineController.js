@@ -730,7 +730,7 @@ exports.GetResult = async (req, res) => {
 
     try {
         // console.log(req.params.id);
-        const collectionPractice = await adminPractice.doc(req.params.id).collection('listResult').orderBy('amountCorrect', 'desc').limit(15).get();
+        const collectionPractice = await adminPractice.doc(req.params.id).collection('listResult').orderBy('amountCorrect', 'desc').orderBy('timePractice').limit(15).get();
         const listResult = [];
         collectionPractice.forEach(element => {
             listResult.push(element.data());
