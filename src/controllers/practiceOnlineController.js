@@ -699,13 +699,8 @@ exports.GetListPracticeComming = async (req, res) => {
 exports.Result = async (req, res) => {
     try {
         const object = req.body;
-        object.uid = object.uid;
-        object.photoURL = object.photoURL;
-        object.name = object.name;
-        object.result = object.result;
-        const idPractice = object.idPractice;
 
-        const docPractice = adminPractice.doc(idPractice);
+        const docPractice = adminPractice.doc(object.idData);
         await docPractice.get().then(async (snapshot) => {
             console.log(snapshot);
             const value = snapshot.get("countStudent");
@@ -713,8 +708,6 @@ exports.Result = async (req, res) => {
                 countStudent: value + 1
             })
             docPractice.collection('listResult').add(object);
-
-
         })
         return res.json({
             status: true,
