@@ -536,7 +536,7 @@ const getListUpcommingElement = () => {
                             idData: snapshot.get('idData'),
                             decription: snapshot.get('decription'),
                             time: snapshot.get('time'),
-                            userCount:snapshot.get('countStudent')
+                            userCount: snapshot.get('countStudent')
                         };
                         listReturn.push(object);
                     }
@@ -565,7 +565,7 @@ exports.GetListPractice = async (req, res) => {
                     idData: snapshot.get('idData'),
                     decription: snapshot.get('decription'),
                     time: snapshot.get('time'),
-                    userCount:snapshot.get('countStudent')
+                    userCount: snapshot.get('countStudent')
                 };
                 listReturn.push(object);
             })
@@ -601,7 +601,7 @@ exports.GetListPracticeHistory = async (req, res) => {
                         idData: snapshot.get('idData'),
                         decription: snapshot.get('decription'),
                         time: snapshot.get('time'),
-                        userCount:snapshot.get('countStudent')
+                        userCount: snapshot.get('countStudent')
                     };
                     if (snapshot.get('time') - n + 7200000 >= 0) {
                         object.status = true
@@ -653,26 +653,33 @@ exports.GetListPracticeComming = async (req, res) => {
 
 }
 
-exports.Result = (req, res) => {
-
-
+exports.Result = async (req, res) => {
     try {
         const object = req.body;
-        object.uid = userRecord.uid;
-        object.photoURL = userRecord.photoURL;
-        object.name = userRecord.displayName;
-        const idPractice = object.idData;
+        object.uid = object.uid;
+        object.photoURL = object.photoURL;
+        object.name = object.name;
+        object.result = object.result;
+        const idPractice = object.idPractice;
 
         const docPractice = adminPractice.doc(idPractice);
-        const collectionPractice = docPractice.collection('listResult');
-        collectionPractice.add(object)
+        await docPractice.get().then(async (snapshot) => {
+            console.log(snapshot);
+            const value = snapshot.get("countStudent");
+            docPractice.update({
+                countStudent: value + 1
+            })
+            docPractice.collection('listResult').add(object);
 
-        // console.log(object);
-
+            
+        })
         return res.json({
-            data: object
+            success: true
         });
+
+
     } catch (error) {
+        console.log(error);
         return res.status(500).send(error);
     }
 
