@@ -358,7 +358,13 @@ exports.AddPractice = (req, res) => {
         AddPart6Detail(JSON.parse(object.dataPart6Detail), practice);
         AddPart7Detail(JSON.parse(object.dataPart7Detail), practice);
 
-        var date = new Date(object.time).customFormat("#DD#/#MM#/#YYYY# #hh#:#mm#:#ss#");
+        var date = null;
+        try{
+            date = new Date(object.time).customFormat("#DD#/#MM#/#YYYY# #hh#:#mm#:#ss#");
+        }catch(e){
+            date = new Date(object.time).toDateString();
+        }
+        
         const messages = [];
         messages.push({
             notification: {
