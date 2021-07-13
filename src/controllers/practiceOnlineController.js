@@ -402,6 +402,7 @@ exports.DeletePracticeOnline = (req, res) => {
     DeleteCustom(req.query.IDData, 'part4Detail');
     DeleteCustom(req.query.IDData, 'part6Detail');
     DeleteCustom(req.query.IDData, 'part7Detail');
+    DeleteCustom(req.query.IDData, 'listResult');
     adminPractice.doc(req.query.IDData).delete().then(() => {
         return res.json({
             status: true,
