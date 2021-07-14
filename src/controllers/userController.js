@@ -119,40 +119,45 @@ exports.listAllUserAuthen = async (req, res) => {
 
 exports.AddUserAuthenRoleAdmin = async (req, res) => {
     console.log('vao');
-    try {
-        admin
-            .auth()
-            .createUser({
+    admin
+        .auth()
+        .createUser({
+            email: req.body.email,
+            password: req.body.password,
+            displayName: req.body.username,
+            photoURL: 'https://firebasestorage.googleapis.com/v0/b/toeic-seb.appspot.com/o/image%2Fuser.png?alt=media&token=e5b3a63e-b683-49a3-b78c-0097b1dabd3c',
+            disabled: false,
+        })
+        .then((userRecord) => {
+            var user = {
+                id: userRecord.uid,
                 email: req.body.email,
                 password: req.body.password,
                 displayName: req.body.username,
                 photoURL: 'https://firebasestorage.googleapis.com/v0/b/toeic-seb.appspot.com/o/image%2Fuser.png?alt=media&token=e5b3a63e-b683-49a3-b78c-0097b1dabd3c',
-                disabled: false,
-            })
-            .then((userRecord) => {
-                var user ={
-                    id:userRecord.uid,
-                    email: req.body.email,
-                    password: req.body.password,
-                    displayName: req.body.username,
-                    photoURL: 'https://firebasestorage.googleapis.com/v0/b/toeic-seb.appspot.com/o/image%2Fuser.png?alt=media&token=e5b3a63e-b683-49a3-b78c-0097b1dabd3c',
-                    status: true
-                }
-                admindbRoleAdmin.doc(userRecord.uid).set(user).then(()=>{
-                    res.send(
-                        {
-                            status: true,
-                            message: 'add Admin compelete'
-                        }
-                    );
+                status: true
+            }
+            admindbRoleAdmin.doc(userRecord.uid).set(user).then(() => {
+                return res.json({
+                    status: true,
+                    message: 'add Admin compelete'
                 });
-            })
-            .catch((error) => {
-                console.log('Error creating new user:', error);
             });
-    } catch (error) {
-        res.status(500).send(error);
-    }
+        })
+        .catch((error) => {
+            console.log('Error creating new user:', error.errorInfo.code);
+            if (error.errorInfo.code === 'auth/email-already-exists') {
+                return res.json({
+                    status: false,
+                    messages: 'Email had sigin with user!'
+                });
+            } else {
+                return res.json({
+                    status: false,
+                    messages: error.message
+                });
+            }
+        });
 }
 exports.listAllUserAuthenRoleAdmin = async (req, res) => {
     console.log('vao');
@@ -165,8 +170,8 @@ exports.listAllUserAuthenRoleAdmin = async (req, res) => {
             res.status(200).json({
                 status: true,
                 message: 'get user success!',
-                data:arr
-              });
+                data: arr
+            });
         });
     } catch (error) {
         res.status(500).send(error);
