@@ -307,7 +307,12 @@ exports.AddPracticeJson = (req, res) => {
         AddPart6Detail(object.dataPart6Detail, practice);
         AddPart7Detail(object.dataPart7Detail, practice);
 
-        var date = new Date(object.time).toLocaleString();
+        var date = null;
+        try{
+            date = new Date(object.time).customFormat("#DD#/#MM#/#YYYY# #hh#:#mm#:#ss#");
+        }catch(e){
+            date = new Date(object.time).toDateString();
+        }
         const messages = [];
         messages.push({
             notification: {
