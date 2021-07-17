@@ -281,7 +281,7 @@ exports.GetDataPractice = async (req, res) => {
         });
     }
 }
-exports.AddPracticeJson = (req, res) => {
+exports.AddPracticeJson = async (req, res) => {
     console.log("Vao 123");
     var object = req.body;
     var idTest = adminPractice.doc().id;
@@ -294,6 +294,36 @@ exports.AddPracticeJson = (req, res) => {
         "status": true,
         "countStudent": 0
     })
+    const part1Format = ['A', 'Audio', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Image', 'Question'];
+    const part2Format = ['A', 'B', 'C', 'Audio', 'Correct', 'IDTest', 'IDYear', 'Question', 'IDQuestion'];
+    const part3Format = ['Audio', 'Explain', 'IDAudio', 'IDTest', 'IDYear', 'Image', 'Translate'];
+    const part4Format = ['Audio', 'Explain', 'IDAudio', 'IDTest', 'IDYear', 'Image', 'Translate'];
+    const part5Format = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Explain', 'Question'];
+    const part6Format = ['IDReading', 'IDTest', 'IDYear', 'Image'];
+    const part7Format = ['IDReading', 'IDTest', 'IDYear', 'Image'];
+    const part3DTFormat = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'IDAudio', 'Question'];
+    const part4DTFormat = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'IDAudio', 'Question'];
+    const part6DTFormat = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Explain', 'IDReading'];
+    const part7DTFormat = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Explain', 'IDReading', 'Question'];
+    try {
+        await checkFormat(part1Format, object.dataPart1[0]);
+        await checkFormat(part2Format, object.dataPart2[0]);
+        await checkFormat(part3Format, object.dataPart3[0]);
+        await checkFormat(part4Format, object.dataPart4[0]);
+        await checkFormat(part5Format, object.dataPart5[0]);
+        await checkFormat(part6Format, object.dataPart6[0]);
+        await checkFormat(part7Format, object.dataPart7[0]);
+        await checkFormat(part3DTFormat, object.dataPart3Detail[0]);
+        await checkFormat(part4DTFormat, object.dataPart4Detail[0]);
+        await checkFormat(part6DTFormat, object.dataPart6Detail[0]);
+        await checkFormat(part7DTFormat, object.dataPart7Detail[0]);
+    } catch (error) {
+        return res.json({
+            status: false,
+            messages: 'File is not in the correct format!'
+        });
+    }
+
     try {
         AddPart1(object.dataPart1, practice);
         AddPart2(object.dataPart2, practice);
@@ -308,9 +338,9 @@ exports.AddPracticeJson = (req, res) => {
         AddPart7Detail(object.dataPart7Detail, practice);
 
         var date = null;
-        try{
+        try {
             date = new Date(object.time).customFormat("#DD#/#MM#/#YYYY# #hh#:#mm#:#ss#");
-        }catch(e){
+        } catch (e) {
             date = new Date(object.time).toDateString();
         }
         const messages = [];
@@ -338,7 +368,17 @@ exports.AddPracticeJson = (req, res) => {
         });
     }
 }
-exports.AddPractice = (req, res) => {
+const checkFormat = async (format, arrayPart) => {
+    return new Promise(async (resolve, reject) => {
+        await Promise.all(format.map(async element => {
+            if (!arrayPart.hasOwnProperty(element)) {
+                reject(false);
+            }
+        }));
+        resolve(true);
+    })
+}
+exports.AddPractice =async (req, res) => {
     var object = req.body;
     var idTest = adminPractice.doc().id;
     var practice = adminPractice.doc(idTest);
@@ -350,6 +390,35 @@ exports.AddPractice = (req, res) => {
         "status": true,
         "countStudent": 0
     })
+    const part1Format = ['A', 'Audio', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Image', 'Question'];
+    const part2Format = ['A', 'B', 'C', 'Audio', 'Correct', 'IDTest', 'IDYear', 'Question', 'IDQuestion'];
+    const part3Format = ['Audio', 'Explain', 'IDAudio', 'IDTest', 'IDYear', 'Image', 'Translate'];
+    const part4Format = ['Audio', 'Explain', 'IDAudio', 'IDTest', 'IDYear', 'Image', 'Translate'];
+    const part5Format = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Explain', 'Question'];
+    const part6Format = ['IDReading', 'IDTest', 'IDYear', 'Image'];
+    const part7Format = ['IDReading', 'IDTest', 'IDYear', 'Image'];
+    const part3DTFormat = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'IDAudio', 'Question'];
+    const part4DTFormat = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'IDAudio', 'Question'];
+    const part6DTFormat = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Explain', 'IDReading'];
+    const part7DTFormat = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Explain', 'IDReading', 'Question'];
+    try {
+        await checkFormat(part1Format, JSON.parse(object.dataPart1)[0]);
+        await checkFormat(part2Format, JSON.parse(object.dataPart2)[0]);
+        await checkFormat(part3Format, JSON.parse(object.dataPart3)[0]);
+        await checkFormat(part4Format, JSON.parse(object.dataPart4)[0]);
+        await checkFormat(part5Format, JSON.parse(object.dataPart5)[0]);
+        await checkFormat(part6Format, JSON.parse(object.dataPart6)[0]);
+        await checkFormat(part7Format, JSON.parse(object.dataPart7)[0]);
+        await checkFormat(part3DTFormat, JSON.parse(object.dataPart3Detail)[0]);
+        await checkFormat(part4DTFormat, JSON.parse(object.dataPart4Detail)[0]);
+        await checkFormat(part6DTFormat, JSON.parse(object.dataPart6Detail)[0]);
+        await checkFormat(part7DTFormat, JSON.parse(object.dataPart7Detail)[0]);
+    } catch (error) {
+        return res.json({
+            status: false,
+            messages: 'File is not in the correct format!'
+        });
+    }
     try {
         AddPart1(JSON.parse(object.dataPart1), practice);
         AddPart2(JSON.parse(object.dataPart2), practice);
@@ -364,12 +433,12 @@ exports.AddPractice = (req, res) => {
         AddPart7Detail(JSON.parse(object.dataPart7Detail), practice);
 
         var date = null;
-        try{
+        try {
             date = new Date(object.time).customFormat("#DD#/#MM#/#YYYY# #hh#:#mm#:#ss#");
-        }catch(e){
+        } catch (e) {
             date = new Date(object.time).toDateString();
         }
-        
+
         const messages = [];
         messages.push({
             notification: {
@@ -411,7 +480,7 @@ exports.DeletePracticeOnline = (req, res) => {
     adminPractice.doc(req.query.IDData).delete().then(() => {
         return res.json({
             status: true,
-            messages:'Delete success!'
+            messages: 'Delete success!'
         });
     }).catch(error => {
         return res.json({
@@ -747,9 +816,9 @@ exports.GetResult = async (req, res) => {
             listResult.push(element.data());
         })
         listResult.sort((a, b) => {
-            if(a.amountCorrect == b.amountCorrect){
+            if (a.amountCorrect == b.amountCorrect) {
                 return a.timePractice - b.timePractice;
-            }      
+            }
         })
         return res.json({
             status: true,
