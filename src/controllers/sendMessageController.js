@@ -4,6 +4,9 @@ exports.sendMessagePackage = (req, res) => {
     console.log('NotificaPackage');
     const messages = [];
     messages.push({
+        data: {
+            type: 'PracticeOnline',
+        },
         notification: {
             title: req.body.title,
             body: req.body.text
