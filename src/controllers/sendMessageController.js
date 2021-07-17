@@ -5,13 +5,13 @@ exports.sendMessagePackage = (req, res) => {
     const messages = [];
     messages.push({
         data: {
-            type: 'PracticeOnline',
+            type: 'NotificaPackage',
         },
         notification: {
             title: req.body.title,
             body: req.body.text
         },
-        topic: 'PracticeOnline',
+        topic: 'NotificaPackage',
     });
 
     admin.messaging().sendAll(messages)
