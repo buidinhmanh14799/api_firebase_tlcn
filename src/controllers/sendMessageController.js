@@ -23,6 +23,9 @@ exports.sendMessagePackage = (req, res) => {
 exports.sendMessageVoca = (req, res) => {
     const messages = [];
     messages.push({
+        data: {
+            type: 'NotificaVoca',
+        },
         notification: {
             title: req.body.title,
             body: req.body.text
@@ -47,6 +50,9 @@ exports.sendMessageVocaRandom = async (req, res) => {
     console.log(item)
     const messages = [];
     messages.push({
+        data: {
+            type: 'NotificaVoca',
+        },
         notification: {
             title: 'Ôn luyện từ vựng 🤯',
             body: item.Voca + ' --> ' + item.Mean
@@ -72,6 +78,9 @@ exports.sendMessageAdmin = (req, res) => {
     const messages = [];
     console.log(req.body.title);
     messages.push({
+        data: {
+            type: 'NotificaAdmin',
+        },
         notification: {
             title: req.body.title,
             body: req.body.text
