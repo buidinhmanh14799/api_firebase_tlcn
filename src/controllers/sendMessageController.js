@@ -1,14 +1,14 @@
 const { admin, admindbVocabulary } = require('../firebase/firebase-confix');
 
 exports.sendMessagePackage = (req, res) => {
-    console.log('manh');
+    console.log('NotificaPackage');
     const messages = [];
     messages.push({
         notification: {
             title: req.body.title,
             body: req.body.text
         },
-        topic: 'NotificaPackage',
+        topic: 'PracticeOnline',
     });
 
     admin.messaging().sendAll(messages)
