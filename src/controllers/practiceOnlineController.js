@@ -286,14 +286,6 @@ exports.AddPracticeJson = async (req, res) => {
     var object = req.body;
     var idTest = adminPractice.doc().id;
     var practice = adminPractice.doc(idTest);
-    practice.set({
-        "idData": idTest,
-        "time": object.time,
-        "title": object.title,
-        "decription": object.decription,
-        "status": true,
-        "countStudent": 0
-    })
     const part1Format = ['A', 'Audio', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Image', 'Question'];
     const part2Format = ['A', 'B', 'C', 'Audio', 'Correct', 'IDTest', 'IDYear', 'Question', 'IDQuestion'];
     const part3Format = ['Audio', 'Explain', 'IDAudio', 'IDTest', 'IDYear', 'Image', 'Translate'];
@@ -325,6 +317,14 @@ exports.AddPracticeJson = async (req, res) => {
     }
 
     try {
+        practice.set({
+            "idData": idTest,
+            "time": object.time,
+            "title": object.title,
+            "decription": object.decription,
+            "status": true,
+            "countStudent": 0
+        })
         AddPart1(object.dataPart1, practice);
         AddPart2(object.dataPart2, practice);
         AddPart3(object.dataPart3, practice);
@@ -372,6 +372,7 @@ const checkFormat = async (format, arrayPart) => {
     return new Promise(async (resolve, reject) => {
         await Promise.all(format.map(async element => {
             if (!arrayPart.hasOwnProperty(element)) {
+                console.log('stop');
                 reject(false);
             }
         }));
@@ -382,14 +383,6 @@ exports.AddPractice =async (req, res) => {
     var object = req.body;
     var idTest = adminPractice.doc().id;
     var practice = adminPractice.doc(idTest);
-    practice.set({
-        "idData": idTest,
-        "time": object.time,
-        "title": object.title,
-        "decription": object.decription,
-        "status": true,
-        "countStudent": 0
-    })
     const part1Format = ['A', 'Audio', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Image', 'Question'];
     const part2Format = ['A', 'B', 'C', 'Audio', 'Correct', 'IDTest', 'IDYear', 'Question', 'IDQuestion'];
     const part3Format = ['Audio', 'Explain', 'IDAudio', 'IDTest', 'IDYear', 'Image', 'Translate'];
@@ -420,6 +413,14 @@ exports.AddPractice =async (req, res) => {
         });
     }
     try {
+        practice.set({
+            "idData": idTest,
+            "time": object.time,
+            "title": object.title,
+            "decription": object.decription,
+            "status": true,
+            "countStudent": 0
+        })
         AddPart1(JSON.parse(object.dataPart1), practice);
         AddPart2(JSON.parse(object.dataPart2), practice);
         AddPart3(JSON.parse(object.dataPart3), practice);
