@@ -20,6 +20,8 @@ router.post('/year/add', controller.AddYear);
 router.post('/test/add', controller.AddTest);
 router.post('/vocabulary/add', controller.AddVocabulary);
 
+router.post('/test/check', controller.CheckTest);
+
 
 
 router.put('/part1/update', controller.UpdatePart1);

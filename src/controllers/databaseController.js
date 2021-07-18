@@ -663,6 +663,23 @@ async function deletePart7dt(IDTest, IDYear) {
 //     }
 
 // }
+exports.CheckTest =async (req, res)=>{
+    var object = req.body;
+    data = await admindbTest.collection('data').where('IDYear', '==', object.IDYear).where('IDTest', '==', object.IDTest).get();
+    console.log(data.size);
+    if(data.size==0){
+        return res.json({
+            status: true,
+            messages: 'Test is not validate in cloud!'
+        });
+    }else{
+        return res.json({
+            status: false,
+            messages: 'Test is validate in cloud!'
+        });
+    }
+
+}
 exports.AddTest = async (req, res) => {
 
     var object = req.body;
