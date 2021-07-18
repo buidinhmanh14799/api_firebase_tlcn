@@ -664,8 +664,9 @@ async function deletePart7dt(IDTest, IDYear) {
 
 // }
 exports.CheckTest =async (req, res)=>{
-    var object = req.body;
-    data = await admindbTest.collection('data').where('IDYear', '==', object.IDYear).where('IDTest', '==', object.IDTest).get();
+    console.log('vao');
+    console.log("sdas"+req.query.idtest+"adsda"+req.query.idyear)
+    data = await admindbTest.collection('data').where('IDYear', '==', req.query.idtest).where('IDTest', '==', req.query.idyear).get();
     console.log(data.size);
     if(data.size==0){
         return res.json({
