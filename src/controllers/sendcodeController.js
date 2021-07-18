@@ -23,7 +23,7 @@ exports.sendmail = function (req, res) {
                 <h4 style="color: #0085ff">Mã xác minh để xác nhận tài khoản của bạn, hãy nhập mã này vào TOEIC SEB:</h4>
                 <span style="color: black">`+req.body.code+`</span>
             </div>
-            <img src="https://scontent.xx.fbcdn.net/v/t1.15752-0/p280x280/126087099_404604660892463_3184378675104284382_n.jpg?_nc_cat=104&ccb=2&_nc_sid=ae9488&_nc_ohc=L3v8v-d6-1UAX9qCT_t&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&tp=6&oh=2d898676b1d4106063aee04fb64f6d2a&oe=5FDDB931">
+            <img src="https://firebasestorage.googleapis.com/v0/b/toeic-seb.appspot.com/o/image%2FScreenshot_2021-07-07-20-13-34-84_ff5bc5773211b68c8343f71017499cd1.jpg?alt=media&token=8dc22dd3-e5c5-4a5e-8021-74aafeaa1165">
         </div>
     `;
     var mainOptions = { // thiết lập đối tượng, nội dung gửi mail
