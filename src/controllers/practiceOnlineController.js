@@ -347,6 +347,8 @@ exports.AddPracticeJson = async (req, res) => {
         messages.push({
             data: {
                 type: 'PracticeOnline',
+                title: 'Lịch thi online mới',
+                body: 'Lịch thi mới vào ngày  ' + date
             },
             notification: {
                 title: 'Lịch thi online mới',
@@ -447,6 +449,8 @@ exports.AddPractice =async (req, res) => {
         messages.push({
             data: {
                 type: 'PracticeOnline',
+                title: 'Lịch thi online mới',
+                body: 'Lịch thi mới vào ngày  ' + date
             },
             notification: {
                 title: 'Lịch thi online mới',

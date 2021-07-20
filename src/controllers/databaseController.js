@@ -711,6 +711,8 @@ exports.AddTest = async (req, res) => {
         messages.push({
             data: {
                 type: 'NotificaAdmin',
+                title: 'Cập nhật đề ☝☝☝',
+                body: 'Đã có thêm ' + object.length + ' mới để cập nhật'
             },
             notification: {
                 title: 'Cập nhật đề ☝☝☝',
@@ -770,6 +772,8 @@ exports.UpdateTest = async (req, res) => {
         messages.push({
             data: {
                 type: 'NotificaAdmin',
+                title: 'Bản cập nhật sửa lỗi đề',
+                body: 'Vui lòng cập nhật để sửa lỗi đề'
             },
             notification: {
                 title: 'Bản cập nhật sửa lỗi đề',
@@ -841,6 +845,8 @@ exports.DeleteTest = async (req, res) => {
         messages.push({
             data: {
                 type: 'NotificaAdmin',
+                title: 'Đã xóa một số đề',
+                body: 'Vui lòng cập nhật lại cơ sở dữ liệu'
             },
             notification: {
                 title: 'Đã xóa một số đề',
@@ -1428,6 +1434,8 @@ exports.AddVocabulary = async (req, res) => {
         messages.push({
             data: {
                 type: 'NotificaAdmin',
+                title: 'Cập nhật từ vựng mới 🐱‍🏍🐱‍🏍🐱‍🏍',
+                body: 'Đã có thêm ' + object.length + ' từ vựng mới để cập nhật'
             },
             notification: {
                 title: 'Cập nhật từ vựng mới 🐱‍🏍🐱‍🏍🐱‍🏍',
