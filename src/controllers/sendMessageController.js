@@ -4,11 +4,11 @@ exports.sendMessagePackage = (req, res) => {
     console.log('NotificaPackage');
     const messages = [];
     messages.push({
-        data: {
-            type: 'NotificaPackage',
-            title: req.body.title,
-            body: req.body.text
-        },
+        // data: {
+        //     type: 'NotificaPackage',
+        //     title: req.body.title,
+        //     body: req.body.text
+        // },
         notification: {
             title: req.body.title,
             body: req.body.text
