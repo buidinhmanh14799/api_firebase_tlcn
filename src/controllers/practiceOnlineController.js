@@ -345,11 +345,11 @@ exports.AddPracticeJson = async (req, res) => {
         }
         const messages = [];
         messages.push({
-            data: {
-                type: 'PracticeOnline',
-                title: 'Lịch thi online mới',
-                body: 'Lịch thi mới vào ngày  ' + date
-            },
+            // data: {
+            //     type: 'PracticeOnline',
+            //     title: 'Lịch thi online mới',
+            //     body: 'Lịch thi mới vào ngày  ' + date
+            // },
             notification: {
                 title: 'Lịch thi online mới',
                 body: 'Lịch thi mới vào ngày  ' + date
@@ -447,11 +447,11 @@ exports.AddPractice =async (req, res) => {
 
         const messages = [];
         messages.push({
-            data: {
-                type: 'PracticeOnline',
-                title: 'Lịch thi online mới',
-                body: 'Lịch thi mới vào ngày  ' + date
-            },
+            // data: {
+            //     type: 'PracticeOnline',
+            //     title: 'Lịch thi online mới',
+            //     body: 'Lịch thi mới vào ngày  ' + date
+            // },
             notification: {
                 title: 'Lịch thi online mới',
                 body: 'Lịch thi mới vào ngày  ' + date

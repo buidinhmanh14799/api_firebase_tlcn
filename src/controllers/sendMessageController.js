@@ -25,11 +25,11 @@ exports.sendMessagePackage = (req, res) => {
 exports.sendMessageVoca = (req, res) => {
     const messages = [];
     messages.push({
-        data: {
-            type: 'NotificaVoca',
-            title: req.body.title,
-            body: req.body.text
-        },
+        // data: {
+        //     type: 'NotificaVoca',
+        //     title: req.body.title,
+        //     body: req.body.text
+        // },
         notification: {
             title: req.body.title,
             body: req.body.text
@@ -54,11 +54,11 @@ exports.sendMessageVocaRandom = async (req, res) => {
     console.log(item)
     const messages = [];
     messages.push({
-        data: {
-            type: 'NotificaVoca',
-            title: 'Ôn luyện từ vựng 🤯',
-            body: item.Voca + ' --> ' + item.Mean
-        },
+        // data: {
+        //     type: 'NotificaVoca',
+        //     title: 'Ôn luyện từ vựng 🤯',
+        //     body: item.Voca + ' --> ' + item.Mean
+        // },
         notification: {
             title: 'Ôn luyện từ vựng 🤯',
             body: item.Voca + ' --> ' + item.Mean
@@ -84,11 +84,11 @@ exports.sendMessageAdmin = (req, res) => {
     const messages = [];
     console.log(req.body.title);
     messages.push({
-        data: {
-            type: 'NotificaAdmin',
-            title: req.body.title,
-            body: req.body.text
-        },
+        // data: {
+        //     type: 'NotificaAdmin',
+        //     title: req.body.title,
+        //     body: req.body.text
+        // },
         notification: {
             title: req.body.title,
             body: req.body.text
