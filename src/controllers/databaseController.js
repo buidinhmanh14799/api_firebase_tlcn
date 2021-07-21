@@ -58,6 +58,12 @@ exports.UpdatePart1 = async (req, res) => {
             // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
+        }))
+        sendNotification();
         return res.json({
             status: true
         });
@@ -120,6 +126,17 @@ exports.UpdatePart2 = async (req, res) => {
             // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
         }))
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
+        }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
+        }))
+        sendNotification();
         return res.json({
             status: true
         });
@@ -173,7 +190,13 @@ exports.UpdatePart3 = async (req, res) => {
         await Promise.all(arr.map(async id => {
             // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
+        }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
         }))
+        sendNotification();
         return res.json({
             status: true
         });
@@ -229,7 +252,13 @@ exports.UpdatePart4 = async (req, res) => {
         await Promise.all(arr.map(async id => {
             // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
+        }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
         }))
+        sendNotification();
         return res.json({
             status: true
         });
@@ -284,13 +313,35 @@ exports.UpdatePart5 = async (req, res) => {
         await Promise.all(arr.map(async id => {
             // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
+        }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
         }))
+        sendNotification();
         return res.json({
             status: true
         });
     } catch (error) {
+        console.log(error.messages);
         return res.status(500).send(error);
     }
+}
+function sendNotification(){
+    const messages = [];
+        messages.push({
+            notification: {
+                title: 'Đã có cập nhật đề',
+                body: 'Vui lòng cập nhật để sửa lỗi đề'
+            },
+            topic: 'NotificaAdmin',
+        });
+
+        admin.messaging().sendAll(messages)
+            .then((response) => {
+                // console.log(response.successCount + ' messages were sent successfully');
+            });
 }
 async function deletePart5(IDTest, IDYear) {
     try {
@@ -341,8 +392,14 @@ exports.UpdatePart6 = async (req, res) => {
         await Promise.all(arr.map(async id => {
             // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
+        }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
         }))
-        returnres.json({
+        sendNotification();
+        return res.json({
             status: true
         });
     } catch (error) {
@@ -397,7 +454,13 @@ exports.UpdatePart7 = async (req, res) => {
         await Promise.all(arr.map(async id => {
             // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
+        }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
         }))
+        sendNotification();
         return res.json({
             status: true
         });
@@ -454,7 +517,13 @@ exports.UpdatePart3Detail = async (req, res) => {
         await Promise.all(arr.map(async id => {
             // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
+        }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
         }))
+        sendNotification();
         return res.json({
             status: true
         });
@@ -509,7 +578,13 @@ exports.UpdatePart4Detail = async (req, res) => {
         await Promise.all(arr.map(async id => {
             // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
+        }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
         }))
+        sendNotification();
         return res.json({
             status: true
         });
@@ -564,7 +639,13 @@ exports.UpdatePart6Detail = async (req, res) => {
         await Promise.all(arr.map(async id => {
             // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
+        }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
         }))
+        sendNotification();
         return res.json({
             status: true
         });
@@ -618,7 +699,13 @@ exports.UpdatePart7Detail = async (req, res) => {
         await Promise.all(arr.map(async id => {
             // console.log(id);
             await admindb.doc(id).collection('array').add(Item);
+        }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
         }))
+        sendNotification();
         return res.json({
             status: true
         });
@@ -891,6 +978,12 @@ exports.UpdateYear = async (req, res) => {
                 })
             })
         }));
+        await Promise.all(arr.map(async id => {
+            await admindb.doc(id).update({
+                newData: true
+            })
+        }))
+        sendNotification();
         return res.json({
             status: true
         });
