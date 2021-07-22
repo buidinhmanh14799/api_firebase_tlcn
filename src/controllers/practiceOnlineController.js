@@ -475,7 +475,7 @@ exports.AddPractice =async (req, res) => {
         });
     }
 }
-exports.Deletepractice_online = (req, res) => {
+exports.DeletePracticeOnline  = (req, res) => {
     DeleteCustom(req.query.IDData, 'part1');
     DeleteCustom(req.query.IDData, 'part2');
     DeleteCustom(req.query.IDData, 'part3');

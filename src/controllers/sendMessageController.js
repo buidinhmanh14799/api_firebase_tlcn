@@ -96,7 +96,7 @@ exports.sendMessageAdmin = (req, res) => {
                 title: req.body.title,
                 body: req.body.text
             },
-            topic: 'NotificaAdmin',
+            topic: 'notifica_admin',
         });
 
         admin.messaging().sendAll(messages)
