@@ -1,7 +1,7 @@
 const { admin, admindbVocabulary } = require('../firebase/firebase-confix');
 
 exports.sendMessagePackage = (req, res) => {
-    console.log('NotificaPackage');
+    console.log('notifica_package');
     try {
         const messages = [];
         messages.push({
@@ -9,7 +9,7 @@ exports.sendMessagePackage = (req, res) => {
                 title: req.body.title,
                 body: req.body.text
             },
-            topic: 'NotificaPackage',
+            topic: 'notifica_package',
         });
 
         admin.messaging().sendAll(messages)
@@ -35,7 +35,7 @@ exports.sendMessageVoca = (req, res) => {
                 title: req.body.title,
                 body: req.body.text
             },
-            topic: 'NotificaVoca',
+            topic: 'notifica_voca',
         });
 
         admin.messaging().sendAll(messages)
@@ -69,7 +69,7 @@ exports.sendMessageVocaRandom = async (req, res) => {
                 title: 'Ôn luyện từ vựng 🤯',
                 body: item.Voca + ' --> ' + item.Mean
             },
-            topic: 'NotificaVoca',
+            topic: 'notifica_voca',
         });
 
         admin.messaging().sendAll(messages)
@@ -125,7 +125,7 @@ exports.sendMessageAdmin = (req, res) => {
 //                 title: 'test',
 //                 body: 'manh'
 //             },
-//             topic: 'NotificaPackage',
+//             topic: 'notifica_package',
 //         });
 //         admin.messaging().sendAll(messages)
 //             .then((response) => {

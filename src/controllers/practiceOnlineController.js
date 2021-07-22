@@ -346,7 +346,7 @@ exports.AddPracticeJson = async (req, res) => {
         const messages = [];
         messages.push({
             // data: {
-            //     type: 'PracticeOnline',
+            //     type: 'practice_online',
             //     title: 'Lịch thi online mới',
             //     body: 'Lịch thi mới vào ngày  ' + date
             // },
@@ -354,7 +354,7 @@ exports.AddPracticeJson = async (req, res) => {
                 title: 'Lịch thi online mới',
                 body: 'Lịch thi mới vào ngày  ' + date
             },
-            topic: 'PracticeOnline',
+            topic: 'practice_online',
         });
 
         admin.messaging().sendAll(messages)
@@ -448,7 +448,7 @@ exports.AddPractice =async (req, res) => {
         const messages = [];
         messages.push({
             // data: {
-            //     type: 'PracticeOnline',
+            //     type: 'practice_online',
             //     title: 'Lịch thi online mới',
             //     body: 'Lịch thi mới vào ngày  ' + date
             // },
@@ -456,7 +456,7 @@ exports.AddPractice =async (req, res) => {
                 title: 'Lịch thi online mới',
                 body: 'Lịch thi mới vào ngày  ' + date
             },
-            topic: 'PracticeOnline',
+            topic: 'practice_online',
         });
 
         admin.messaging().sendAll(messages)
@@ -475,7 +475,7 @@ exports.AddPractice =async (req, res) => {
         });
     }
 }
-exports.DeletePracticeOnline = (req, res) => {
+exports.Deletepractice_online = (req, res) => {
     DeleteCustom(req.query.IDData, 'part1');
     DeleteCustom(req.query.IDData, 'part2');
     DeleteCustom(req.query.IDData, 'part3');

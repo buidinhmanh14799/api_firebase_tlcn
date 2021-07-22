@@ -9,7 +9,7 @@ var usersRouter = require('./routes/userRouter');
 var SendCode = require('./routes/sendcodeRouter');
 var database = require('./routes/databaseRouter');
 
-var practiceonline = require('./routes/practiceOnline');
+var practice_online = require('./routes/practice_online');
 var SendMessage = require('./routes/sendMessageRouter');
 const {admin} = require('./src/firebase/firebase-confix');
 
@@ -35,7 +35,7 @@ app.use('/users',requiresLogin, usersRouter);
 app.use('/sendcode', SendCode);
 app.use('/database',requiresLogin, database);
 app.use('/sendmessage',requiresLogin, SendMessage);
-app.use('/practiceonline',requiresLogin, practiceonline);
+app.use('/practice_online',requiresLogin, practice_online);
 
 function requiresLogin(req, res, next) {
   console.log('Vao check');
