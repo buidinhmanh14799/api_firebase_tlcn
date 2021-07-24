@@ -388,17 +388,17 @@ exports.AddPractice =async (req, res) => {
     var object = req.body;
     var idTest = adminPractice.doc().id;
     var practice = adminPractice.doc(idTest);
-    const part1Format = ['A', 'Audio', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Image', 'Question'];
-    const part2Format = ['A', 'B', 'C', 'Audio', 'Correct', 'IDTest', 'IDYear', 'Question', 'IDQuestion'];
-    const part3Format = ['Audio', 'Explain', 'IDAudio', 'IDTest', 'IDYear', 'Image', 'Translate'];
-    const part4Format = ['Audio', 'Explain', 'IDAudio', 'IDTest', 'IDYear', 'Image', 'Translate'];
-    const part5Format = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Explain', 'Question'];
-    const part6Format = ['IDReading', 'IDTest', 'IDYear', 'Image'];
-    const part7Format = ['IDReading', 'IDTest', 'IDYear', 'Image'];
-    const part3DTFormat = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'IDAudio', 'Question'];
-    const part4DTFormat = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'IDAudio', 'Question'];
-    const part6DTFormat = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Explain', 'IDReading'];
-    const part7DTFormat = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear', 'Explain', 'IDReading', 'Question'];
+    const part1Format = ['A', 'Audio', 'B', 'C', 'D', 'Correct'];
+    const part2Format = ['A', 'B', 'C', 'Audio', 'Correct', 'IDTest', 'IDYear'];
+    const part3Format = ['Audio', 'Explain', 'IDAudio', 'IDTest', 'IDYear'];
+    const part4Format = ['Audio', 'Explain', 'IDAudio', 'IDTest', 'IDYear'];
+    const part5Format = ['A', 'B', 'C', 'D', 'Correct', 'IDQuestion', 'IDTest', 'IDYear'];
+    const part6Format = ['IDReading', 'IDTest', 'IDYear'];
+    const part7Format = ['IDReading', 'IDTest', 'IDYear'];
+    const part3DTFormat = ['A', 'B', 'C', 'D'];
+    const part4DTFormat = ['A', 'B', 'C', 'D'];
+    const part6DTFormat = ['A', 'B', 'C', 'D'];
+    const part7DTFormat = ['A', 'B', 'C', 'D' ];
     try {
         await checkFormat(part1Format, JSON.parse(object.dataPart1)[0]);
         await checkFormat(part2Format, JSON.parse(object.dataPart2)[0]);
